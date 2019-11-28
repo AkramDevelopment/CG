@@ -20,7 +20,7 @@ class Account(Base):
     Password = Column("Password",String(10000))
     Email = Column("Email",String(32))
     Group = Column("Group",String(32),default="Unconfirmed")
-    Positon = Column("Position",String(32),default="Member")
+    Position = Column("Position",String(32),default="Member")
     Create_Date = Column("Create_Date", String(32),default = datetime.datetime.now())
 
 
@@ -38,33 +38,41 @@ def Add_User(first_name,last_name,email,password):
     session.add(newUser)
     session.commit()
 
+    return("User Added Successfully")
+
 
 
 def Add_Admin(id):
     query = session.query(Account).filter(Account.id == id).first()
-    query.Positon = "Admin"
+    query.Position = "Admin"
     session.commit()
-    return("Admin Privlages have been added!")
+    return("Admin Privilege have been added!")
 
 def remove_User(id):
     result = session.query(Account).filter(Account.id == id).first()
     session.delete(result)
     session.commit()
+    return ("User Has Been Removed Successfully!")
 
 
 def Is_Admin(id):
     user = session.query(Account).filter(Account.id == id).first()
-    if user.Positon == "Admin":
+    if user.Position == "Admin":
         return True
     else:
         return False
 
         
-def Query_Account_By_Username(Email):
+def Query_Account_By_Email(Email):
     query = session.query(Account).filter(Account.Email == Email).first()
     return (query)
 
-
+def Query_All_Accounts():
+    query = session.query(Account)
+    result = []
+    for account in query:
+        result.append({'First_Name': account.First_Name, "Last_Name": account.Last_name, "Email": account.Email,"Position": account.Position})
+    return (result)
 
 
 

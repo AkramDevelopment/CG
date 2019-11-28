@@ -1,6 +1,7 @@
 from flask import Blueprint,Flask,render_template,session,request
 from werkzeug.security import check_password_hash
 from backend.db.db import Query_Account_By_Email,Add_User
+
 user_blueprint = Blueprint(
     'user',
     __name__,
@@ -13,6 +14,7 @@ def createAccount():
     if Query_Account_By_Email(new_user["Email"]):
         return ("There Is Already An Account Associated With that Email!")
     Add_User(new_user["First_Name"],new_user["Last_Name"],new_user["Email"],new_user["Password"])
+    return ("Account Created")
 
     
 
@@ -21,20 +23,15 @@ def createAccountGET():
     return render_template('createAccount.html')
 
            
-       
-  
-
-
-
 @user_blueprint.route("/auth/login", methods = ["POST"])
 def login():
-    username = request.form["username"]
+    username = request.form["email"]
     password = request.form["password"]
     account = Query_Account_By_Email(username)
-    if not check_password_hash(account.password,password):
+    if not check_password_hash(account.Password,password):
         return ("Invalid Credentials")
     else:
-        return ("You may pass")
+        return ("Login Successful")
 
 
 
