@@ -71,8 +71,13 @@ def Query_All_Accounts():
     query = session.query(Account)
     result = []
     for account in query:
-        result.append({'First_Name': account.First_Name, "Last_Name": account.Last_name, "Email": account.Email,"Position": account.Position})
+        result.append({"ID":account.ID,'First_Name': account.First_Name, "Last_Name": account.Last_name, "Email": account.Email,"Position": account.Position})
     return (result)
+
+
+
+
+
 
 
 
