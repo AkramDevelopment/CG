@@ -4,13 +4,13 @@ from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 
-engine = create_engine('mysql://root:!Amohammed21@localhost/CG',
+engine = create_engine('mysql://Akram:!Amohammed21@localhost/CG',
                        isolation_level="READ UNCOMMITTED")
 Session = sessionmaker(bind=engine)
 session = Session()
 connection = engine.connect()
 Base = declarative_base()
-
+#Account Model And Account Functions
 class Account(Base):
     __tablename__="Account"
 
@@ -74,10 +74,11 @@ def Query_All_Accounts():
         result.append({"ID":account.ID,'First_Name': account.First_Name, "Last_Name": account.Last_name, "Email": account.Email,"Position": account.Position})
     return (result)
 
+# End of Account Model And Account Functions
 
 
 
 
-
+print(Query_Account_By_Email('amohammed11@ivytech.edu').Password)
 
 

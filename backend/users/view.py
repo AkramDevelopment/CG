@@ -1,6 +1,10 @@
-from flask import Blueprint,Flask,render_template,session,request
+from flask import Blueprint,Flask,render_template,session,request,jsonify
 from werkzeug.security import check_password_hash
 from backend.db.db import Query_Account_By_Email,Add_User
+from auth import token_required,adminRequired
+from functools import wraps
+from jwt import encode,decode
+
 
 user_blueprint = Blueprint(
     'user',
@@ -9,6 +13,7 @@ user_blueprint = Blueprint(
 )
 
 @user_blueprint.route('/register', methods = ["POST"])
+@adminRequired
 def createAccount():
     new_user =  {"First_Name":request.form["first_name"],"Last_Name":request.form["Last_Name"],"Email":request.form["Email"],"Password":request.form["Password"]}
     if Query_Account_By_Email(new_user["Email"]):
@@ -16,22 +21,22 @@ def createAccount():
     Add_User(new_user["First_Name"],new_user["Last_Name"],new_user["Email"],new_user["Password"])
     return ("Account Created")
 
-    
 
-@user_blueprint.route('/register', methods = ["GET"])
-def createAccountGET():
-    return render_template('createAccount.html')
 
-           
+
 @user_blueprint.route("/auth/login", methods = ["POST"])
 def login():
-    username = request.form["email"]
+    email = request.form["email"]
     password = request.form["password"]
-    account = Query_Account_By_Email(username)
+
+    account = Query_Account_By_Email(email)
+    if not account:
+        return("There is no account with those credentials")  
     if not check_password_hash(account.Password,password):
         return ("Invalid Credentials")
     else:
-        return ("Login Successful")
+        token = encode({'id': account.id}, 'secret', algorithm='HS256')
+        return (jsonify({"Message":"Login Successful!"},{"token":token}))
 
 
 
