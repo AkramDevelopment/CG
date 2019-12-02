@@ -1,7 +1,7 @@
 from flask import Blueprint,Flask,render_template,session,request,jsonify
 from werkzeug.security import check_password_hash
 from backend.db.db import Query_Account_By_Email,Add_User
-from auth import token_required,adminRequired
+from backend.users.auth import adminRequired,token_required
 from functools import wraps
 from jwt import encode,decode
 
@@ -21,7 +21,10 @@ def createAccount():
     Add_User(new_user["First_Name"],new_user["Last_Name"],new_user["Email"],new_user["Password"])
     return ("Account Created")
 
-
+@user_blueprint.route('/test', methods = ["GET"])
+@adminRequired
+def GET_SOMETHING():
+    return ("IT WORKED")
 
 
 @user_blueprint.route("/auth/login", methods = ["POST"])
@@ -36,7 +39,7 @@ def login():
         return ("Invalid Credentials")
     else:
         token = encode({'id': account.id}, 'secret', algorithm='HS256')
-        return (jsonify({"Message":"Login Successful!"},{"token":token}))
+        return (token)
 
 
 

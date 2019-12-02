@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 
-engine = create_engine('mysql://Akram:!Amohammed21@localhost/CG',
+engine = create_engine('mysql://root:!Amohammed21@localhost/CG',
                        isolation_level="READ UNCOMMITTED")
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -38,7 +38,7 @@ def Add_User(first_name,last_name,email,password):
     session.add(newUser)
     session.commit()
 
-    return("User Added Successfully")
+   
 
 
 
@@ -71,14 +71,8 @@ def Query_All_Accounts():
     query = session.query(Account)
     result = []
     for account in query:
-        result.append({"ID":account.ID,'First_Name': account.First_Name, "Last_Name": account.Last_name, "Email": account.Email,"Position": account.Position})
+        result.append({"ID":account.id,'First_Name': account.First_Name, "Last_Name": account.Last_name, "Email": account.Email,"Position": account.Position})
     return (result)
 
 # End of Account Model And Account Functions
-
-
-
-
-print(Query_Account_By_Email('amohammed11@ivytech.edu').Password)
-
 

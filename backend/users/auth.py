@@ -1,5 +1,6 @@
 from functools import wraps
 from flask import jsonify,request
+from backend.db.db import Query_Account_By_Email
 
 def token_required(f):
     @wraps(f)
@@ -25,7 +26,7 @@ def adminRequired(f):
             return jsonify({"Error":"No Token Found"}),404
         try:
             data = decode(token,'secret',algorithms='HS256')
-            return (data)
+            
         except:
             return jsonify({"Error":"Token is Invalid!"})
         return f(*args,**kwargs)
