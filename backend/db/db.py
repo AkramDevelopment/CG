@@ -75,4 +75,3 @@ def Query_All_Accounts():
     return (result)
 
 # End of Account Model And Account Functions
-
