@@ -21,3 +21,10 @@ pip3 install virtualenv
 # setup env
 ./bin/setup.sh
 ```
+
+linux:
+```
+sudo apt-get install python-dev default-libmysqlclient-dev
+pip3 install virtualenv
+./bin/setup.sh
+```
