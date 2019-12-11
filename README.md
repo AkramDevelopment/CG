@@ -1,8 +1,12 @@
 # Cyber Gladiators
 ## Online Platform
 
+---------
 
-#### Setup
+
+### Setup
+
+Start mysql and create a database named `CG`, then:
 
 macOS:
 ```
@@ -27,4 +31,12 @@ linux:
 sudo apt-get install python-dev default-libmysqlclient-dev
 pip3 install virtualenv
 ./bin/setup.sh
+```
+
+---------
+
+### Running
+```
+# Start Backend
+./bin/run.sh
 ```
