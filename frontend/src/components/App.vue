@@ -17,6 +17,10 @@ export default {
 </script>
 
 <style>
+:root {
+  --primary-color: #1f9e78;
+  --secondary-color: #F3D8BE;
+}
 * { margin: 0; padding: 0; }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

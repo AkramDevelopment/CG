@@ -1,11 +1,11 @@
 <template>
     <div class="login-screen">
         <h1>Login</h1>
-        <form class="login-wrapper">
+        <form v-on:submit="submit" class="login-wrapper">
             <label>Email (Ivy Tech Only):</label>
-            <input type="email" name="email" />
+            <input v-model="email" type="email" name="email" />
             <label>Password:</label>
-            <input type="password" name="password" />
+            <input v-model="password" type="password" name="password" />
             <input type="submit" value="Submit" />
             <a href="">New Gladiator? (Create Account)</a>
         </form>
@@ -14,9 +14,21 @@
 
 <script>
 
+const log = all => console.log(all) // eslint-disable-line
+
 export default {
     name: 'LoginScreen',
-    components: {}
+    components: {},
+    data: () => ({
+        email: '',
+        password: '',
+    }),
+    methods: {
+        submit(e) {
+            e.preventDefault()
+            log(`Signing in with: ${this.email}, ${this.password}`)
+        },
+    },
 }
 </script>
 
@@ -54,7 +66,7 @@ form.login-wrapper input[type="email"], form.login-wrapper input[type="password"
     height: 30px;
     border: none;
     outline: none;
-    background-color: #F3D8BE;
+    background-color: var(--secondary-color);
     box-sizing: border-box;
     padding-left: 20px;
     font-size: 1.25rem;
@@ -65,7 +77,7 @@ form.login-wrapper input[type="submit"] {
     padding: 10px 40px;
     font-size: 1.25rem;
     cursor: pointer;
-    background-color: #35ECB9;
+    background-color: var(--primary-color);
     border-radius: 5px;
     align-self: flex-end;
 }
