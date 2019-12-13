@@ -10,7 +10,6 @@ Session = sessionmaker(bind=engine)
 session = Session()
 connection = engine.connect()
 Base = declarative_base()
-#Account Model And Account Functions
 class Account(Base):
     __tablename__="Account"
 
@@ -40,7 +39,11 @@ def Add_User(first_name,last_name,email,password):
 
    
 
-
+def Deactivate_Account(id):
+    query = session.query(Account).filter(Account.id == id ).first()
+    query.Position = "Deactivated"
+    session.commit()
+    return ("Account Has Been Deactivated")
 
 def Add_Admin(id):
     query = session.query(Account).filter(Account.id == id).first()
@@ -74,4 +77,8 @@ def Query_All_Accounts():
         result.append({"ID":account.id,'First_Name': account.First_Name, "Last_Name": account.Last_name, "Email": account.Email,"Position": account.Position})
     return (result)
 
-# End of Account Model And Account Functions
+
+
+
+
+
