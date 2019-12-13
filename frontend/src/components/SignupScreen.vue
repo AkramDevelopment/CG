@@ -1,13 +1,19 @@
 <template>
     <div class="login-screen">
-        <h1>Login</h1>
+        <h1>Gladiator Recruitment</h1>
         <form v-on:submit="submit" class="login-wrapper">
+            <label>First Name:</label>
+            <input v-model="fName" type="text" name="fname" />
+            <label>Last Name:</label>
+            <input v-model="lName" type="text" name="lname" />
             <label>Email (Ivy Tech Only):</label>
             <input v-model="email" type="email" name="email" />
             <label>Password:</label>
             <input v-model="password" type="password" name="password" />
+            <label>Confirm Password:</label>
+            <input v-model="passwordConf" type="password" name="password-conf" />
             <input type="submit" value="Submit" />
-            <router-link to="/signup">New Gladiator? (Create Account)</router-link>
+            <router-link to="/">Already have an account? (Login)</router-link>
         </form>
     </div>
 </template>
@@ -17,16 +23,28 @@
 const log = all => console.log(all) // eslint-disable-line
 
 export default {
-    name: 'LoginScreen',
+    name: 'SignupScreen',
     components: {},
     data: () => ({
+        fName: '',
+        lName: '',
         email: '',
         password: '',
+        passwordConf: '',
     }),
     methods: {
         submit(e) {
             e.preventDefault()
-            log(`Signing in with: ${this.email}, ${this.password}`)
+            const { fName, lName, email, password, passwordConf } = this;
+            if (
+                fName.length > 0 && lName.length > 0 &&
+                password.length >= 10 && password === passwordConf &&
+                email.includes('@ivytech.edu')
+            ) {
+                log(`Signing up with: ${this.fName}, ${this.lName} ${this.email}, ${this.password}`)
+            } else {
+                log('Invalid information');
+            }
         },
     },
 }
@@ -60,7 +78,9 @@ form.login-wrapper label {
     font-size: 1.5rem;
     font-weight: bold;
 }
-form.login-wrapper input[type="email"], form.login-wrapper input[type="password"] {
+form.login-wrapper input[type="text"],
+form.login-wrapper input[type="email"],
+form.login-wrapper input[type="password"] {
     width: 100%;
     margin: 10px 0;
     height: 30px;
