@@ -34,19 +34,3 @@ def login():
         token = encode({'id': account.id}, 'secret', algorithm='HS256')
         return (token)
 
-
-@user_blueprint.route("/test", methods = ["POST"])
-def test():
-    email = request.form["Email"]
-    password = request.form["Password"]
-
-    account = Query_Account_By_Email(email)
-    if not account:
-        return("There is no account with those credentials")  
-    if not check_password_hash(account.Password,password):
-        return ("Invalid Credentials")
-    
-    token = encode({'id': account.id}, 'secret', algorithm='HS256')
-    resp = make_response('Setting Cookie!')
-    resp.set_cookie('token','token')
-    return (token)
