@@ -20,6 +20,7 @@ def createAccount():
     Add_User(new_user["First_Name"],new_user["Last_Name"],new_user["Email"],new_user["Password"])
     return ("Account Created")
 
+
 @user_blueprint.route("/auth/login", methods = ["POST"])
 def login():
     email = request.form["email"]
@@ -35,17 +36,29 @@ def login():
         return (token)
 
 
+
+#Admin Route
 @user_blueprint.route("/lookup/all", methods = ["GET"])
 def lookup():
+    if len(Query_All_Accounts()) == 0:
+        return (jsonify({"Message":"There Are No Accounts"}))
     return (jsonify(Query_All_Accounts()))
 
 
-
+#Admin Route
 @user_blueprint.route("/lookup/email", methods = ["POST"])
 def lookupEmail():
     email = request.form["Email"]
     account = Query_Account_By_Email(email)
-    return ({'Account':{'Email': account.Email,'First_Name':account.First_Name,'Last_Name':account.Last_name ,'ID': account.id,"Position":account.Position}})
+    if account:
+        return ({'Account':{'Email': account.Email,'First_Name':account.First_Name,'Last_Name':account.Last_name ,'ID': account.id,"Position":account.Position}})
+        
+    else:
+        return (jsonify({"Error":"There is no Account with that email"}))
+    
+
+
+
 
 
 
