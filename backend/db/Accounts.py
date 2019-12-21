@@ -70,7 +70,11 @@ def Is_Admin(id):
         
 def Query_Account_By_Email(Email):
     query = session.query(Account).filter(Account.Email == Email).first()
-    return (query)
+    if query:
+        print(query)
+        return (query)
+    else:
+        return ("There Is No Account With That Email")
 
 def Query_All_Accounts():
     query = session.query(Account)
