@@ -1,6 +1,6 @@
 from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response
 from werkzeug.security import check_password_hash
-from backend.db.db import Query_Account_By_Email,Add_User
+from backend.db.Accounts import Query_Account_By_Email,Add_User
 from backend.users.auth import adminRequired,token_required
 from functools import wraps
 from jwt import encode,decode

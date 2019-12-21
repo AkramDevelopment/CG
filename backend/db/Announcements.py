@@ -2,8 +2,9 @@
 from sqlalchemy import create_engine, Column, Integer, String, Numeric, DateTime, MetaData,Boolean
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+from backend.db.config import mysqlcred
 import datetime
-engine = create_engine('mysql://root:!Amohammed21@localhost/CG',
+engine = create_engine(mysqlcred['uri'],
                        isolation_level="READ UNCOMMITTED")
 Session = sessionmaker(bind=engine)
 session = Session()

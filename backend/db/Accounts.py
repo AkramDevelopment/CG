@@ -2,9 +2,10 @@ from sqlalchemy import create_engine, Column, Integer, String, Numeric, DateTime
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash, check_password_hash
+from backend.db.config import mysqlcred
 import datetime
 
-engine = create_engine('mysql://root:!Amohammed21@localhost/CG',
+engine = create_engine(mysqlcred['uri'],
                        isolation_level="READ UNCOMMITTED")
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -36,6 +37,7 @@ def Add_User(first_name,last_name,email,password):
     newUser = Account(first_name,last_name,email,hashed)
     session.add(newUser)
     session.commit()
+    return ("User Has been Successfully Created!")
 
    
 
@@ -76,6 +78,10 @@ def Query_All_Accounts():
     for account in query:
         result.append({"ID":account.id,'First_Name': account.First_Name, "Last_Name": account.Last_name, "Email": account.Email,"Position": account.Position})
     return (result)
+
+
+
+
 
 
 

@@ -1,7 +1,7 @@
 from functools import wraps
 from flask import jsonify,request
 
-from backend.db.db import Query_Account_By_Email,Is_Admin
+from backend.db.Accounts import Query_Account_By_Email,Is_Admin
 from jwt import encode, decode
 
 def token_required(f):
