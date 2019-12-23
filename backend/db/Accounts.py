@@ -89,6 +89,13 @@ def Query_All_Accounts():
         result.append({"ID":account.id,'First_Name': account.First_Name, "Last_Name": account.Last_name, "Email": account.Email,"Position": account.Position})
     return (result)
 
+def Query_Roster():
+    query = session.query(Account)
+    result = []
+    for account in query:
+        result.append({"First_Name":account.First_Name,'Last_Name':account.Last_name,'Date_Joined':account.Create_Date})
+    return(result)
+
 
 
 
