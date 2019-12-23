@@ -67,6 +67,12 @@ def Is_Admin(id):
     else:
         return False
 
+def Is_Developer(id):
+    user = session.query(Account).filter(Account.id == id).first()
+    if user.Position == "Developer":
+        return True
+    else:
+        return False       
         
 def Query_Account_By_Email(Email):
     query = session.query(Account).filter(Account.Email == Email).first()
