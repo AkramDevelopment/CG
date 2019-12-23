@@ -23,9 +23,50 @@ class Announcement(Base):
         self.title = title
         self.body = body
         
+def query_all_announcements():
+    query = session.query(Announcement)
+    result = []
+    for row in query:
+        result.append({"id":row.id,"title":row.title,'body':row.body,'create_date':row.Create_Date})
+
+def query_announcement_by_id(id):
+    query = session.query(Announcement).filter(Announcement.id == id)
+    return (query)
 
 def create_announcement(title,body):
     new_announcement = Announcement(title,body)
     session.add(new_announcement)
     session.commit()
     return('Announcement Created!')
+
+def delete_announcement(id):
+    try:
+        announcement_query = session.query(Announcement).filter(Announcement.id == id).first()
+        session.delete(announcement_query)
+        session.commit()
+        return ("Announcement Has Been Deleted!")
+    except:
+        return ("There Was An Error Deleting The Announcement, verify that there is an announcement with the unique ID provided.")
+
+
+def edit_announcement(id,title,body):
+    try:
+        announcement_query = session.query(Announcement).filter(Announcement.id == id).first()
+        announcement_query.id = id
+        announcement_query.title = title
+        announcement_query.body = body
+        session.commit()
+        return ("Announcement updated successuly!")
+    except:
+        return ("There was an error editing the announcement")
+
+
+
+    
+    
+
+
+
+
+
+
