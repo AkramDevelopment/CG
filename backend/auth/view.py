@@ -14,10 +14,13 @@ auth_blueprint = Blueprint(
 
 @auth_blueprint.route('/register', methods = ["POST"])
 def createAccount():
-    new_user =  {"First_Name":request.form["First_Name"],"Last_Name":request.form["Last_Name"],"Email":request.form["Email"],"Password":request.form["Password"]}
-  
-    Add_User(new_user["First_Name"],new_user["Last_Name"],new_user["Email"],new_user["Password"])
-    return ("Account Created")
+    try:
+        new_user =  {"First_Name":request.form["First_Name"],"Last_Name":request.form["Last_Name"],"Email":request.form["Email"],"Password":request.form["Password"]}
+    
+        Add_User(new_user["First_Name"],new_user["Last_Name"],new_user["Email"],new_user["Password"])
+        return (jsonify({'success':"Account Created"}))
+    except:
+        return(jsonify({"error":"There Was An Error Creating Account!"}))
 
 
 @auth_blueprint.route("/login", methods = ["POST"])
@@ -36,7 +39,7 @@ def login():
         token = encode({'id': account.id}, 'secret', algorithm='HS256')
         session['token'] = token
         return (jsonify({"success":"Login Successful!"}))
-        
+
 
 @auth_blueprint.route("/logout", methods = ["GET"])
 def logout():
