@@ -1,52 +1,29 @@
-from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response
+from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response,session
 from werkzeug.security import check_password_hash
-from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts
-from backend.users.auth import adminRequired,token_required
+from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts,Deactivate_Account,Add_Admin
+from backend.users.auth import adminRequired,token_required,Developer_Required
 from functools import wraps
 from jwt import encode,decode
 
-
+SESSION_COOKIE_SECURE = True
 user_blueprint = Blueprint(
     'user',
     __name__,
     template_folder='templates'
 )
 
-@user_blueprint.route('/register', methods = ["POST"])
-def createAccount():
-    new_user =  {"First_Name":request.form["First_Name"],"Last_Name":request.form["Last_Name"],"Email":request.form["Email"],"Password":request.form["Password"]}
-    if Query_Account_By_Email(new_user["Email"]):
-        return ("There Is Already An Account Associated With that Email!")
-    Add_User(new_user["First_Name"],new_user["Last_Name"],new_user["Email"],new_user["Password"])
-    return ("Account Created")
 
 
-@user_blueprint.route("/auth/login", methods = ["POST"])
-def login():
-    email = request.form["email"]
-    password = request.form["password"]
-
-    account = Query_Account_By_Email(email)
-    if not account:
-        return("There is no account with those credentials")  
-    if not check_password_hash(account.Password,password):
-        return ("Invalid Credentials")
-    else:
-        token = encode({'id': account.id}, 'secret', algorithm='HS256')
-        return (token)
-
-
-
-#Admin Route
 @user_blueprint.route("/lookup/all", methods = ["GET"])
+@adminRequired
 def lookup():
     if len(Query_All_Accounts()) == 0:
         return (jsonify({"Message":"There Are No Accounts"}))
     return (jsonify(Query_All_Accounts()))
 
 
-#Admin Route
 @user_blueprint.route("/lookup/email", methods = ["POST"])
+@adminRequired
 def lookupEmail():
     email = request.form["Email"]
     account = Query_Account_By_Email(email)
@@ -55,6 +32,20 @@ def lookupEmail():
         
     else:
         return (jsonify({"Error":"There is no Account with that email"}))
+
+
+@user_blueprint.route("/deactivate", methods = ["POST"])
+@adminRequired
+def DeactivateAccount():
+    try:
+        email = request.form["Email"]
+        account = Query_Account_By_Email(email)
+        Deactivate_Account(account.id)
+        return (jsonify({"Message":"Account has been deactivated!"}))
+    except:
+        return (jsonify({"Error":"There was an error deactivating account!"}))
+
+
     
 
 
@@ -62,3 +53,7 @@ def lookupEmail():
 
 
 
+
+
+
+ 
