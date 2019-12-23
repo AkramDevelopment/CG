@@ -1,6 +1,5 @@
 from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response
-from backend.users.auth import adminRequired,token_required
-
+from backend.users.auth import adminRequired,login_required
 
 
 announcements_blueprint = Blueprint(
@@ -22,13 +21,13 @@ def delete_by_id():
 
 
 @announcements_blueprint.route('view/all')
-@token_required
+@login_required
 def view_all():
     return (jsonify("View All By ID "))
 
 
 @announcements_blueprint.route('/view/id')
-@token_required
+@login_required
 def view_by_id():
     return (jsonify("View Announcements By ID"))
 

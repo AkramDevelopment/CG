@@ -3,7 +3,7 @@ from flask import jsonify,request,session
 from backend.db.Accounts import Query_Account_By_Email,Is_Admin,Is_Developer
 from jwt import encode, decode
 
-def token_required(f):
+def login_required(f):
     @wraps(f)
     def decorated(*args,**kwargs):  
        
