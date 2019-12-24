@@ -17,15 +17,55 @@ class Announcement(Base):
     title = Column('title',String(32))
     body = Column('body',String(32))
     Create_Date = Column("Create_Date", String(32),default = datetime.datetime.now())
+    created_by = Column("Created_By", String(32))
 
 
-    def __init__(self,title,body):
+    def __init__(self,title,body,created_by):
         self.title = title
         self.body = body
+        self.created_by = created_by
         
+def query_all_announcements():
+    query = session.query(Announcement)
+    result = []
+    for row in query:
+        result.append({"id":row.id,"title":row.title,'body':row.body,'create_date':row.Create_Date})
+    return(result)
 
-def create_announcement(title,body):
-    new_announcement = Announcement(title,body)
+def query_announcement_by_id(id):
+    query = session.query(Announcement).filter(Announcement.id == id).first()
+    announcement = {"id": query.id,"title":query.title,"body":query.body,"created_by":query.created_by,"created_Date":query.Create_Date}
+    return (announcement)
+
+def create_announcement(title,body,created_by):
+    new_announcement = Announcement(title,body,created_by)
     session.add(new_announcement)
     session.commit()
     return('Announcement Created!')
+
+def delete_announcement(id):
+
+    announcement_query = session.query(Announcement).filter(Announcement.id == id).first()
+    session.delete(announcement_query)
+    session.commit()
+    return ("Announcement Has Been Deleted!")
+    
+
+
+def edit_announcement(id,title,body):
+    try:
+        announcement_query = session.query(Announcement).filter(Announcement.id == id).first()
+        announcement_query.id = id
+        announcement_query.title = title
+        announcement_query.body = body
+        session.commit()
+        return ("Announcement updated successuly!")
+    except:
+        return ("There was an error editing the announcement")
+
+
+
+
+
+
+
