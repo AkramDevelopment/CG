@@ -46,6 +46,7 @@ def Ban_Account():
         return (jsonify({"Error":"There was an error deactivating account!"}))
 
 @user_blueprint.route("/roster")
+@login_required
 def Public_Roster():
     return (jsonify(Query_Roster()))
 
