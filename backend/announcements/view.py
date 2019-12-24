@@ -1,7 +1,7 @@
 from flask import Blueprint,Flask,request,jsonify,session
 from jwt import decode
 from backend.db.Accounts import Query_Account_By_ID
-from backend.db.Announcements import create_announcement,query_all_announcements,query_announcement_by_id,delete_announcement
+from backend.db.Announcements import create_announcement,query_all_announcements,query_announcement_by_id,delete_announcement,edit_announcement
 from backend.users.auth import adminRequired,login_required
 
 
@@ -48,7 +48,14 @@ def view_by_id(id):
         return(jsonify({"error":"Announcement with given ID not found"})),404
 
 
-
+@announcements_blueprint.route('/edit/<id>',methods=["POST"])
+def edit(id):
+    try:
+        announcement = query_announcement_by_id(id)
+        edit_announcement(announcement.id,request.form['title'],request.form['body'])
+        return (jsonify({"success":"Announcement edit successful!"}))
+    except:
+        return (jsonify({"error":"There was an error editing announcement!"}))
 
 
 
