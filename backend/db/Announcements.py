@@ -30,10 +30,12 @@ def query_all_announcements():
     result = []
     for row in query:
         result.append({"id":row.id,"title":row.title,'body':row.body,'create_date':row.Create_Date})
+    return(result)
 
 def query_announcement_by_id(id):
-    query = session.query(Announcement).filter(Announcement.id == id)
-    return (query)
+    query = session.query(Announcement).filter(Announcement.id == id).first()
+    announcement = {"id": query.id,"title":query.title,"body":query.body,"created_by":query.created_by,"created_Date":query.Create_Date}
+    return (announcement)
 
 def create_announcement(title,body,created_by):
     new_announcement = Announcement(title,body,created_by)
@@ -42,13 +44,12 @@ def create_announcement(title,body,created_by):
     return('Announcement Created!')
 
 def delete_announcement(id):
-    try:
-        announcement_query = session.query(Announcement).filter(Announcement.id == id).first()
-        session.delete(announcement_query)
-        session.commit()
-        return ("Announcement Has Been Deleted!")
-    except:
-        return ("There Was An Error Deleting The Announcement, verify that there is an announcement with the unique ID provided.")
+
+    announcement_query = session.query(Announcement).filter(Announcement.id == id).first()
+    session.delete(announcement_query)
+    session.commit()
+    return ("Announcement Has Been Deleted!")
+    
 
 
 def edit_announcement(id,title,body):
@@ -63,4 +64,8 @@ def edit_announcement(id,title,body):
         return ("There was an error editing the announcement")
 
 
-Base.metadata.create_all(engine)
+
+
+
+
+
