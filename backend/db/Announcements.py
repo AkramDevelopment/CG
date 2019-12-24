@@ -17,11 +17,13 @@ class Announcement(Base):
     title = Column('title',String(32))
     body = Column('body',String(32))
     Create_Date = Column("Create_Date", String(32),default = datetime.datetime.now())
+    created_by = Column("Created_By", String(32))
 
 
-    def __init__(self,title,body):
+    def __init__(self,title,body,created_by):
         self.title = title
         self.body = body
+        self.created_by = created_by
         
 def query_all_announcements():
     query = session.query(Announcement)
@@ -33,8 +35,8 @@ def query_announcement_by_id(id):
     query = session.query(Announcement).filter(Announcement.id == id)
     return (query)
 
-def create_announcement(title,body):
-    new_announcement = Announcement(title,body)
+def create_announcement(title,body,created_by):
+    new_announcement = Announcement(title,body,created_by)
     session.add(new_announcement)
     session.commit()
     return('Announcement Created!')
@@ -61,15 +63,4 @@ def edit_announcement(id,title,body):
         return ("There was an error editing the announcement")
 
 
-
-
-
-
-    
-    
-
-
-
-
-
-
+Base.metadata.create_all(engine)
