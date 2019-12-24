@@ -81,6 +81,10 @@ def Query_Account_By_Email(Email):
         return (query)
     else:
         return ("There Is No Account With That Email")
+def Query_Account_By_ID(id):
+    query = session.query(Account).filter(Account.id == id).first()
+    return (query)
+    
 
 def Query_All_Accounts():
     query = session.query(Account)
