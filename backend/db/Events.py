@@ -42,7 +42,7 @@ def create_event(Created_By,Event_Title,Date_Start,Date_End,Time_Start,Time_End,
 
 def remove_event(id):
     query = session.query(Event).filter(Event.id == id).first()
-    session.remove(query)
+    session.delete(query)
     session.commit()
     return ("Event Has Been Successfully Removed!")
 
@@ -57,7 +57,7 @@ def query_events():
 
 
 def query_by_id(id):
-    query = session.query(Event).filter(Event.id == id)
+    query = session.query(Event).filter(Event.id == id).first()
     return (query)
 
 
