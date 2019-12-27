@@ -19,8 +19,12 @@
 </template>
 
 <script>
+import sha256 from 'crypto-js/sha256';
+import Base64 from 'crypto-js/enc-base64';
 
 const log = all => console.log(all) // eslint-disable-line
+const error = all => console.error(all) // eslint-disable-line
+const URL = 'http://96.68.37.181:8080' // eslint-disable-line
 
 export default {
     name: 'SignupScreen',
@@ -42,6 +46,27 @@ export default {
                 email.includes('@ivytech.edu')
             ) {
                 log(`Signing up with: ${this.fName}, ${this.lName} ${this.email}, ${this.password}`)
+                fetch(`${URL}/auth/register`, {
+                    method: 'POST',
+                    headers: {},
+                    body: JSON.stringify({
+                        'First_Name': this.fName,
+                        'Last_Name': this.lName,
+                        'Email': this.email,
+                        'Password': Base64.stringify(sha256(this.password))
+                    })
+                })
+                    .then(res => res.json())
+                    .then(res => {
+                        if (res.status == 200) {
+                            log('Success!!!!')
+                            log(res)
+                        } else if (res.error) {
+                            log('\n\nSomething went wrong...')
+                            error(res.error)
+                        }
+                    })
+                    .catch(err => error(err))
             } else {
                 log('Invalid information');
             }
