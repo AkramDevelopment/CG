@@ -33,23 +33,20 @@ export default {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                credentials: "include",
                 body: JSON.stringify({
                     'Email': this.email,
                     'Password': Base64.stringify(sha256(this.password))
                 })
             })
-                .then(res => {
-                    log(res)
-                    return res
-                })
                 .then(res => res.json())
                 .then(res => {
-                    if (res.error) {
+                    if (res.success) {
+                        log('Success!!!!')
+                        log(res)
+                    } else if (res.error) {
                         log('\n\nSomething went wrong...')
                         error(res.error)
                     } else {
-                        log('Success!!!!')
                         log(res)
                     }
                 })
