@@ -57,11 +57,13 @@ export default {
                 })
                     .then(res => res.json())
                     .then(res => {
-                        if (res.error) {
+                        if (res.success) {
+                            log('Success!!!!')
+                            log(res)
+                        } else if (res.error) {
                             log('\n\nSomething went wrong...')
                             error(res.error)
                         } else {
-                            log('Success!!!!')
                             log(res)
                         }
                     })

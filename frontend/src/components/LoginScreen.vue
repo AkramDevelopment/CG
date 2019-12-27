@@ -13,8 +13,9 @@
 </template>
 
 <script>
-
-const log = all => console.log(all) // eslint-disable-line
+import sha256 from 'crypto-js/sha256'
+import Base64 from 'crypto-js/enc-base64'
+import { log, error, URL } from '../globals'
 
 export default {
     name: 'LoginScreen',
@@ -27,6 +28,32 @@ export default {
         submit(e) {
             e.preventDefault()
             log(`Signing in with: ${this.email}, ${this.password}`)
+            fetch(`${URL}/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    'Email': this.email,
+                    'Password': Base64.stringify(sha256(this.password))
+                })
+            })
+                .then(res => {
+                    log(res)
+                    return res
+                })
+                .then(res => res.json())
+                .then(res => {
+                    if (res.error) {
+                        log('\n\nSomething went wrong...')
+                        error(res.error)
+                    } else {
+                        log('Success!!!!')
+                        log(res)
+                    }
+                })
+                .catch(err => error(err))
         },
     },
 }
