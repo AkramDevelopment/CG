@@ -4,3 +4,4 @@ mysql-connector-python
 mysqlclient
 jwt
 SQLAlchemy
+flask_cors

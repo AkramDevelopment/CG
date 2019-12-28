@@ -15,10 +15,11 @@ announcements_blueprint = Blueprint(
 @adminRequired
 def add_announcement():
     try:
+        data = request.get_json(force=True)
         decoded = decode(session['token'],'secret',algorithms='HS256')
         created_by = Query_Account_By_ID(decoded['id'])
         print(created_by.First_Name)
-        create_announcement(request.form['title'],request.form['body'],created_by.First_Name)
+        create_announcement(data['title'],data['body'],created_by.First_Name)
         return jsonify({"success":"announcement created!"})
     except:
         return jsonify({"error":"There was an error adding announcement!"}),500
@@ -51,8 +52,9 @@ def view_by_id(id):
 @announcements_blueprint.route('/edit/<id>',methods=["POST"])
 def edit(id):
     try:
+        data = request.get_json(force=True)
         announcement = query_announcement_by_id(id)
-        edit_announcement(announcement.id,request.form['title'],request.form['body'])
+        edit_announcement(announcement.id,data['title'],data['body'])
         return (jsonify({"success":"Announcement edit successful!"}))
     except:
         return (jsonify({"error":"There was an error editing announcement!"}))
