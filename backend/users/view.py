@@ -13,7 +13,6 @@ user_blueprint = Blueprint(
 )
 
 
-
 @user_blueprint.route("/lookup/all", methods = ["GET"])
 @adminRequired
 def lookup():
@@ -25,7 +24,8 @@ def lookup():
 @user_blueprint.route("/lookup/email", methods = ["POST"])
 @adminRequired
 def lookupEmail():
-    email = request.form["Email"]
+    data = request.get_json(force=True  )
+    email = data["Email"]
     account = Query_Account_By_Email(email)
     if account:
         return ({'Account':{'Email': account.Email,'First_Name':account.First_Name,'Last_Name':account.Last_name ,'ID': account.id,"Position":account.Position}})
@@ -38,12 +38,14 @@ def lookupEmail():
 @adminRequired
 def Ban_Account():
     try:
-        email = request.form["Email"]
+        data = request.get_json(force=True)
+        email = data["Email"]
         account = Query_Account_By_Email(email)
         Deactivate_Account(account.id)
         return (jsonify({"Message":"Account has been deactivated!"}))
     except:
         return (jsonify({"Error":"There was an error deactivating account!"}))
+        
 
 @user_blueprint.route("/roster")
 @login_required
