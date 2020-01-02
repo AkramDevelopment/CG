@@ -33,6 +33,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify({
                     'Email': this.email,
                     'Password': Base64.stringify(sha256(this.password))
