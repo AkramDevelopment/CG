@@ -7,6 +7,7 @@
 
 <script>
 import Header from './Header.vue'
+import '../assets/css/app.css'
 
 export default {
   name: 'app',
