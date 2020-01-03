@@ -2,26 +2,52 @@
     <div class="app-screen">
         <h1>Dashboard</h1>
         <button class="logout" v-on:click="logout">Logout</button>
-        <div v-for="a in announcements" v-bind:key="a.title" class="annoucement-card">
-            <h3>Announcement Title</h3>
+        <div v-for="p in posts" v-bind:key="p.title" class="post-wrapper">
+            <div v-if="p.type === postTypes.announcement" class="annoucement-card">
+                <h3>Announcement Title</h3>
+            </div>
+            <div v-else-if="p.type === postTypes.event" class="event-card">
+                <h3>Event Title</h3>
+            </div>
         </div>
-        <h4 v-if="announcements.length <= 0">Looks like we don't have any announcements yet.<br /> Please check back later!</h4>
+        <h4 v-if="posts.length <= 0">Looks like we don't have any posts yet.<br /> Please check back later!</h4>
     </div>
 </template>
 
 <script>
-import { log, error, reqErrors, URL } from '../globals'
+import { log, error, reqErrors, URL, postTypes } from '../globals'
 
 export default {
     name: 'HomeScreen',
     components: {},
     data: () => ({
-        announcements: []
+        announcements: [],
+        events: [],
+        posts: []
     }),
     created() {
         this.getAnnouncements()
+        // this.getEvents()
     },
     methods: {
+        sortPosts() {
+            const allPosts = []
+            this.announcements.forEach(a => {
+                allPosts.push({ ...a, type: postTypes.announcement })
+                log(a)
+            })
+            this.events.forEach(e => {
+                allPosts.push({ ...e, type: postTypes.event })
+                log(e)
+            })
+            // Sort by: announcements -> Create_Date; events -> date_start
+            allPosts.sort((a, b) => {
+                const date1 = a.type === postTypes.announcement ? a['Create_Date'] : a['date_start']
+                const date2 = b.type === postTypes.announcement ? b['Create_Date'] : b['date_start']
+                return date1 - date2 // double check that the two different date types are comparable
+            })
+            this.posts = allPosts
+        },
         getAnnouncements() {
             fetch(`${URL}/announcements/view/all`, {
                 method: 'GET',
@@ -34,8 +60,26 @@ export default {
                         this.$router.push('/')
                     } else if (res.announcements) {
                         this.announcements = res.announcements
+                        this.sortPosts()
                     } else {
                         log(res)
+                    }
+                })
+                .catch(err => error(err))
+        },
+        getEvents() {
+            fetch(`${URL}/events/all`, {
+                method: 'GET',
+                headers: {},
+                credentials: 'include'
+            })
+                .then(res => res.json())
+                .then(res => {
+                    if (res.events) {
+                        this.events = res.events
+                        this.sortPosts()
+                    } else {
+                        print(res)
                     }
                 })
                 .catch(err => error(err))
@@ -61,8 +105,9 @@ export default {
 </script>
 
 <style scoped>
-/* Announcement Card */
-div.annoucement-card {
+/* Announcement Card && Event Card */
+div.annoucement-card,
+div.event-card {
     width: 50%;
     min-width: 300px;
     padding: 20px;
@@ -71,7 +116,8 @@ div.annoucement-card {
     border: 10px solid #a4a4a4;
     margin-bottom: 20px;
 }
-div.annoucement-card h3 {
+div.annoucement-card h3,
+div.event-card h3 {
     font-size: 1.6rem;
 }
 
