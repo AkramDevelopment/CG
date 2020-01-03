@@ -1,9 +1,14 @@
 from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response,session
 from werkzeug.security import check_password_hash
-from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts,Deactivate_Account,Add_Admin,Query_Roster
+from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts,Deactivate_Account,Add_Admin,Query_Roster,Is_Admin
 from backend.users.auth import adminRequired,login_required,Developer_Required
 from functools import wraps
 from jwt import encode,decode
+import logging
+
+
+formatter = logging.Formatter("%(levelname)s:%(message)s")
+
 
 SESSION_COOKIE_SECURE = True
 user_blueprint = Blueprint(
@@ -11,6 +16,16 @@ user_blueprint = Blueprint(
     __name__,
     template_folder='templates'
 )
+
+
+@user_blueprint.route("/isadmin/<id>")
+def check_admin(id):
+    try:
+        return(jsonify(Is_Admin(id)))
+    except Exception as e :
+        print(e)
+        return (jsonify("There was an error looking up account status")),404
+        
 
 
 @user_blueprint.route("/lookup/all", methods = ["GET"])
@@ -37,14 +52,16 @@ def lookupEmail():
 @user_blueprint.route("/deactivate", methods = ["POST"])
 @adminRequired
 def Ban_Account():
+    
     try:
         data = request.get_json(force=True)
         email = data["Email"]
         account = Query_Account_By_Email(email)
         Deactivate_Account(account.id)
         return (jsonify({"Message":"Account has been deactivated!"}))
-    except:
-        return (jsonify({"Error":"There was an error deactivating account!"}))
+    except Exception as e :
+        print(e)
+        return (jsonify({"Error":"There was an error deactivating account!"})),500
         
 
 @user_blueprint.route("/roster")
