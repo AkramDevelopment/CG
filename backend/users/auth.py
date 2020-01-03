@@ -1,38 +1,73 @@
 from functools import wraps
-from flask import jsonify,request
-
-from backend.db.db import Query_Account_By_Email,Is_Admin
+from flask import jsonify,request,session
+from backend.db.Accounts import Query_Account_By_Email,Is_Admin,Is_Developer
 from jwt import encode, decode
 
-def token_required(f):
+def login_required(f):
     @wraps(f)
     def decorated(*args,**kwargs):  
-        token = request.args.get('token')
-        if not token:
-            return jsonify({"Error":"No Token Found"}),404
+       
         try:
-            data = decode(token,'secret',algorithms='HS256')
-            
+            token = session['token']
+            decode(token,'secret',algorithms='HS256')
+
         except:
-            return jsonify({"Error":"Token is Invalid!"})
+            return jsonify({'error':"User Is Not Logged In!"}),401
         return f(*args,**kwargs)
     return decorated
         
     
-
 def adminRequired(f):
     @wraps(f)
     def decorated(*args,**kwargs):  
-        token = request.args.get('token')
-        data = decode(token,'secret',algorithms='HS256')
-
-        if Is_Admin(data['id']) == False:
-            return ("Access Denied, User Is Not an Admin"),401
-        if not token:
-            return jsonify({"Error":"No Token Found"}),404
+        
         try:
-            decode(token,'secret',algorithms='HS256')
+            token = session['token']
+            token=(decode(session['token'],'secret',algorithms='HS256'))
+            if Is_Admin(token['id']) == False:
+                return (jsonify({"error":"User Is Not Authorized To Access This Route"})),401
+            #Will have a loggin system eventually to know who accessess what route at what time   
+            print("Token Was Authorized into route")
+                  
         except:
-            return jsonify({"Error":"Token is Invalid!"})
+            return jsonify({"error":"User Is Not Logged In"}),401
+        return f(*args,**kwargs)
+    return decorated
+
+
+def Developer_Required(f):
+    @wraps(f)
+    def decorated(*args,**kwargs):  
+    
+        try:
+            token = session['token']
+            token=(decode(session['token'],'secret',algorithms='HS256'))
+            if Is_Developer(token['id']) == False:
+                return (jsonify({"error":"User Is Not Authorized To Access This Route"})),401
+            #Will have a loggin system eventually to know who accessess what route at what time   
+            print("Token Was Authorized into route")
+                  
+        except:
+            token=(decode(session['token'],'secret',algorithms='HS256'))
+            print(token['id'])
+            return jsonify({"error":"User Is Not Logged In"}),401
+        return f(*args,**kwargs)
+    return decorated
+
+
+
+def check_admin(f):
+    @wraps(f)
+    def decorated(*args,**kwargs):  
+        
+        try:
+            token = session['token']
+            token=(decode(session['token'],'secret',algorithms='HS256'))
+            if Is_Admin(token['id']) == False:
+                return (jsonify({"info":"This user is not an Admin"})),401
+            #Will have a loggin system eventually to know who accessess what route at what time   
+            return(jsonify({"info":"This user is an admin"}))          
+        except:
+            return jsonify({"error":"User Is Not Logged In"}),401
         return f(*args,**kwargs)
     return decorated

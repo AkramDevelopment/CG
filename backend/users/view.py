@@ -1,52 +1,81 @@
-from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response
+from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response,session
 from werkzeug.security import check_password_hash
-from backend.db.db import Query_Account_By_Email,Add_User
-from backend.users.auth import adminRequired,token_required
+from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts,Deactivate_Account,Add_Admin,Query_Roster,Is_Admin
+from backend.users.auth import adminRequired,login_required,Developer_Required,check_admin
 from functools import wraps
 from jwt import encode,decode
+import logging
 
 
+formatter = logging.Formatter("%(levelname)s:%(message)s")
+
+
+SESSION_COOKIE_SECURE = True
 user_blueprint = Blueprint(
     'user',
     __name__,
     template_folder='templates'
 )
 
-@user_blueprint.route('/register', methods = ["POST"])
-def createAccount():
-    new_user =  {"First_Name":request.form["First_Name"],"Last_Name":request.form["Last_Name"],"Email":request.form["Email"],"Password":request.form["Password"]}
-    if Query_Account_By_Email(new_user["Email"]):
-        return ("There Is Already An Account Associated With that Email!")
-    Add_User(new_user["First_Name"],new_user["Last_Name"],new_user["Email"],new_user["Password"])
-    return ("Account Created")
 
-@user_blueprint.route("/auth/login", methods = ["POST"])
-def login():
-    email = request.form["email"]
-    password = request.form["password"]
+@user_blueprint.route("/isadmin")
+@check_admin
+def check_admin_test():
+    return(jsonify({"response":"Check Admin Route"}))
+        
 
+
+@user_blueprint.route("/lookup/all", methods = ["GET"])
+@adminRequired
+def lookup():
+    if len(Query_All_Accounts()) == 0:
+        return (jsonify({"Message":"There Are No Accounts"}))
+    return (jsonify(Query_All_Accounts()))
+
+
+@user_blueprint.route("/lookup/email", methods = ["POST"])
+@adminRequired
+def lookupEmail():
+    data = request.get_json(force=True  )
+    email = data["Email"]
     account = Query_Account_By_Email(email)
-    if not account:
-        return("There is no account with those credentials")  
-    if not check_password_hash(account.Password,password):
-        return ("Invalid Credentials")
+    if account:
+        return ({'Account':{'Email': account.Email,'First_Name':account.First_Name,'Last_Name':account.Last_name ,'ID': account.id,"Position":account.Position}})
+        
     else:
-        token = encode({'id': account.id}, 'secret', algorithm='HS256')
-        return (token)
+        return (jsonify({"Error":"There is no Account with that email"}))
 
 
-@user_blueprint.route("/test", methods = ["POST"])
-def test():
-    email = request.form["Email"]
-    password = request.form["Password"]
-
-    account = Query_Account_By_Email(email)
-    if not account:
-        return("There is no account with those credentials")  
-    if not check_password_hash(account.Password,password):
-        return ("Invalid Credentials")
+@user_blueprint.route("/deactivate", methods = ["POST"])
+@adminRequired
+def Ban_Account():
     
-    token = encode({'id': account.id}, 'secret', algorithm='HS256')
-    resp = make_response('Setting Cookie!')
-    resp.set_cookie('token','token')
-    return (token)
+    try:
+        data = request.get_json(force=True)
+        email = data["Email"]
+        account = Query_Account_By_Email(email)
+        Deactivate_Account(account.id)
+        return (jsonify({"Message":"Account has been deactivated!"}))
+    except Exception as e :
+        print(e)
+        return (jsonify({"Error":"There was an error deactivating account!"})),500
+        
+
+@user_blueprint.route("/roster")
+@login_required
+def Public_Roster():
+    return (jsonify(Query_Roster()))
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

@@ -2,15 +2,15 @@ from sqlalchemy import create_engine, Column, Integer, String, Numeric, DateTime
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash, check_password_hash
+from backend.db.config import mysqlcred
 import datetime
 
-engine = create_engine('mysql://root:!Amohammed21@localhost/CG',
+engine = create_engine(mysqlcred['uri'],
                        isolation_level="READ UNCOMMITTED")
 Session = sessionmaker(bind=engine)
 session = Session()
 connection = engine.connect()
 Base = declarative_base()
-#Account Model And Account Functions
 class Account(Base):
     __tablename__="Account"
 
@@ -37,10 +37,15 @@ def Add_User(first_name,last_name,email,password):
     newUser = Account(first_name,last_name,email,hashed)
     session.add(newUser)
     session.commit()
+    return ("User Has been Successfully Created!")
 
    
 
-
+def Deactivate_Account(id):
+    query = session.query(Account).filter(Account.id == id ).first()
+    query.Position = "Deactivated"
+    session.commit()
+    return ("Account Has Been Deactivated")
 
 def Add_Admin(id):
     query = session.query(Account).filter(Account.id == id).first()
@@ -62,10 +67,24 @@ def Is_Admin(id):
     else:
         return False
 
+def Is_Developer(id):
+    user = session.query(Account).filter(Account.id == id).first()
+    if user.Position == "Developer":
+        return True
+    else:
+        return False       
         
 def Query_Account_By_Email(Email):
     query = session.query(Account).filter(Account.Email == Email).first()
+    if query:
+        print(query)
+        return (query)
+    else:
+        return ("There Is No Account With That Email")
+def Query_Account_By_ID(id):
+    query = session.query(Account).filter(Account.id == id).first()
     return (query)
+    
 
 def Query_All_Accounts():
     query = session.query(Account)
@@ -74,4 +93,14 @@ def Query_All_Accounts():
         result.append({"ID":account.id,'First_Name': account.First_Name, "Last_Name": account.Last_name, "Email": account.Email,"Position": account.Position})
     return (result)
 
-# End of Account Model And Account Functions
+def Query_Roster():
+    query = session.query(Account)
+    result = []
+    for account in query:
+        result.append({"First_Name":account.First_Name,'Last_Name':account.Last_name,'Date_Joined':account.Create_Date})
+    return(result)
+
+
+
+
+
