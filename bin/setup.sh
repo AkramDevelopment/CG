@@ -4,4 +4,9 @@
 virtualenv .venv 
 source .venv/bin/activate
 
-pip3 install flask sqlalchemy PyMySQL pyjwt mysqlclient
+REQS='requirements.txt'
+
+while read dep; do 
+    dep=$(echo "$dep" | tr -d '\n')
+    pip3 install "$dep"
+done < $REQS
