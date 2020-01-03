@@ -42,7 +42,7 @@ export default {
                 .then(res => res.json())
                 .then(res => {
                     if (res.success) {
-                        this.$router.push('announcements')
+                        this.$router.push('home')
                     } else if (res.error) {
                         // TODO: implement UI based error handling.
                         log('\n\nSomething went wrong...')

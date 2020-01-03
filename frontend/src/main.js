@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import App from './components/App.vue'
 import LoginScreen from "./components/LoginScreen.vue";
 import SignupScreen from "./components/SignupScreen.vue";
-import Announcements from "./components/Announcements.vue";
+import HomeScreen from "./components/HomeScreen.vue";
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
@@ -11,7 +11,7 @@ Vue.use(VueRouter);
 const routes = [
   { path: "/", component: LoginScreen },
   { path: "/signup", component: SignupScreen },
-  { path: "/announcements", component: Announcements },
+  { path: "/home", component: HomeScreen },
 ];
 
 const router = new VueRouter({ routes });

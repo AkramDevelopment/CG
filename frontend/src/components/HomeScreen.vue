@@ -1,6 +1,6 @@
 <template>
     <div class="app-screen">
-        <h1>Announcements</h1>
+        <h1>Dashboard</h1>
         <button class="logout" v-on:click="logout">Logout</button>
         <div v-for="a in announcements" v-bind:key="a.title" class="annoucement-card">
             <h3>Announcement Title</h3>
@@ -13,7 +13,7 @@
 import { log, error, reqErrors, URL } from '../globals'
 
 export default {
-    name: 'Announcements',
+    name: 'HomeScreen',
     components: {},
     data: () => ({
         announcements: []
