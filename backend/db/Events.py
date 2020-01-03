@@ -13,7 +13,6 @@ Base = declarative_base()
 class Event(Base):
     __tablename__="Events"
     id = Column("ID",Integer,primary_key=True)
-    Created_By = Column("Created_By",String(32))
     Event_Title = Column('Event_Title',String(32))
     Date_Start = Column("Date_Start",String(32))
     Date_End = Column("Date_End",String(32))
@@ -21,8 +20,7 @@ class Event(Base):
     Time_End = Column("Time_End",String(32))
     Location = Column("Location", String(32))
     
-    def __init__(self,Created_By,Event_Title,Date_Start,Date_End,Time_Start,Time_End,Location):
-        self.Created_By = Created_By
+    def __init__(self,Event_Title,Date_Start,Date_End,Time_Start,Time_End,Location):
         self.Event_Title = Event_Title
         self.Date_Start = Date_Start
         self.Date_End = Date_End
@@ -32,8 +30,8 @@ class Event(Base):
 
 
 
-def create_event(Created_By,Event_Title,Date_Start,Date_End,Time_Start,Time_End,Location):
-    new_event = Event(Created_By,Event_Title,Date_Start,Date_End,Time_Start,Time_End,Location)
+def create_event(Event_Title,Date_Start,Date_End,Time_Start,Time_End,Location):
+    new_event = Event(Event_Title,Date_Start,Date_End,Time_Start,Time_End,Location)
     session.add(new_event)
     session.commit()
     return ("New Event Added Successfully!")

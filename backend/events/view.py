@@ -1,5 +1,5 @@
 from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response,session
-from backend.db.Events import query_events,query_by_id,remove_event
+from backend.db.Events import query_events,query_by_id,remove_event,create_event
 from backend.users.auth import adminRequired,login_required
 
 
@@ -9,7 +9,18 @@ event_blueprint = Blueprint(
     __name__,
     template_folder='templates'
 )
+@event_blueprint.route("/add", methods=["POST"])
+@adminRequired
+def add_event():
+    try:
+        data = request.get_json(force=True)
+        create_event(data['Title'],data["Date_Start"],data["Date_End"],data["Start_Time"],data["End_Time"],data['Location'])
+        return(jsonify({"success":"Event Successfully Created!"}))
+    except Exception as e:
+        print(e)
+        return ("There was an error creating event!")
 
+    
 
 @event_blueprint.route("/all")
 @login_required
@@ -45,8 +56,6 @@ def delete(id):
     except Exception as e:
         print(e)
         return ("There was an error deleting this event, please verify the event ID matches the event you are trying to delete!"),500
-
-
 
 
 
