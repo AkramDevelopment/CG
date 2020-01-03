@@ -1,7 +1,7 @@
 from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response,session
 from werkzeug.security import check_password_hash
 from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts,Deactivate_Account,Add_Admin,Query_Roster,Is_Admin
-from backend.users.auth import adminRequired,login_required,Developer_Required
+from backend.users.auth import adminRequired,login_required,Developer_Required,check_admin
 from functools import wraps
 from jwt import encode,decode
 import logging
@@ -18,13 +18,10 @@ user_blueprint = Blueprint(
 )
 
 
-@user_blueprint.route("/isadmin/<id>")
-def check_admin(id):
-    try:
-        return(jsonify(Is_Admin(id)))
-    except Exception as e :
-        print(e)
-        return (jsonify("There was an error looking up account status")),404
+@user_blueprint.route("/isadmin")
+@check_admin
+def check_admin_test():
+    return(jsonify({"response":"Check Admin Route"}))
         
 
 

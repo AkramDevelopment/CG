@@ -53,3 +53,21 @@ def Developer_Required(f):
             return jsonify({"error":"User Is Not Logged In"}),401
         return f(*args,**kwargs)
     return decorated
+
+
+
+def check_admin(f):
+    @wraps(f)
+    def decorated(*args,**kwargs):  
+        
+        try:
+            token = session['token']
+            token=(decode(session['token'],'secret',algorithms='HS256'))
+            if Is_Admin(token['id']) == False:
+                return (jsonify({"info":"This user is not an Admin"})),401
+            #Will have a loggin system eventually to know who accessess what route at what time   
+            return(jsonify({"info":"This user is an admin"}))          
+        except:
+            return jsonify({"error":"User Is Not Logged In"}),401
+        return f(*args,**kwargs)
+    return decorated
