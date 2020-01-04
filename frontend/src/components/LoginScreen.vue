@@ -15,7 +15,8 @@
 <script>
 import sha256 from 'crypto-js/sha256'
 import Base64 from 'crypto-js/enc-base64'
-import { log, error, URL } from '../globals'
+import { log, URL } from '../globals'
+import { POST } from '../helpers'
 import '../assets/css/formPages.css'
 
 export default {
@@ -28,30 +29,17 @@ export default {
     methods: {
         submit(e) {
             e.preventDefault()
-            fetch(`${URL}/auth/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-                body: JSON.stringify({
-                    'Email': this.email,
-                    'Password': Base64.stringify(sha256(this.password))
-                })
+            POST(`${URL}/auth/login`, {
+                'Email': this.email,
+                'Password': Base64.stringify(sha256(this.password))
             })
-                .then(res => res.json())
                 .then(res => {
-                    if (res.success) {
+                    if (res.ok) {
                         this.$router.push('home')
-                    } else if (res.error) {
-                        // TODO: implement UI based error handling.
-                        log('\n\nSomething went wrong...')
-                        error(res.error)
                     } else {
                         log(res)
                     }
                 })
-                .catch(err => error(err))
         },
     },
 }

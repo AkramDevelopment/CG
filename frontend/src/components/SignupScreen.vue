@@ -21,7 +21,8 @@
 <script>
 import sha256 from 'crypto-js/sha256'
 import Base64 from 'crypto-js/enc-base64'
-import { log, error, URL } from '../globals'
+import { log, URL } from '../globals'
+import { POST } from '../helpers'
 import '../assets/css/formPages.css'
 
 export default {
@@ -43,32 +44,20 @@ export default {
                 password.length >= 10 && password === passwordConf &&
                 email.includes('@ivytech.edu')
             ) {
-                log(`Signing up with: ${this.fName}, ${this.lName} ${this.email}, ${this.password}`)
-                fetch(`${URL}/auth/register`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        'First_Name': this.fName,
-                        'Last_Name': this.lName,
-                        'Email': this.email,
-                        'Password': Base64.stringify(sha256(this.password))
-                    })
+                POST(`${URL}/auth/register`, {
+                    'First_Name': this.fName,
+                    'Last_Name': this.lName,
+                    'Email': this.email,
+                    'Password': Base64.stringify(sha256(this.password))
                 })
-                    .then(res => res.json())
                     .then(res => {
-                        if (res.success) {
+                        if (res.ok) {
                             log('Success!!!!')
-                            log(res)
-                        } else if (res.error) {
-                            log('\n\nSomething went wrong...')
-                            error(res.error)
+                            this.$router.push('/')
                         } else {
                             log(res)
                         }
                     })
-                    .catch(err => error(err))
             } else {
                 log('Invalid information');
             }
