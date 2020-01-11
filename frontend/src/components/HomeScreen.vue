@@ -3,9 +3,10 @@
         <h1 v-if="isAdmin">Admin Dashboard</h1>
         <h1 v-else>Dashboard</h1>
         <button class="logout" v-on:click="logout">Logout</button>
-        <div v-for="p in posts" v-bind:key="p.title" class="post-wrapper">
+        <div v-for="p in posts" v-bind:key="p.id" class="post-wrapper">
             <div v-if="p.type === postTypes.announcement" class="annoucement-card">
-                <h3>Announcement Title</h3>
+                <h3>{{p.title}}</h3>
+                <p>{{p.body}}</p>
             </div>
             <div v-else-if="p.type === postTypes.event" class="event-card">
                 <h3>Event Title</h3>
@@ -23,6 +24,7 @@ export default {
     name: 'HomeScreen',
     components: {},
     data: () => ({
+        postTypes,
         announcements: [],
         events: [],
         posts: [],
@@ -105,11 +107,19 @@ export default {
 </script>
 
 <style scoped>
+div.post-wrapper {
+    width: 50%;
+    min-width: 300px;
+}
+@media screen and (max-width: 900px) {
+    div.post-wrapper {
+        width: 90%;
+    }
+}
 /* Announcement Card && Event Card */
 div.annoucement-card,
 div.event-card {
-    width: 50%;
-    min-width: 300px;
+    width: 100%;
     padding: 20px;
     box-sizing: border-box;
     border-radius: 8px;
