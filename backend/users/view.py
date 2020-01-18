@@ -3,14 +3,8 @@ from backend.logging.loggers import log_unban
 from werkzeug.security import check_password_hash
 from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts,Deactivate_Account,Add_Admin,Query_Roster,Is_Admin,Query_Account_By_ID
 from backend.users.sessions import get_session_id
-
 from backend.users.auth import adminRequired,login_required,Developer_Required,check_admin
-from functools import wraps
 from jwt import encode,decode
-import logging
-
-
-formatter = logging.Formatter("%(levelname)s:%(message)s")
 
 
 SESSION_COOKIE_SECURE = True
@@ -54,6 +48,7 @@ def lookupEmail():
 def Ban_Account():
     
     try:
+
         unbanned_by = Query_Account_By_ID(get_session_id())
         data = request.get_json(force=True)
         email = data["Email"]
@@ -61,7 +56,9 @@ def Ban_Account():
         Deactivate_Account(account.id)
         log_unban(unbanned_by.Email, email)
         return (jsonify({"Message":"Account has been deactivated!"}))
+        
     except Exception as e :
+
         print(e)
         return (jsonify({"Error":"There was an error deactivating account!"})),500
         
