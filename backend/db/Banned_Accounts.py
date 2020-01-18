@@ -26,7 +26,6 @@ class Banned_Accounts(Base):
        self.Banned_By = Banned_By
 
 
-
 def ban_account(account_id,banned_by):
     banned_account = Banned_Accounts(account_id,banned_by)
     session.add(banned_account)
@@ -48,5 +47,3 @@ def is_banned(id):
         return False
 
 
-
-Base.metadata.create_all(engine)
