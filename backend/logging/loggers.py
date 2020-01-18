@@ -5,6 +5,8 @@ import datetime
 
 
 def log_unban(unbanned_by,unbanned_email):
+
+    
     unban_logger = logging.getLogger(__name__)
     unban_logs = logging.FileHandler('backend/logging/logs/unbans.log')
     unban_logger.addHandler(unban_logs)
@@ -15,6 +17,8 @@ def log_unban(unbanned_by,unbanned_email):
 
 
 def post_removed(removed_by,post_id):
+
+
     post_logger = logging.getLogger(__name__)
     post_logs = logging.FileHandler('backend/logging/logs/post_removed.log')
     post_logger.addHandler(post_logs)
@@ -25,6 +29,8 @@ def post_removed(removed_by,post_id):
 
 
 def announcement_removed(removed_by,announcement_id):
+
+
     announcement_logger = logging.getLogger(__name__)
     announcement_logs = logging.FileHandler('backend/logging/logs/announcement_removed.log')
     announcement_logger.addHandler(announcement_logs)
