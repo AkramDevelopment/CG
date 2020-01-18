@@ -1,6 +1,8 @@
 from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response,session
 from werkzeug.security import check_password_hash
-from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts,Deactivate_Account,Add_Admin,Query_Roster,Is_Admin
+from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts,Deactivate_Account,Add_Admin,Query_Roster,Is_Admin,Query_Account_By_ID
+from backend.users.sessions import get_session_id
+
 from backend.users.auth import adminRequired,login_required,Developer_Required,check_admin
 from functools import wraps
 from jwt import encode,decode
@@ -64,6 +66,7 @@ def Ban_Account():
 @user_blueprint.route("/roster")
 @login_required
 def Public_Roster():
+    account = Query_Account_By_ID(get_session_id())
     return (jsonify(Query_Roster()))
 
 
