@@ -60,7 +60,11 @@ def Ban_Account():
 
         print(e)
         return (jsonify({"Error":"There was an error deactivating account!"})),500
-        
+
+@user_blueprint.route("/unban",method = ['POST'])
+@adminRequired
+def unban_acccount():
+    return jsonify("Unban route")        
 
 @user_blueprint.route("/roster")
 @login_required
