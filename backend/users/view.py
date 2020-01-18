@@ -1,7 +1,7 @@
 from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response,session
 from backend.logging.loggers import log_unban
 from werkzeug.security import check_password_hash
-from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts,Deactivate_Account,Add_Admin,Query_Roster,Is_Admin,Query_Account_By_ID
+from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts,Add_Admin,Query_Roster,Is_Admin,Query_Account_By_ID
 from backend.users.sessions import get_session_id
 from backend.users.auth import adminRequired,login_required,Developer_Required,check_admin
 from jwt import encode,decode
@@ -53,7 +53,7 @@ def Ban_Account():
         data = request.get_json(force=True)
         email = data["Email"]
         account = Query_Account_By_Email(email)
-        Deactivate_Account(account.id,banned_by)
+        #Create ban account logic here. 
         return (jsonify({"Message":"Account has been deactivated!"}))
         
     except Exception as e :
@@ -61,10 +61,12 @@ def Ban_Account():
         print(e)
         return (jsonify({"Error":"There was an error deactivating account!"})),500
 
-@user_blueprint.route("/unban",method = ['POST'])
+   
+@user_blueprint.route("/unban",methods=["POST"])
 @adminRequired
-def unban_acccount():
-    return jsonify("Unban route")        
+def unban():
+    return ("Unban route")
+
 
 @user_blueprint.route("/roster")
 @login_required

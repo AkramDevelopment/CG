@@ -23,3 +23,13 @@ class Banned_Accounts(Base):
     def __init__(self,Account_ID):
        self.Account_ID = Account_ID
 
+
+
+def ban_account(account_id):
+    session.add(account_id)
+    session.commit()
+
+
+def unban_account(account_id):
+    session.delete(account_id)
+    session.commit()
