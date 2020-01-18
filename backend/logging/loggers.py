@@ -4,10 +4,9 @@ import datetime
 
 
 
-
 def log_unban(unbanned_by,unbanned_email):
     unban_logger = logging.getLogger(__name__)
-    unban_logs = logging.FileHandler('logs/unbans.log')
+    unban_logs = logging.FileHandler('backend/logging/logs/unbans.log')
     unban_logger.addHandler(unban_logs)
     unban_logger.setLevel(logging.CRITICAL)
     unban_logger.critical(f'{unbanned_email} was unbanned by {unbanned_by} on {datetime.datetime.now()}')
@@ -27,7 +26,7 @@ def post_removed(removed_by,post_id):
 
 def announcement_removed(removed_by,announcement_id):
     announcement_logger = logging.getLogger(__name__)
-    announcement_logs = logging.FileHandler('/backend/logging/logs/announcement_removed.log')
+    announcement_logs = logging.FileHandler('backend/logging/logs/announcement_removed.log')
     announcement_logger.addHandler(announcement_logs)
     announcement_logger.setLevel(logging.CRITICAL)
     announcement_logger.critical(f'Announcement removed (id={announcement_id}) by {removed_by} on {datetime.datetime.now()}')
