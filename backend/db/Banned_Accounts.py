@@ -33,3 +33,11 @@ def ban_account(account_id):
 def unban_account(account_id):
     session.delete(account_id)
     session.commit()
+
+def is_banned(id):
+    query = session.query(Banned_Accounts).filter(Banned_Accounts.Account_ID == id)
+    if query:
+        return True
+    else:
+        return False
+
