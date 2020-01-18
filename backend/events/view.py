@@ -1,4 +1,7 @@
 from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response,session
+from backend.db.Accounts import Query_Account_By_ID
+from backend.users.sessions import get_session_id
+from backend.logging.loggers import post_removed
 from backend.db.Events import query_events,query_by_id,remove_event,create_event
 from backend.users.auth import adminRequired,login_required
 
@@ -51,6 +54,9 @@ def view_by_id(id):
 @adminRequired
 def delete(id):
     try:
+        
+        account = Query_Account_By_ID(get_session_id())
+        post_removed(account.Email,id)
         remove_event(id)
         return (jsonify({"success":"Event removed successfully!"}))
     except Exception as e:

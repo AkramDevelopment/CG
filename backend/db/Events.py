@@ -49,7 +49,7 @@ def query_events():
     query = session.query(Event)
     result = []
     for row in query:
-        result.append({"created_by":row.Created_By,"event_title":row.Event_Title,'date_start':row.Date_Start,"date_end":row.Date_End,'time_start':row.Time_Start,
+        result.append({"id":row.id,"event_title":row.Event_Title,'date_start':row.Date_Start,"date_end":row.Date_End,'time_start':row.Time_Start,
         "time_end":row.Time_End,'location':row.Location})
     return (result)
 

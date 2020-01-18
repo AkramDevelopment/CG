@@ -40,3 +40,11 @@ pip3 install virtualenv
 # Start Backend
 ./bin/run.sh
 ```
+
+### Setup MySQL on Linux
+```
+sudo apt update
+sudo apt install mysql-server
+sudo mysql_secure_installation
+```
+

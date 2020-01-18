@@ -41,23 +41,11 @@ def Add_User(first_name,last_name,email,password):
 
    
 
-def Deactivate_Account(id):
-    query = session.query(Account).filter(Account.id == id ).first()
-    query.Position = "Deactivated"
-    session.commit()
-    return ("Account Has Been Deactivated")
-
 def Add_Admin(id):
     query = session.query(Account).filter(Account.id == id).first()
     query.Position = "Admin"
     session.commit()
     return("Admin Privilege have been added!")
-
-def remove_User(id):
-    result = session.query(Account).filter(Account.id == id).first()
-    session.delete(result)
-    session.commit()
-    return ("User Has Been Removed Successfully!")
 
 
 def Is_Admin(id):
@@ -77,9 +65,8 @@ def Is_Developer(id):
 def Query_Account_By_Email(Email):
     query = session.query(Account).filter(Account.Email == Email).first()
     if query:
-        print(query)
         return (query)
-    else:
+    else: 
         return ("There Is No Account With That Email")
 def Query_Account_By_ID(id):
     query = session.query(Account).filter(Account.id == id).first()
@@ -99,8 +86,6 @@ def Query_Roster():
     for account in query:
         result.append({"First_Name":account.First_Name,'Last_Name':account.Last_name,'Date_Joined':account.Create_Date})
     return(result)
-
-
 
 
 
