@@ -22,7 +22,7 @@ class Account(Base):
     Group = Column("Group",String(32),default="Unconfirmed")
     Position = Column("Position",String(32),default="Member")
     Is_Banned = Column("Is_Banned",Boolean,default = False)
-    Banned_By = Column("Banned_By",String(32) )
+    Banned_By = Column("Banned_By",String(32))
     Create_Date = Column("Create_Date", String(32),default = datetime.datetime.now())
 
 
