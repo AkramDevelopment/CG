@@ -1,7 +1,8 @@
 from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response,session
+from backend.db.Banned_Accounts import ban_account,unban_account
 from backend.logging.loggers import log_unban
 from werkzeug.security import check_password_hash
-from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts,Deactivate_Account,Add_Admin,Query_Roster,Is_Admin,Query_Account_By_ID
+from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts,Add_Admin,Query_Roster,Is_Admin,Query_Account_By_ID
 from backend.users.sessions import get_session_id
 from backend.users.auth import adminRequired,login_required,Developer_Required,check_admin
 from jwt import encode,decode
@@ -43,25 +44,41 @@ def lookupEmail():
         return (jsonify({"Error":"There is no Account with that email"}))
 
 
-@user_blueprint.route("/deactivate", methods = ["POST"])
+@user_blueprint.route("/ban", methods = ["POST"])
 @adminRequired
 def Ban_Account():
     
     try:
 
-        unbanned_by = Query_Account_By_ID(get_session_id())
+        banned_by = Query_Account_By_ID(get_session_id())
         data = request.get_json(force=True)
         email = data["Email"]
         account = Query_Account_By_Email(email)
-        Deactivate_Account(account.id)
-        log_unban(unbanned_by.Email, email)
+        ban_account(account.id,banned_by.Email)
         return (jsonify({"Message":"Account has been deactivated!"}))
         
     except Exception as e :
 
         print(e)
         return (jsonify({"Error":"There was an error deactivating account!"})),500
-        
+
+   
+@user_blueprint.route("/unban",methods=["POST"])
+@adminRequired
+def unban():
+    try:
+
+        unbanned_by = Query_Account_By_ID(get_session_id())
+        data = request.get_json(force=True)
+        email = data["Email"]
+        account = Query_Account_By_Email(email)
+        unban_account(account.id)
+        log_unban(unbanned_by.Email,email)
+        return ( jsonify("Account has been unbanned!"))
+    except Exception as e:
+        print(e)
+        return(jsonify("There was an issue unbanning account"))
+
 
 @user_blueprint.route("/roster")
 @login_required
