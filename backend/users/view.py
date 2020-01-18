@@ -1,4 +1,5 @@
 from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response,session
+from backend.db.Banned_Accounts import ban_account
 from backend.logging.loggers import log_unban
 from werkzeug.security import check_password_hash
 from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts,Add_Admin,Query_Roster,Is_Admin,Query_Account_By_ID
@@ -53,7 +54,8 @@ def Ban_Account():
         data = request.get_json(force=True)
         email = data["Email"]
         account = Query_Account_By_Email(email)
-        #Create ban account logic here. 
+        ban_account(account.ID,banned_by)
+         
         return (jsonify({"Message":"Account has been deactivated!"}))
         
     except Exception as e :
