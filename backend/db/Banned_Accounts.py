@@ -17,9 +17,9 @@ class Banned_Accounts(Base):
     __tablename__="Banned_Accounts"
 
     id = Column("ID",Integer,primary_key=True)
-    Account_ID = ("Account_ID",Integer)
-    Banned_By = ("Banned_By",String(32))
-    ban_date = Column("Ban_Date",String(32),default = datetime.datetime.now())
+    Account_ID = Column("Account_ID",Integer)
+    Banned_By = Column("Banned_By",String(32))
+    Ban_Date  = Column("Ban_Date",String(100),default = datetime.datetime.now())
 
     def __init__(self,Account_ID,Banned_By):
        self.Account_ID = Account_ID
@@ -46,3 +46,6 @@ def is_banned(id):
     else:
         return False
 
+
+
+Base.metadata.create_all(engine)
