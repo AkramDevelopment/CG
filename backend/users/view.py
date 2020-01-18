@@ -49,12 +49,11 @@ def Ban_Account():
     
     try:
 
-        unbanned_by = Query_Account_By_ID(get_session_id())
+        banned_by = Query_Account_By_ID(get_session_id())
         data = request.get_json(force=True)
         email = data["Email"]
         account = Query_Account_By_Email(email)
-        Deactivate_Account(account.id)
-        log_unban(unbanned_by.Email, email)
+        Deactivate_Account(account.id,banned_by)
         return (jsonify({"Message":"Account has been deactivated!"}))
         
     except Exception as e :
