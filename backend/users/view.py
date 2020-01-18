@@ -57,6 +57,7 @@ def Ban_Account():
         email = data["Email"]
         account = Query_Account_By_Email(email)
         Deactivate_Account(account.id)
+        
         return (jsonify({"Message":"Account has been deactivated!"}))
     except Exception as e :
         print(e)

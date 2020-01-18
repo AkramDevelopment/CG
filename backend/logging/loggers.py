@@ -2,13 +2,7 @@ import logging
 import datetime
 
 
-def log_ban(banned_by,banned_email):
-    ban_logger = logging.getLogger(__name__)
-    ban_logs = logging.FileHandler('logs/bans.log')
-    ban_logger.addHandler(ban_logs)
-    ban_logger.setLevel(logging.CRITICAL)
-    ban_logger.critical(f'{banned_email} was banned by {banned_by} on {datetime.datetime.now()}')
-    
+
 
 
 def log_unban(unbanned_by,unbanned_email):
