@@ -44,7 +44,7 @@ def lookupEmail():
         return (jsonify({"Error":"There is no Account with that email"}))
 
 
-@user_blueprint.route("/deactivate", methods = ["POST"])
+@user_blueprint.route("/ban", methods = ["POST"])
 @adminRequired
 def Ban_Account():
     
@@ -55,7 +55,6 @@ def Ban_Account():
         email = data["Email"]
         account = Query_Account_By_Email(email)
         ban_account(account.ID,banned_by)
-         
         return (jsonify({"Message":"Account has been deactivated!"}))
         
     except Exception as e :

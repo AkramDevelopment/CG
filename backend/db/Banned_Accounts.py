@@ -28,7 +28,8 @@ class Banned_Accounts(Base):
 
 
 def ban_account(account_id,banned_by):
-    session.add(account_id,banned_by)
+    banned_Account = Banned_Accounts(account_id,banned_by)
+    session.add(banned_Account)
     session.commit()
 
 
