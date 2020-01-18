@@ -65,9 +65,8 @@ def Is_Developer(id):
 def Query_Account_By_Email(Email):
     query = session.query(Account).filter(Account.Email == Email).first()
     if query:
-        print(query)
         return (query)
-    else:
+    else: 
         return ("There Is No Account With That Email")
 def Query_Account_By_ID(id):
     query = session.query(Account).filter(Account.id == id).first()
@@ -87,5 +86,6 @@ def Query_Roster():
     for account in query:
         result.append({"First_Name":account.First_Name,'Last_Name':account.Last_name,'Date_Joined':account.Create_Date})
     return(result)
+
 
 

@@ -14,7 +14,7 @@ Base = declarative_base()
 
 
 class Banned_Accounts(Base):
-    __tablename__="Account"
+    __tablename__="Banned_Accounts"
 
     id = Column("ID",Integer,primary_key=True)
     Account_ID = ("Account_ID",Integer)
@@ -28,14 +28,16 @@ class Banned_Accounts(Base):
 
 
 def ban_account(account_id,banned_by):
-    banned_Account = Banned_Accounts(account_id,banned_by)
-    session.add(banned_Account)
+    banned_account = Banned_Accounts(account_id,banned_by)
+    session.add(banned_account)
     session.commit()
+    return ("Account Banned")
 
 
 def unban_account(account_id):
     session.delete(account_id)
     session.commit()
+    return ("Account Unbanned")
 
 def is_banned(id):
     query = session.query(Banned_Accounts).filter(Banned_Accounts.Account_ID == id)
@@ -43,6 +45,4 @@ def is_banned(id):
         return True
     else:
         return False
-
-
 
