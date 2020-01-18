@@ -21,8 +21,6 @@ class Account(Base):
     Email = Column("Email",String(32))
     Group = Column("Group",String(32),default="Unconfirmed")
     Position = Column("Position",String(32),default="Member")
-    Is_Banned = Column("Is_Banned",Boolean,default = False)
-    Banned_By = Column("Banned_By",String(32))
     Create_Date = Column("Create_Date", String(32),default = datetime.datetime.now())
 
 
@@ -43,24 +41,11 @@ def Add_User(first_name,last_name,email,password):
 
    
 
-def Deactivate_Account(id,banned_by):
-    query = session.query(Account).filter(Account.id == id ).first()
-    query.Is_Banned = True
-    query.Banned_By = banned_by
-    session.commit()
-    return ("Account Has Been Deactivated")
-
 def Add_Admin(id):
     query = session.query(Account).filter(Account.id == id).first()
     query.Position = "Admin"
     session.commit()
     return("Admin Privilege have been added!")
-
-def remove_User(id):
-    result = session.query(Account).filter(Account.id == id).first()
-    session.delete(result)
-    session.commit()
-    return ("User Has Been Removed Successfully!")
 
 
 def Is_Admin(id):
