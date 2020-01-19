@@ -1,10 +1,13 @@
 from sqlalchemy import create_engine, Column, Integer, String, Numeric, DateTime, MetaData,Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from backend.db.config import mysqlcred
+from backend.config.database import mysqlcred
+import json
 import datetime
 
-engine = create_engine(mysqlcred['uri'],
+config =  json.loads(mysqlcred) 
+
+engine = create_engine(config["Mysql"]['uri'],
                        isolation_level="READ UNCOMMITTED")
 
 connection = engine.connect()
