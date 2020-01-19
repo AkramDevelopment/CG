@@ -1,13 +1,15 @@
 
 from sqlalchemy import create_engine, Column, Integer, String, Numeric, DateTime, MetaData,Boolean
 from backend.db.database import Banned_Accounts
-from backend.db.config import mysqlcred
+from backend.config.database import mysqlcred
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import datetime
+import json
 
 
-engine = create_engine(mysqlcred['uri'],
+config =  json.loads(mysqlcred) 
+engine = create_engine(config["Mysql"]['uri'],
                        isolation_level="READ UNCOMMITTED")
 Session = sessionmaker(bind=engine)
 session = Session()
