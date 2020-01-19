@@ -65,6 +65,8 @@ class Banned_Accounts(Base):
 
 
 class Event(Base):
+
+    
     __tablename__="Events"
     id = Column("ID",Integer,primary_key=True)
     Event_Title = Column('Event_Title',String(32))
@@ -75,6 +77,8 @@ class Event(Base):
     Location = Column("Location", String(32))
     
     def __init__(self,Event_Title,Date_Start,Date_End,Time_Start,Time_End,Location):
+
+
         self.Event_Title = Event_Title
         self.Date_Start = Date_Start
         self.Date_End = Date_End
