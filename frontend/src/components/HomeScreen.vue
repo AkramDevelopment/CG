@@ -152,4 +152,5 @@ button.logout {
 button.logout:hover {
     background: rgba(0, 0, 0, 0.2);
 }
+h4 { color: #e0e0e0; }
 </style>
