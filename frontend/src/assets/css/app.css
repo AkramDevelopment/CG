@@ -13,3 +13,40 @@ div.app-screen > h4 {
     font-size: 1rem;
     text-align: center;
 }
+
+/* New CSS */
+
+.cg-center-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - 56px);
+    padding-bottom: calc(56px * 0.5);
+}
+.cg-card-size {
+    width: 50%;
+    min-width: 300px !important;
+    max-width: 800px;
+}
+.cg-card {
+    background-color: #2F2D2E !important;
+}
+.cg-card h4.card-title, .cg-card p.card-text {
+    color: #fff !important;
+}
+.cg-card label {
+    color: #fafafa !important;
+}
+.cg-card small {
+    color: #e0e0e0 !important;
+}
+.cg-submit-button {
+    width: 50%;
+    margin-left: 25%;
+}
+.cg-center-horiz {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

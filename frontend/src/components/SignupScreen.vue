@@ -4,7 +4,7 @@
         <div class="cg-center-content">
             <b-card
                 title="Signup for a Cyber Gladiators Account"
-                class="mb-2 cg-card"
+                class="mb-2 cg-card cg-card-size"
             >
                 <b-card-text>
                     <b-form @submit="submit">
@@ -96,7 +96,6 @@ import Base64 from 'crypto-js/enc-base64'
 import Footer from './Footer'
 import { log, URL } from '../globals'
 import { POST } from '../helpers'
-import '../assets/css/formPages.css'
 
 export default {
     name: 'SignupScreen',

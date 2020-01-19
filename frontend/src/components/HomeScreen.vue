@@ -4,13 +4,14 @@
         <h1 v-else>Dashboard</h1>
         <button class="logout" v-on:click="logout">Logout</button>
         <div v-for="p in posts" v-bind:key="p.id" class="post-wrapper">
-            <div v-if="p.type === postTypes.announcement" class="annoucement-card">
-                <h3>{{p.title}}</h3>
-                <p>{{p.body}}</p>
-            </div>
-            <div v-else-if="p.type === postTypes.event" class="event-card">
-                <h3>Event Title</h3>
-            </div>
+            <b-card v-if="p.type === postTypes.announcement" class="cg-card" v-bind:title="p.title">
+                <b-card-text>
+                    {{p.body}}
+                </b-card-text>
+            </b-card>
+            <b-card v-if="p.type === postTypes.event" title="Event Name">
+                No content available....
+            </b-card>
         </div>
         <h4 v-if="posts.length <= 0">Looks like we don't have any posts yet.<br /> Please check back later!</h4>
     </div>
@@ -107,6 +108,7 @@ export default {
 </script>
 
 <style scoped>
+h1 { color: #fff; }
 div.post-wrapper {
     width: 50%;
     min-width: 300px;
