@@ -91,8 +91,6 @@
 </template>
 
 <script>
-import sha256 from 'crypto-js/sha256'
-import Base64 from 'crypto-js/enc-base64'
 import Footer from './Footer'
 import { log, URL } from '../globals'
 import { POST } from '../helpers'
@@ -122,7 +120,7 @@ export default {
                     'first-name': this.fName,
                     'last-name': this.lName,
                     'email': this.email,
-                    'password': Base64.stringify(sha256(this.password))
+                    'password': this.password
                 })
                     .then(res => {
                         if (res.ok) {
