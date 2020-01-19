@@ -119,10 +119,10 @@ export default {
                 email.includes('@ivytech.edu')
             ) {
                 POST(`${URL}/auth/register`, {
-                    'First_Name': this.fName,
-                    'Last_Name': this.lName,
-                    'Email': this.email,
-                    'Password': Base64.stringify(sha256(this.password))
+                    'first-name': this.fName,
+                    'last-name': this.lName,
+                    'email': this.email,
+                    'password': Base64.stringify(sha256(this.password))
                 })
                     .then(res => {
                         if (res.ok) {

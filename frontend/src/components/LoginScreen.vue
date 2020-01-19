@@ -68,8 +68,8 @@ export default {
         submit(e) {
             e.preventDefault()
             POST(`${URL}/auth/login`, {
-                'Email': this.email,
-                'Password': Base64.stringify(sha256(this.password))
+                'email': this.email,
+                'password': Base64.stringify(sha256(this.password))
             })
                 .then(res => {
                     if (res.ok) {
