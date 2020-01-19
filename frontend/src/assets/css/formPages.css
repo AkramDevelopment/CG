@@ -1,55 +1,24 @@
-/* Login Wrapper || Form */
-form.login-wrapper {
-    width: 98%;
-    max-width: 500px;
-    border: 10px solid #a4a4a4;
-    padding: 30px;
-    box-sizing: border-box;
-    border-radius: 30px;
+/* New CSS */
+
+.cg-center-content {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-}
-form.login-wrapper label {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-/* Inputs */
-form.login-wrapper input[type="text"],
-form.login-wrapper input[type="email"],
-form.login-wrapper input[type="password"] {
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    margin: 10px 0;
-    height: 30px;
-    border: none;
-    outline: none;
-    background-color: var(--secondary-color);
-    box-sizing: border-box;
-    padding-left: 20px;
-    font-size: 1.25rem;
+    height: calc(100vh - 56px);
+    padding-bottom: calc(56px * 0.5);
 }
-form.login-wrapper input[type="submit"] {
-    border: none;
-    outline: none;
-    padding: 10px 40px;
-    font-size: 1.25rem;
-    cursor: pointer;
-    background-color: var(--primary-color);
-    border-radius: 5px;
-    align-self: flex-end;
-    opacity: 0.8;
-    color: #000;
-    transition: 200ms ease;
+.cg-card {
+    width: 50%;
+    min-width: 300px !important;
+    max-width: 800px;
 }
-form.login-wrapper input[type="submit"]:hover {
-    opacity: 1;
-    color: #fff;
+.cg-submit-button {
+    width: 50%;
+    margin-left: 25%;
 }
-form.login-wrapper a {
-    color: #0e0e0e;
-    text-decoration: none;
-    align-self: center;
-    margin-top: 30px;
-    font-weight: bold;
+.cg-center-horiz {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

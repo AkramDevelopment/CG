@@ -1,11 +1,12 @@
 <template>
-    <div class="center-content">
+    <div class="cg-center-content">
         <b-card
-            title="Login"
-            class="mb-2 card"
+            title="Login to your Cyber Gladiator Account"
+            class="mb-2 cg-card"
         >
             <b-card-text>
                 <b-form @submit="submit">
+                    <!-- Email Address Input -->
                     <b-form-group
                         id="input-group-1"
                         label="Email:"
@@ -20,6 +21,7 @@
                         placeholder="Enter email"
                         ></b-form-input>
                     </b-form-group>
+                    <!-- Password Input -->
                     <b-form-group
                         id="input-group-2"
                         label="Password:"
@@ -33,8 +35,8 @@
                         placeholder="Enter Password"
                         ></b-form-input>
                     </b-form-group>
-                    <b-button type="submit" variant="primary" class="submit-button">Submit</b-button><br />
-                    <div class="center-horiz">
+                    <b-button type="submit" variant="primary" class="cg-submit-button">Submit</b-button><br />
+                    <div class="cg-center-horiz">
                         <router-link to="/signup" style="margin-top: 12px;">New Gladiator? (Create Account)</router-link>
                     </div>
                 </b-form>
@@ -77,26 +79,4 @@ export default {
 </script>
 
 <style scoped>
-.center-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: calc(100vh - 56px);
-    padding-bottom: calc(56px * 0.5);
-}
-.card {
-    width: 50%;
-    min-width: 300px;
-    max-width: 800px;
-}
-.submit-button {
-    width: 50%;
-    margin-left: 25%;
-}
-.center-horiz {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
 </style>
