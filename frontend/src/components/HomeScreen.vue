@@ -1,10 +1,12 @@
 <template>
     <div class="app-screen">
-        <h1>Dashboard</h1>
+        <h1 v-if="isAdmin">Admin Dashboard</h1>
+        <h1 v-else>Dashboard</h1>
         <button class="logout" v-on:click="logout">Logout</button>
-        <div v-for="p in posts" v-bind:key="p.title" class="post-wrapper">
+        <div v-for="p in posts" v-bind:key="p.id" class="post-wrapper">
             <div v-if="p.type === postTypes.announcement" class="annoucement-card">
-                <h3>Announcement Title</h3>
+                <h3>{{p.title}}</h3>
+                <p>{{p.body}}</p>
             </div>
             <div v-else-if="p.type === postTypes.event" class="event-card">
                 <h3>Event Title</h3>
@@ -15,21 +17,37 @@
 </template>
 
 <script>
-import { log, error, reqErrors, URL, postTypes } from '../globals'
+import { log, URL, postTypes } from '../globals'
+import { GET } from '../helpers'
 
 export default {
     name: 'HomeScreen',
     components: {},
     data: () => ({
+        postTypes,
         announcements: [],
         events: [],
-        posts: []
+        posts: [],
+        isAdmin: false
     }),
     created() {
         this.getAnnouncements()
-        // this.getEvents()
+        this.getEvents()
+        this.checkAdmin()
     },
     methods: {
+        checkAdmin() {
+            GET(`${URL}/user/isadmin`)
+                .then(res => {
+                    if (res.ok) {
+                        this.isAdmin = true;
+                    } else if (res.status == 401) {
+                        this.isAdmin = false;
+                    } else {
+                        log(res)
+                    }
+                })
+        },
         sortPosts() {
             const allPosts = []
             this.announcements.forEach(a => {
@@ -49,67 +67,59 @@ export default {
             this.posts = allPosts
         },
         getAnnouncements() {
-            fetch(`${URL}/announcements/view/all`, {
-                method: 'GET',
-                headers: {},
-                credentials: 'include'
-            })
-                .then(res => res.json())
+            GET(`${URL}/announcements/view/all`)
                 .then(res => {
-                    if (res.error && res.error == reqErrors.badAuth) {
-                        this.$router.push('/')
-                    } else if (res.announcements) {
+                    if (res.ok) {
                         this.announcements = res.announcements
                         this.sortPosts()
-                    } else {
-                        log(res)
-                    }
-                })
-                .catch(err => error(err))
-        },
-        getEvents() {
-            fetch(`${URL}/events/all`, {
-                method: 'GET',
-                headers: {},
-                credentials: 'include'
-            })
-                .then(res => res.json())
-                .then(res => {
-                    if (res.events) {
-                        this.events = res.events
-                        this.sortPosts()
-                    } else {
-                        print(res)
-                    }
-                })
-                .catch(err => error(err))
-        },
-        logout() {
-            fetch(`${URL}/auth/logout`, {
-                method: 'GET',
-                headers: {},
-                credentials: 'include'
-            })
-                .then(res => res.json())
-                .then(res => {
-                    if (res.success) {
+                    } else if (res.status == 401) {
                         this.$router.push('/')
                     } else {
                         log(res)
                     }
                 })
-                .catch(err => error(err))
+        },
+        getEvents() {
+            GET(`${URL}/events/all`)
+                .then(res => {
+                    if (res.ok) {
+                        this.events = res.events
+                        this.sortPosts()
+                    } else if (res.status == 401) {
+                        this.$router.push('/')
+                    } else {
+                        log(res)
+                    }
+                })
+        },
+        logout() {
+            GET(`${URL}/auth/logout`)
+                .then(res => {
+                    if (res.ok) {
+                        this.$router.push('/')
+                    } else {
+                        log(res)
+                    }
+                })
         }
     }
 }
 </script>
 
 <style scoped>
+div.post-wrapper {
+    width: 50%;
+    min-width: 300px;
+}
+@media screen and (max-width: 900px) {
+    div.post-wrapper {
+        width: 90%;
+    }
+}
 /* Announcement Card && Event Card */
 div.annoucement-card,
 div.event-card {
-    width: 50%;
-    min-width: 300px;
+    width: 100%;
     padding: 20px;
     box-sizing: border-box;
     border-radius: 8px;
