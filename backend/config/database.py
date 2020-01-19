@@ -3,11 +3,12 @@ mysqlcred = '''
 {
     "Mysql": 
         {
-            "uri": "mysql://username:password1@localhost/CG"
+            "uri": "mysql://root:!Amohammed21@localhost/CG"
 
         }
     
 }
+
 
 
 '''
