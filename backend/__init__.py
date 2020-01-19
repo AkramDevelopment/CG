@@ -1,4 +1,5 @@
 from datetime import timedelta
+from backend.config.secret_key import key
 from flask import Blueprint,Flask,session
 from backend.users.view import user_blueprint
 from backend.announcements.view import announcements_blueprint
@@ -10,7 +11,7 @@ app = Flask(__name__)
 
 
 
-app.config["SECRET_KEY"] = "PLACEHOLDER"
+app.config["SECRET_KEY"] = key['secret_key']
 app.config['PERMANENT_SESSION_LIFETIME'] =  timedelta(minutes=60)
 app.register_blueprint(user_blueprint,url_prefix="/user")
 app.register_blueprint(announcements_blueprint,url_prefix="/announcements")
