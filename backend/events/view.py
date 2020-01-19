@@ -3,6 +3,7 @@ from backend.db.Events import query_events,query_by_id,remove_event,create_event
 from backend.users.auth import adminRequired,login_required
 from backend.db.Accounts import Query_Account_By_ID
 from backend.users.sessions import get_session_id
+from backend.config.fields import Event_Fields
 from backend.logging.loggers import post_removed
 
 
@@ -20,7 +21,8 @@ def add_event():
 
     try:
         data = request.get_json(force=True)
-        create_event(data['Title'],data["Date_Start"],data["Date_End"],data["Start_Time"],data["End_Time"],data['Location'])
+        create_event(data[Event_Fields['title']],data[Event_Fields["date-start"]],data[Event_Fields['date-end']],data[Event_Fields['time-start']],
+        data[Event_Fields['time-end']],data[Event_Fields['location']])
         return(jsonify({"success":"Event Successfully Created!"}))
     except Exception as e:
         print(e)
