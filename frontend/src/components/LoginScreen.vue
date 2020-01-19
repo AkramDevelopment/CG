@@ -33,7 +33,10 @@
                         placeholder="Enter Password"
                         ></b-form-input>
                     </b-form-group>
-                    <b-button type="submit" variant="primary">Submit</b-button>
+                    <b-button type="submit" variant="primary" class="submit-button">Submit</b-button><br />
+                    <div class="center-horiz">
+                        <router-link to="/signup" style="margin-top: 12px;">New Gladiator? (Create Account)</router-link>
+                    </div>
                 </b-form>
             </b-card-text>
         </b-card>
@@ -86,5 +89,14 @@ export default {
     width: 50%;
     min-width: 300px;
     max-width: 800px;
+}
+.submit-button {
+    width: 50%;
+    margin-left: 25%;
+}
+.center-horiz {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 </style>
