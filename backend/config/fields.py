@@ -21,3 +21,10 @@ Banned_Account_Fields = {
 }
 
 
+Announcement = { 
+    "title" : 'title',
+    'body' : 'body',
+    'create-date' : 'create-date',
+    'created-by' : 'created-by'
+}
+
