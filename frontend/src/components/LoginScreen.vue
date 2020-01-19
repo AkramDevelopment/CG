@@ -1,14 +1,42 @@
 <template>
-    <div class="app-screen">
-        <h1>Login</h1>
-        <form v-on:submit="submit" class="login-wrapper">
-            <label>Email (Ivy Tech Only):</label>
-            <input v-model="email" type="email" name="email" />
-            <label>Password:</label>
-            <input v-model="password" type="password" name="password" />
-            <input type="submit" value="Submit" />
-            <router-link to="/signup">New Gladiator? (Create Account)</router-link>
-        </form>
+    <div class="center-content">
+        <b-card
+            title="Login"
+            class="mb-2 card"
+        >
+            <b-card-text>
+                <b-form @submit="submit">
+                    <b-form-group
+                        id="input-group-1"
+                        label="Email:"
+                        label-for="input-1"
+                        description="Must be an official IvyTech email address."
+                    >
+                        <b-form-input
+                        id="input-1"
+                        v-model="email"
+                        type="email"
+                        required
+                        placeholder="Enter email"
+                        ></b-form-input>
+                    </b-form-group>
+                    <b-form-group
+                        id="input-group-2"
+                        label="Password:"
+                        label-for="input-2"
+                    >
+                        <b-form-input
+                        id="input-2"
+                        v-model="password"
+                        type="password"
+                        required
+                        placeholder="Enter Password"
+                        ></b-form-input>
+                    </b-form-group>
+                    <b-button type="submit" variant="primary">Submit</b-button>
+                </b-form>
+            </b-card-text>
+        </b-card>
     </div>
 </template>
 
@@ -46,4 +74,17 @@ export default {
 </script>
 
 <style scoped>
+.center-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - 56px);
+    padding-bottom: calc(56px * 0.5);
+}
+.card {
+    width: 50%;
+    min-width: 300px;
+    max-width: 800px;
+}
 </style>
