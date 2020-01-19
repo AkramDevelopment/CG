@@ -2,11 +2,14 @@ from sqlalchemy import create_engine, Column, Integer, String, Numeric, DateTime
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash, check_password_hash
-from backend.db.config import mysqlcred
+from backend.config.database import mysqlcred
 from backend.db.database import Account
 import datetime
+import json
+import datetime
 
-engine = create_engine(mysqlcred['uri'],
+config =  json.loads(mysqlcred) 
+engine = create_engine(config["Mysql"]['uri'],
                        isolation_level="READ UNCOMMITTED")
 Session = sessionmaker(bind=engine)
 session = Session()
