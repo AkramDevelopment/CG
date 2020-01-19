@@ -1,11 +1,14 @@
 from sqlalchemy import create_engine, Column, Integer, String, Numeric, DateTime, MetaData,Boolean
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from backend.db.config import mysqlcred
+from backend.config.database import mysqlcred
 from backend.db.database import Event
 import datetime
+import json
 
-engine = create_engine(mysqlcred['uri'],
+config =  json.loads(mysqlcred) 
+
+engine = create_engine(config["Mysql"]['uri'],
                        isolation_level="READ UNCOMMITTED")
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -45,9 +48,6 @@ def query_events():
 
 def query_by_id(id):
 
-    
+
     query = session.query(Event).filter(Event.id == id).first()
     return (query)
-
-
-

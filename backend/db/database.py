@@ -6,8 +6,7 @@ import datetime
 
 engine = create_engine(mysqlcred['uri'],
                        isolation_level="READ UNCOMMITTED")
-Session = sessionmaker(bind=engine)
-session = Session()
+
 connection = engine.connect()
 Base = declarative_base()
 
@@ -79,3 +78,7 @@ class Event(Base):
         self.Time_Start = Time_Start
         self.Time_End = Time_End
         self.Location = Location
+
+
+#Creates tables on the Mysql server, if they weren't already.
+Base.metadata.create_all(engine)
