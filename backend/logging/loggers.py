@@ -2,11 +2,9 @@ import logging
 import datetime
 
 
-
-
 def log_unban(unbanned_by,unbanned_email):
 
-    
+
     unban_logger = logging.getLogger(__name__)
     unban_logs = logging.FileHandler('backend/logging/logs/unbans.log')
     unban_logger.addHandler(unban_logs)
