@@ -12,6 +12,16 @@
     width: 50%;
     min-width: 300px !important;
     max-width: 800px;
+    background-color: #2F2D2E !important;
+}
+.cg-card h4.card-title {
+    color: #fff !important;
+}
+.cg-card label {
+    color: #fafafa !important;
+}
+.cg-card small {
+    color: #e0e0e0 !important;
 }
 .cg-submit-button {
     width: 50%;
