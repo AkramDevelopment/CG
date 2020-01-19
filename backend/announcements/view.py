@@ -1,8 +1,11 @@
-from flask import Blueprint,Flask,request,jsonify,session
-from jwt import decode
-from backend.db.Accounts import Query_Account_By_ID
 from backend.db.Announcements import create_announcement,query_all_announcements,query_announcement_by_id,delete_announcement,edit_announcement
+from flask import Blueprint,Flask,request,jsonify,session
 from backend.users.auth import adminRequired,login_required
+from backend.db.Accounts import Query_Account_By_ID
+from backend.config.fields import Announcement_Fields
+from jwt import decode
+
+
 
 
 announcements_blueprint = Blueprint(
@@ -19,7 +22,7 @@ def add_announcement():
         decoded = decode(session['token'],'secret',algorithms='HS256')
         created_by = Query_Account_By_ID(decoded['id'])
         print(created_by.First_Name)
-        create_announcement(data['title'],data['body'],created_by.First_Name)
+        create_announcement(data[Announcement_Fields['title']],data[Announcement_Fields['body']],created_by.First_Name)
         return jsonify({"success":"announcement created!"})
     except:
         return jsonify({"error":"There was an error adding announcement!"}),500
@@ -54,7 +57,7 @@ def edit(id):
     try:
         data = request.get_json(force=True)
         announcement = query_announcement_by_id(id)
-        edit_announcement(announcement.id,data['title'],data['body'])
+        edit_announcement(announcement.id,data[Announcement_Fields['title']],data[Announcement_Fields['body']])
         return (jsonify({"success":"Announcement edit successful!"}))
     except:
         return (jsonify({"error":"There was an error editing announcement!"}))
