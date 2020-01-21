@@ -2,7 +2,7 @@ Account_Fields =  {
     "first-name" : "first-name",
     "last-name" : "last-name",
     "password" : "password",
-    "email" : "password"
+    "email" : "email"
 
 }
 
