@@ -1,9 +1,7 @@
-<template scroll="no"  style="overflow: hidden">
+<template >
+<div class=wrapper> 
 
-    <div>
-        
-        <Footer />
-        <div class="cg-center-content" scroll="no">
+   
             
             <b-card
                
@@ -51,20 +49,20 @@
                 </b-card-text>
             </b-card>
         </div>
-    </div>
+   
 </template>
 
 <script>
 import sha256 from 'crypto-js/sha256'
 import Base64 from 'crypto-js/enc-base64'
-import Footer from './Footer'
+
 import { log, URL } from '../globals'
 import { POST } from '../helpers'
 
 export default {
     name: 'LoginScreen',
     components: {
-        Footer
+        
     },
     data: () => ({
         email: '',
@@ -90,9 +88,18 @@ export default {
 </script>
 
 <style scoped>
-.cgtitle{
-    align-content: center;
-    margin-top: rem
+.wrapper{
+    background-image: url("../assets/img/CGBackground.jpg");
+    background-repeat: none;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0rem;
+    padding: 0r;
 }
 
 </style>

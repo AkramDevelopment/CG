@@ -41,15 +41,18 @@ div.app-screen > h4 {
 
 }
 .cg-card {
-    overflow: hidden;
+    box-sizing: content-box; padding-bottom: 1px;
     background-color: rgba(0, 12, 14, 0.7) !important;
-    margin-right:100rem !important;
-    padding-top: 700px;
-    padding-bottom: 700px;
-    overflow: hidden !important;
+    width: 500px;
+    margin: 0;
+    height: 100%;
     font-family: Caesar !important;
-    
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px;
+
     
 }
 
