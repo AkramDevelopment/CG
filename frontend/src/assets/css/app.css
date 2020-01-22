@@ -4,10 +4,12 @@ div.app-screen {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    
 }
 div.app-screen > h1 {
     margin: 30px 0;
     text-transform: uppercase;
+    
 }
 div.app-screen > h4 {
     font-size: 1rem;
@@ -23,18 +25,45 @@ div.app-screen > h4 {
     width: 100%;
     height: calc(100vh - 56px);
     padding-bottom: calc(56px * 0.5);
+    
+
+    
+
+   
 }
 .cg-card-size {
-    width: 50%;
+    border: 5px solid red;
+    width: 30%;
     min-width: 300px !important;
     max-width: 800px;
+  
+   
+
 }
 .cg-card {
-    background-color: #2F2D2E !important;
+    overflow: hidden;
+    background-color: rgba(0, 12, 14, 0.7) !important;
+    margin-right:100rem !important;
+    padding-top: 700px;
+    padding-bottom: 700px;
+    overflow: hidden !important;
+    font-family: Caesar !important;
+    
+    
+    
 }
+
+
+    
 .cg-card h4.card-title, .cg-card p.card-text {
     color: #fff !important;
 }
+.cg-card h4.card-title
+{
+    font-size: 40px;
+    margin-left: 7.5vmax;
+}
+
 .cg-card label {
     color: #fafafa !important;
 }
@@ -50,3 +79,7 @@ div.app-screen > h4 {
     display: flex;
     justify-content: center;
 }
+
+
+
+

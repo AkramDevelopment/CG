@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import background from '../assets/img/background1.jpg'
+import background from '../assets/img/CGBackground.jpg'
 export default {
     name: 'Footer',
     data() { return { background } }
@@ -17,7 +17,7 @@ export default {
 <style scoped>
 footer.app-footer {
     width: 100%;
-    height: calc(100vh - 56px);
+    height: calc(100vh - 0px);
     position:fixed;
     left: 0;
     bottom: 0;
@@ -29,18 +29,12 @@ footer.app-footer {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    filter: grayscale(50%);
-}
-footer.app-footer > div.overlay {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.7);
+    filter: grayscale(30%);
 }
 footer.app-footer > div.overlay > div.angle {
     width: 200%;
     height: 400%;
     transform: rotateZ(50deg);
-    background-color: rgb(0, 255, 106);
     position: absolute;
     top: 20%;
     opacity: 0.5;
