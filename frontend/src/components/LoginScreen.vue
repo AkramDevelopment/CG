@@ -1,55 +1,47 @@
 <template >
-<div class=wrapper> 
-
-   
-            
-            <b-card
-               
-                title="Login"
-                class="mb-2 cg-card cg-card-size"
-                
-            >
-                
-                <b-card-text>
-                    <b-form @submit="submit">
-                        <!-- Email Address Input -->
-                        <b-form-group
-                            id="input-group-1"
-                            label="Email:"
-                            label-for="input-1"
-                            description="Must be an official IvyTech email address."
-                        >
-                            <b-form-input
-                            id="input-1"
-                            v-model="email"
-                            type="email"
-                            required
-                            placeholder="Enter email"
-                            ></b-form-input>
-                        </b-form-group>
-                        <!-- Password Input -->
-                        <b-form-group
-                            id="input-group-2"
-                            label="Password:"
-                            label-for="input-2"
-                        >
-                            <b-form-input
-                            id="input-2"
-                            v-model="password"
-                            type="password"
-                            required
-                            placeholder="Enter Password"
-                            ></b-form-input>
-                        </b-form-group>
-                        <b-button type="submit" variant="primary" class="cg-submit-button">Submit</b-button><br />
-                        <div class="cg-center-horiz">
-                            <router-link to="/signup" style="margin-top: 12px;">New Gladiator? (Create Account)</router-link>
-                        </div>
-                    </b-form>
-                </b-card-text>
-            </b-card>
-        </div>
-   
+    <div class="wrapper"> 
+        <b-card
+            title="Cyber Gladiators"
+            class="cg-card"
+        >
+            <h4>Login Form</h4>
+            <b-form class="cg-form" @submit="submit">
+                <!-- Email Address Input -->
+                <b-form-group
+                    id="input-group-1"
+                    label="Email:"
+                    label-for="input-1"
+                    description="Must be an official IvyTech email address."
+                >
+                    <b-form-input
+                    id="input-1"
+                    v-model="email"
+                    type="email"
+                    required
+                    placeholder="Enter email"
+                    ></b-form-input>
+                </b-form-group>
+                <!-- Password Input -->
+                <b-form-group
+                    id="input-group-2"
+                    label="Password:"
+                    label-for="input-2"
+                >
+                    <b-form-input
+                    id="input-2"
+                    v-model="password"
+                    type="password"
+                    required
+                    placeholder="Enter Password"
+                    ></b-form-input>
+                </b-form-group>
+                <b-button type="submit" variant="primary" class="cg-submit-button">Submit</b-button><br />
+                <div class="cg-center-horiz">
+                    <router-link to="/signup" style="margin-top: 12px; color: #fff;">New Gladiator? (Create Account)</router-link>
+                </div>
+            </b-form>
+        </b-card>
+    </div>
 </template>
 
 <script>
@@ -61,9 +53,7 @@ import { POST } from '../helpers'
 
 export default {
     name: 'LoginScreen',
-    components: {
-        
-    },
+    components: {},
     data: () => ({
         email: '',
         password: '',
@@ -88,18 +78,4 @@ export default {
 </script>
 
 <style scoped>
-.wrapper{
-    background-image: url("../assets/img/CGBackground.jpg");
-    background-repeat: none;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 0rem;
-    padding: 0r;
-}
-
 </style>
