@@ -1,16 +1,17 @@
 <template scroll="no"  style="overflow: hidden">
+
     <div>
+        
         <Footer />
-         
         <div class="cg-center-content" scroll="no">
             
             <b-card
-                
+               
                 title="Login"
                 class="mb-2 cg-card cg-card-size"
                 
             >
-            
+                
                 <b-card-text>
                     <b-form @submit="submit">
                         <!-- Email Address Input -->
@@ -89,5 +90,9 @@ export default {
 </script>
 
 <style scoped>
+.cgtitle{
+    align-content: center;
+    margin-top: rem
+}
 
 </style>
