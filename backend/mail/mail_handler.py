@@ -30,6 +30,3 @@ def send_mail(mail_to,subject,message):
 def verify_account(account_id,first_name,last_name):
     #WIP Account Verification System
     pass
-
-send_mail("neko_shinigami@yahoo.com","Cyber Gladiators Mail System","Hello! This is a test for the Cyber Gladiators Mail System!")
-    
