@@ -5,6 +5,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
 
+
+
+
 port = 587
 server = 'smtp.gmail.com'
 #Move these to config file in the future
@@ -12,6 +15,8 @@ smtp_user = "user_name"
 smtp_password = "password"
 
 def send_mail(mail_to,subject,message):
+
+
     msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
     msg["From"] = smtp_user
@@ -28,5 +33,12 @@ def send_mail(mail_to,subject,message):
 
 
 def verify_account(account_id,first_name,last_name):
+
+
     #WIP Account Verification System
     pass
+
+
+
+
+
