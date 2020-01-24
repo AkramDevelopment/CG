@@ -10,6 +10,11 @@
 
 */
 
+@font-face {
+    font-family: 'Caesar';
+    src: url('../fonts/caeser.ttf');
+}
+
 p {
     font-family: 'Roboto Mono', monospace;
 }
@@ -109,9 +114,7 @@ div.app-screen > h4 {
     font-size: 40px;
     text-align: center;
     color: #fff;
-    font-family: 'Titillium Web', sans-serif;
 }
-
 h4 {
     color: #f0f0f0;
     font-size: 35px;

@@ -118,7 +118,7 @@ export default {
 <style scoped>
 h1 {
   color: #fff;
-  font-family: 'Titillium Web', sans-serif;
+  font-family: Caesar, sans-serif;
 }
 div.post-wrapper {
   width: 50%;
@@ -136,7 +136,7 @@ div.post {
   margin: 20px 0;
 }
 div.post h4 {
-  font-family: 'Titillium Web', sans-serif;
+  font-family: Caesar, sans-serif;
 }
 div.post.announcement h4 {
   font-size: 2rem;
