@@ -1,7 +1,12 @@
 <template>
+
+
+<div class="home-wrapper">
+    <NavBar/>
     <div class="app-screen">
         <h1 v-if="isAdmin">Admin Dashboard</h1>
-        <h1 v-else>Dashboard</h1>
+        <h1 v-else>Welcome To The Arena</h1>
+
         <button class="logout" v-on:click="logout">Logout</button>
         <div v-for="p in posts" v-bind:key="p.id" class="post-wrapper">
             <b-card v-if="p.type === postTypes.announcement" class="cg-card" v-bind:title="p.title">
@@ -15,15 +20,17 @@
         </div>
         <h4 v-if="posts.length <= 0">Looks like we don't have any posts yet.<br /> Please check back later!</h4>
     </div>
+    </div>
 </template>
 
 <script>
 import { log, URL, postTypes } from '../globals'
+import NavBar from './NavBar.vue';
 import { GET } from '../helpers'
 
 export default {
     name: 'HomeScreen',
-    components: {},
+    components: {NavBar},
     data: () => ({
         postTypes,
         announcements: [],
