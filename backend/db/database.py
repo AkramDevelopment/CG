@@ -85,7 +85,6 @@ class Event(Base):
 
     Location = Column("Location", String(500))
 
-    Location = Column("Location", String(32))
 
     
     def __init__(self,Event_Title,Date_Start,Date_End,Time_Start,Time_End,Location):
