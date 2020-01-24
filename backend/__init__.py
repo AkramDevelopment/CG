@@ -8,6 +8,7 @@ from backend.auth.view import auth_blueprint
 from backend.events.view import event_blueprint
 
 
+
 app = Flask(__name__)
 
 
