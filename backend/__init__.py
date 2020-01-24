@@ -6,6 +6,7 @@ from backend.announcements.view import announcements_blueprint
 from backend.auth.registration import registeration_blueprint
 from backend.auth.view import auth_blueprint
 from backend.events.view import event_blueprint
+from backend.groups.view import groups_blueprint
 
 
 
@@ -20,3 +21,4 @@ app.register_blueprint(announcements_blueprint,url_prefix="/announcements")
 app.register_blueprint(auth_blueprint,url_prefix="/auth")
 app.register_blueprint(registeration_blueprint,url_prefix="/auth")
 app.register_blueprint(event_blueprint,url_prefix="/events")
+app.register_blueprint(groups_blueprint,url_prefix="/group")

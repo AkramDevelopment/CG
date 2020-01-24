@@ -1,9 +1,12 @@
-from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response,session
-from backend.db.Accounts import Query_Account_By_Email
-from backend.config.fields import Account_Fields
-from werkzeug.security import check_password_hash
 from functools import wraps
-from jwt import encode,decode
+
+from flask import (Blueprint, Flask, jsonify, make_response, render_template,
+                   request, session)
+from jwt import decode, encode
+from werkzeug.security import check_password_hash
+
+from backend.config.fields import Account_Fields
+from backend.db.Accounts import Query_Account_By_Email
 
 auth_blueprint = Blueprint(
     'auth',
@@ -46,5 +49,3 @@ def logout():
     
     session.clear()
     return(jsonify({"success":"Logout Successful"}))
-
-
