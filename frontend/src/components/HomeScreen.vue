@@ -24,94 +24,94 @@
 </template>
 
 <script>
-import { log, URL, postTypes } from '../globals'
+import { log, URL, postTypes } from '../globals';
 import NavBar from './NavBar.vue';
-import { GET } from '../helpers'
+import { GET } from '../helpers';
 
 export default {
-    name: 'HomeScreen',
-    components: {NavBar},
-    data: () => ({
-        postTypes,
-        announcements: [],
-        events: [],
-        posts: [],
-        isAdmin: false
-    }),
-    created() {
-        this.getAnnouncements()
-        this.getEvents()
-        this.checkAdmin()
+  name: 'HomeScreen',
+  components: { NavBar },
+  data: () => ({
+    postTypes,
+    announcements: [],
+    events: [],
+    posts: [],
+    isAdmin: false,
+  }),
+  created() {
+    this.getAnnouncements();
+    this.getEvents();
+    this.checkAdmin();
+  },
+  methods: {
+    checkAdmin() {
+      GET(`${URL}/user/isadmin`)
+        .then((res) => {
+          if (res.ok) {
+            this.isAdmin = true;
+          } else if (res.status == 401) {
+            this.isAdmin = false;
+          } else {
+            log(res);
+          }
+        });
     },
-    methods: {
-        checkAdmin() {
-            GET(`${URL}/user/isadmin`)
-                .then(res => {
-                    if (res.ok) {
-                        this.isAdmin = true;
-                    } else if (res.status == 401) {
-                        this.isAdmin = false;
-                    } else {
-                        log(res)
-                    }
-                })
-        },
-        sortPosts() {
-            const allPosts = []
-            this.announcements.forEach(a => {
-                allPosts.push({ ...a, type: postTypes.announcement })
-                log(a)
-            })
-            this.events.forEach(e => {
-                allPosts.push({ ...e, type: postTypes.event })
-                log(e)
-            })
-            // Sort by: announcements -> Create_Date; events -> date_start
-            allPosts.sort((a, b) => {
-                const date1 = a.type === postTypes.announcement ? a['Create_Date'] : a['date_start']
-                const date2 = b.type === postTypes.announcement ? b['Create_Date'] : b['date_start']
-                return date1 - date2 // double check that the two different date types are comparable
-            })
-            this.posts = allPosts
-        },
-        getAnnouncements() {
-            GET(`${URL}/announcements/view/all`)
-                .then(res => {
-                    if (res.ok) {
-                        this.announcements = res.announcements
-                        this.sortPosts()
-                    } else if (res.status == 401) {
-                        this.$router.push('/')
-                    } else {
-                        log(res)
-                    }
-                })
-        },
-        getEvents() {
-            GET(`${URL}/events/all`)
-                .then(res => {
-                    if (res.ok) {
-                        this.events = res.events
-                        this.sortPosts()
-                    } else if (res.status == 401) {
-                        this.$router.push('/')
-                    } else {
-                        log(res)
-                    }
-                })
-        },
-        logout() {
-            GET(`${URL}/auth/logout`)
-                .then(res => {
-                    if (res.ok) {
-                        this.$router.push('/')
-                    } else {
-                        log(res)
-                    }
-                })
-        }
-    }
-}
+    sortPosts() {
+      const allPosts = [];
+      this.announcements.forEach((a) => {
+        allPosts.push({ ...a, type: postTypes.announcement });
+        log(a);
+      });
+      this.events.forEach((e) => {
+        allPosts.push({ ...e, type: postTypes.event });
+        log(e);
+      });
+      // Sort by: announcements -> Create_Date; events -> date_start
+      allPosts.sort((a, b) => {
+        const date1 = a.type === postTypes.announcement ? a.Create_Date : a.date_start;
+        const date2 = b.type === postTypes.announcement ? b.Create_Date : b.date_start;
+        return date1 - date2; // double check that the two different date types are comparable
+      });
+      this.posts = allPosts;
+    },
+    getAnnouncements() {
+      GET(`${URL}/announcements/view/all`)
+        .then((res) => {
+          if (res.ok) {
+            this.announcements = res.announcements;
+            this.sortPosts();
+          } else if (res.status == 401) {
+            this.$router.push('/');
+          } else {
+            log(res);
+          }
+        });
+    },
+    getEvents() {
+      GET(`${URL}/events/all`)
+        .then((res) => {
+          if (res.ok) {
+            this.events = res.events;
+            this.sortPosts();
+          } else if (res.status == 401) {
+            this.$router.push('/');
+          } else {
+            log(res);
+          }
+        });
+    },
+    logout() {
+      GET(`${URL}/auth/logout`)
+        .then((res) => {
+          if (res.ok) {
+            this.$router.push('/');
+          } else {
+            log(res);
+          }
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>

@@ -1,4 +1,4 @@
-<template> 
+<template>
 <div class = "navbar-wrapper">
     <div class="sidenav">
   <a href="#">Home</a>
@@ -11,15 +11,14 @@
 <div class="main">
   ...
 </div>
-    </div>  
+    </div>
 
-</template> 
+</template>
 
 
-
-<script> 
+<script>
 export default {
   name: 'NavBar',
-}
+};
 
-</script> 
+</script>

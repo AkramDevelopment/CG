@@ -1,5 +1,5 @@
 <template >
-    <div class="wrapper"> 
+    <div class="wrapper">
         <b-card
             title="Cyber Gladiators"
             class="cg-card"
@@ -45,36 +45,36 @@
 </template>
 
 <script>
-import sha256 from 'crypto-js/sha256'
-import Base64 from 'crypto-js/enc-base64'
+import sha256 from 'crypto-js/sha256';
+import Base64 from 'crypto-js/enc-base64';
 
-import { log, URL } from '../globals'
-import { POST } from '../helpers'
+import { log, URL } from '../globals';
+import { POST } from '../helpers';
 
 export default {
-    name: 'LoginScreen',
-    components: {},
-    data: () => ({
-        email: '',
-        password: '',
-    }),
-    methods: {
-        submit(e) {
-            e.preventDefault()
-            POST(`${URL}/auth/login`, {
-                'email': this.email,
-                'password': Base64.stringify(sha256(this.password))
-            })
-                .then(res => {
-                    if (res.ok) {
-                        this.$router.push('home')
-                    } else {
-                        log(res)
-                    }
-                })
-        },
+  name: 'LoginScreen',
+  components: {},
+  data: () => ({
+    email: '',
+    password: '',
+  }),
+  methods: {
+    submit(e) {
+      e.preventDefault();
+      POST(`${URL}/auth/login`, {
+        email: this.email,
+        password: Base64.stringify(sha256(this.password)),
+      })
+        .then((res) => {
+          if (res.ok) {
+            this.$router.push('home');
+          } else {
+            log(res);
+          }
+        });
     },
-}
+  },
+};
 </script>
 
 <style scoped>

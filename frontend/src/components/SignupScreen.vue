@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper"> 
+    <div class="wrapper">
         <b-card
             title="Cyber Gladiators"
             class="cg-card"
@@ -87,50 +87,52 @@
 </template>
 
 <script>
-import sha256 from 'crypto-js/sha256'
-import Base64 from 'crypto-js/enc-base64'
-import { log, URL } from '../globals'
-import { POST } from '../helpers'
+import sha256 from 'crypto-js/sha256';
+import Base64 from 'crypto-js/enc-base64';
+import { log, URL } from '../globals';
+import { POST } from '../helpers';
 
 export default {
-    name: 'SignupScreen',
-    components: {},
-    data: () => ({
-        fName: '',
-        lName: '',
-        email: '',
-        password: '',
-        passwordConf: '',
-    }),
-    methods: {
-        submit(e) {
-            e.preventDefault()
-            const { fName, lName, email, password, passwordConf } = this;
-            if (
-                fName.length > 0 && lName.length > 0 &&
-                password.length >= 10 && password === passwordConf &&
-                email.includes('@ivytech.edu')
-            ) {
-                POST(`${URL}/auth/register`, {
-                    'first-name': this.fName,
-                    'last-name': this.lName,
-                    'email': this.email,
-                    'password': Base64.stringify(sha256(this.password))
-                })
-                    .then(res => {
-                        if (res.ok) {
-                            log('Success!!!!')
-                            this.$router.push('/')
-                        } else {
-                            log(res)
-                        }
-                    })
+  name: 'SignupScreen',
+  components: {},
+  data: () => ({
+    fName: '',
+    lName: '',
+    email: '',
+    password: '',
+    passwordConf: '',
+  }),
+  methods: {
+    submit(e) {
+      e.preventDefault();
+      const {
+        fName, lName, email, password, passwordConf,
+      } = this;
+      if (
+        fName.length > 0 && lName.length > 0
+                && password.length >= 10 && password === passwordConf
+                && email.includes('@ivytech.edu')
+      ) {
+        POST(`${URL}/auth/register`, {
+          'first-name': this.fName,
+          'last-name': this.lName,
+          email: this.email,
+          password: Base64.stringify(sha256(this.password)),
+        })
+          .then((res) => {
+            if (res.ok) {
+              log('Success!!!!');
+              this.$router.push('/');
             } else {
-                log('Invalid information');
+              log(res);
             }
-        },
+          });
+      } else {
+        log('Invalid information');
+      }
     },
-}
+  },
+};
 </script>
 
 <style scoped>

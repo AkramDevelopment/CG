@@ -7,11 +7,12 @@
 </template>
 
 <script>
-import background from '../assets/img/CGBackground.jpg'
+import background from '../assets/img/CGBackground.jpg';
+
 export default {
-    name: 'Footer',
-    data() { return { background } }
-}
+  name: 'Footer',
+  data() { return { background }; },
+};
 </script>
 
 <style scoped>
