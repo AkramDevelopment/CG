@@ -82,8 +82,10 @@ class Event(Base):
     Date_End = Column("Date_End",String(32))
     Time_Start = Column("Time_Start",String(32))
     Time_End = Column("Time_End",String(32))
-    Location = Column("Location", String(32))
-    Links = Column("Links",String(100))
+
+    Location = Column("Location", String(500))
+
+
     
     def __init__(self,Event_Title,Date_Start,Date_End,Time_Start,Time_End,Location):
 
