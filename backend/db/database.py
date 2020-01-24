@@ -44,7 +44,7 @@ class Announcement(Base):
 
     id = Column("ID",Integer,primary_key=True)
     title = Column('title',String(32))
-    body = Column('body',String(32))
+    body = Column('body',String(1000))
     Create_Date = Column("Create_Date", String(32),default = datetime.datetime.now())
     created_by = Column("Created_By", String(32))
 
@@ -101,7 +101,7 @@ class Groups(Base):
 
     __tablename__= "Cyber_Groups"
 
-    id = Column("ID",Integer,primary_key=True)
+    ID = Column("ID",Integer,primary_key=True)
     Group_Name = Column('Group_Name',String(32))
     Group_Description = Column("Group_Description",String(32))
     Group_Admin = Column("Group_Admin",String(32))
@@ -118,12 +118,14 @@ class Roster(Base):
     __tablename__= "Cyber_Rosters"
 
     id = Column("ID",Integer,primary_key=True)
-    account_id = Column("Account_Id",Integer)
-    group_id = Column("Group_Id",Integer)
+    Account_ID= Column("Account_Id",Integer)
+    Group_ID = Column("Group_Id",Integer)
+    Is_Admin = Column("Is_Admin",Boolean, default =False)
 
-    def __init__(self,account_id,group_id):
+    def __init__(self,account_id,group_id,Is_Admin):
         self.account_id = account_id
         self.group_id = group_id
+        self.Is_Admin = Is_Admin
 
 
 
