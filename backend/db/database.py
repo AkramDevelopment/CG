@@ -14,6 +14,8 @@ connection = engine.connect()
 Base = declarative_base()
 
 class Account(Base):
+
+
     __tablename__="Account"
 
     id = Column("ID",Integer,primary_key=True)
@@ -22,18 +24,22 @@ class Account(Base):
     Password = Column("Password",String(10000))
     Email = Column("Email",String(32))
     Group = Column("Group",String(32),default="Unconfirmed")
-    Position = Column("Position",String(32),default="Member")
+    Security_Clerance = Column("Security_Clerance",String(32),default="unregistered") 
     Create_Date = Column("Create_Date", String(32),default = datetime.datetime.now())
 
 
     def __init__(self,First_Name,Last_Name,Email,Password):
+
+        
         self.First_Name = First_Name
         self.Last_name = Last_Name
         self.Email = Email
         self.Password = Password
 
 
-class Announcement(Base):
+class Announcement(Base): 
+
+
     __tablename__="Announcements"
 
     id = Column("ID",Integer,primary_key=True)
@@ -51,6 +57,8 @@ class Announcement(Base):
 
 
 class Banned_Accounts(Base):
+
+
     __tablename__="Banned_Accounts"
 
     id = Column("ID",Integer,primary_key=True)
@@ -87,5 +95,19 @@ class Event(Base):
         self.Location = Location
 
 
-#Creates tables on the Mysql server, if they weren't already.
-Base.metadata.create_all(engine)
+
+class Groups(Base):
+
+
+    __tablename__= "Cyber_Groups"
+
+    id = Column("ID",Integer,primary_key=True)
+    Group_Name = Column('Group_Name',String(32))
+    Group_Description = Column("Group_Description",String(32))
+
+
+    def __init__(self,Group_Name,Group_Description):
+        self.Group_Name = Group_Name
+        self.Group_Description = Group_Description
+
+
