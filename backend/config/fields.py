@@ -29,3 +29,8 @@ Announcement_Fields = {
 }
 
 
+Group_Fields = { 
+    "group-name" : "group-name",
+    "group-description" : "group-description"
+}
+
