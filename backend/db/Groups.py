@@ -1,4 +1,5 @@
 from sqlalchemy import create_engine, Column, Integer, String, Numeric, DateTime, MetaData,Boolean
+from backend.db.Accounts import Account
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response,session
@@ -15,9 +16,9 @@ session = Session()
 connection = engine.connect()
 
 
-def create_group(group_name, group_description):
+def create_group(group_name, group_description,created_by):
     
-    Group = Groups(group_name,group_description)
+    Group = Groups(group_name,group_description,created_by)
     session.add(Group)
     session.commit()
     return ("Group Created!")
@@ -30,11 +31,12 @@ def delete_group(id):
     return ("Group deleted!")
 
 
-def edit_group(id,group_name,group_description):
+def edit_group(id,group_name,group_description,group_admin):
 
     Group = session.query(Groups).filter(Groups.ID == id).first()
     Group.Group_Name = group_name
     Group.Group_Description = group_description
+    Group.Group_Admin = group_admin
     return ("Edit complete!")
     
 
@@ -46,5 +48,8 @@ def query_groups():
         result.append({"id":group.ID,"group-name": group.Group_Name,"group-desciption" : group.Group_Description})
 
     return(result)
+
+
+
 
 

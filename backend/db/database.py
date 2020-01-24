@@ -104,10 +104,29 @@ class Groups(Base):
     id = Column("ID",Integer,primary_key=True)
     Group_Name = Column('Group_Name',String(32))
     Group_Description = Column("Group_Description",String(32))
+    Group_Admin = Column("Group_Admin",String(32))
 
-
-    def __init__(self,Group_Name,Group_Description):
+    def __init__(self,Group_Name,Group_Description,Group_Admin):
         self.Group_Name = Group_Name
         self.Group_Description = Group_Description
+        self.Group_Admin = Group_Admin
 
 
+class Roster(Base):
+
+
+    __tablename__= "Cyber_Rosters"
+
+    id = Column("ID",Integer,primary_key=True)
+    account_id = Column("Account_Id",Integer)
+    group_id = Column("Group_Id",Integer)
+
+    def __init__(self,account_id,group_id):
+        self.account_id = account_id
+        self.group_id = group_id
+
+
+
+
+
+Base.metadata.create_all(engine)
