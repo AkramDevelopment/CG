@@ -50,6 +50,13 @@ def query_groups():
     return(result)
 
 
+def query_group_by_id(id):
+    query = session.query(Groups).filter(Groups.ID == id).first()
+    if query:
+
+        return (query.ID)
+    else:
+        return False
 
 
 

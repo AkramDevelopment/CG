@@ -9,7 +9,6 @@ from backend.events.view import event_blueprint
 from backend.groups.view import groups_blueprint
 
 
-
 app = Flask(__name__)
 
 
