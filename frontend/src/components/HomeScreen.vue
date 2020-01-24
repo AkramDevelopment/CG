@@ -6,14 +6,18 @@
       <h1 v-else>Welcome To The Arena</h1>
 
       <button class="logout" v-on:click="logout">Logout</button>
-      <div v-for="p in posts" v-bind:key="p.id" class="post-wrapper">
-        <b-card v-if="p.type === postTypes.announcement" class="cg-card" v-bind:title="p.title">
+      <div v-for="p in posts" v-bind:key="`${p.type}${p.id}`" class="post-wrapper">
+        <b-card class="post announcement" v-if="p.type === postTypes.announcement" v-bind:title="p.title">
           <b-card-text>
             {{ p.body }}
           </b-card-text>
         </b-card>
-        <b-card v-if="p.type === postTypes.event" title="Event Name">
-          No content available....
+        <b-card class="post event" v-if="p.type === postTypes.event" v-bind:title="p.event_title">
+          <div class="event-row">
+            <p>{{ p.date_start !== p.date_end ? `From ${p.date_start} to ${p.date_end}` : `On ${p.date_start}` }}</p>
+            <p>{{ `Starts at ${p.time_start}, Ends at ${p.time_end}` }}</p>
+          </div>
+          <p>{{ `Location: ${p.location}` }}</p>
         </b-card>
       </div>
       <h4 v-if="posts.length <= 0">
@@ -114,6 +118,7 @@ export default {
 <style scoped>
 h1 {
   color: #fff;
+  font-family: 'Titillium Web', sans-serif;
 }
 div.post-wrapper {
   width: 50%;
@@ -124,41 +129,36 @@ div.post-wrapper {
     width: 90%;
   }
 }
-/* Announcement Card && Event Card */
-div.annoucement-card,
-div.event-card {
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  border-radius: 8px;
-  border: 10px solid #a4a4a4;
-  margin-bottom: 20px;
+div.post {
+  background-color: rgba(2,37,53,0.7);
+  box-shadow: 0 2px 4px 2px rgba(0,0,0,0.5);
+  color: #fff;
+  margin: 20px 0;
 }
-div.annoucement-card h3,
-div.event-card h3 {
-  font-size: 1.6rem;
+div.post h4 {
+  font-family: 'Titillium Web', sans-serif;
 }
-
-/* Logout button */
-button.logout {
-  position: absolute;
-  top: 110px;
-  right: 40px;
-  background: rgba(0, 0, 0, 0);
-  outline: none;
-  border: none;
-  font-size: 1.5rem;
-  color: var(--primary-color);
-  box-sizing: border-box;
-  padding: 5px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: 200ms ease;
+div.post.announcement h4 {
+  font-size: 2rem;
+  font-weight: bold;
 }
-button.logout:hover {
-  background: rgba(0, 0, 0, 0.2);
+div.post.announcement p {
+  color: #c4c4c4;
+  margin-left: 10px;
+  text-indent: 10px;
 }
-h4 {
-  color: #e0e0e0;
+div.post.event h4 {
+  font-size: 1.3rem;
+}
+div.post.event p {
+  margin: 0;
+}
+div.event-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  /* padding: 0 40px; */
 }
 </style>

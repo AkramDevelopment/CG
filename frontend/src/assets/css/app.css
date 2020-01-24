@@ -1,3 +1,19 @@
+/* 
+
+    *** App Fonts ***
+
+    Header:
+    font-family: 'Titillium Web', sans-serif;
+
+    Para:
+    font-family: 'Roboto Mono', monospace;
+
+*/
+
+p {
+    font-family: 'Roboto Mono', monospace;
+}
+
 div.app-screen {
     width: 100%;
     display: flex;
@@ -93,6 +109,7 @@ div.app-screen > h4 {
     font-size: 40px;
     text-align: center;
     color: #fff;
+    font-family: 'Titillium Web', sans-serif;
 }
 
 h4 {
@@ -100,20 +117,34 @@ h4 {
     font-size: 35px;
 }
 
+.cg-card input {
+    font-family: 'Roboto Mono', monospace;
+}
 .cg-card label {
     color: #fafafa !important;
+    font-family: 'Roboto Mono', monospace;
 }
 .cg-card small {
     color: #e0e0e0 !important;
+    font-family: 'Roboto Mono', monospace;
 }
 .cg-submit-button {
     width: 100%;
     margin-top: 15px;
+    font-family: 'Roboto Mono', monospace;
 }
 .cg-center-horiz {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+.router-link {
+    margin-top: 12px;
+    color: #fff;
+    font-family: 'Roboto Mono', monospace;
+}
+.router-link:hover {
+    color: #fff;
 }
 
 

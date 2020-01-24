@@ -30,9 +30,8 @@
         </b-form-group>
         <b-button type="submit" variant="primary" class="cg-submit-button">Submit</b-button><br />
         <div class="cg-center-horiz">
-          <router-link to="/signup" style="margin-top: 12px; color: #fff;"
-            >New Gladiator? (Create Account)</router-link
-          >
+          <router-link to="/signup" class="router-link"
+            >New Gladiator? (Create Account)</router-link>
         </div>
       </b-form>
     </b-card>

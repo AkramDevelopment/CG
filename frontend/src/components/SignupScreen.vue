@@ -60,7 +60,7 @@
         </b-form-group>
         <b-button type="submit" variant="primary" class="cg-submit-button">Submit</b-button><br />
         <div class="cg-center-horiz">
-          <router-link to="/" style="margin-top: 12px; color: #fff;"
+          <router-link to="/" class="router-link"
             >Already have an account? (Login)</router-link
           >
         </div>
