@@ -20,8 +20,9 @@ def createAccount():
     
         Add_User(new_user[Account_Fields['first-name']],new_user[Account_Fields['last-name']],new_user[Account_Fields['email']],new_user[Account_Fields['password']])
         return (jsonify({'success':"Account Created"}))
-    except:
-        return(jsonify({"error":"There Was An Error Creating Account!"})),500
+    except Exception as e :
+        print(e)
+        return(jsonify({"error":"There Was An Error Creating Acco   unt!"})),500
 
 
 @auth_blueprint.route("/login", methods = ["POST"])

@@ -1,18 +1,20 @@
 <template>
   <div id="app">
     <Header />
+    <NavBar />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import Header from './Header.vue'
+
 import '../assets/css/app.css'
 
 export default {
   name: 'app',
   components: {
-    Header
+    Header,
   }
 }
 </script>
