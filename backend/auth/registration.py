@@ -47,5 +47,8 @@ def activate_account():
 
         return (jsonify({"success!": "Account successfully updated!"}))
     except Exception as e:
+
         print(e)
         return ("error")
+
+
