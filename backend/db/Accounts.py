@@ -127,9 +127,9 @@ def get_groups(account_id):
     if query:
 
         result = []
-        for group in result:
-            group_name = query_group_by_id(group['Group_ID'])
-            result.append({'group_name': group_name["Group_Name"], 'is_admin': query.Is_Admin})
+        for group in query:
+            group_name = query_group_by_id(group.Group_ID)
+            result.append({'group_name': group_name.Group_Name, 'is_admin': group.Is_Admin})
         return (result)
     else:
         return False
