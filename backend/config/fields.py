@@ -37,3 +37,10 @@ Group_Fields = {
     "group-description" : "group-description"
 }
 
+
+Roster_Field = { 
+    'group-id' : 'group-id',
+    'group-name' : 'group-name',
+    'account-id' : 'account-id'
+}
+
