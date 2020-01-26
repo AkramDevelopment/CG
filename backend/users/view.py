@@ -83,7 +83,7 @@ def unban():
         unban_account(account.id)
         log_unban(unbanned_by.Email,email)
 
-        
+
         return ( jsonify("Account has been unbanned!"))
 
 
@@ -103,7 +103,7 @@ def Public_Roster():
 
 
 @user_blueprint.route("/inactive/get")
-
+@adminRequired
 
 def get_inactives():
 
@@ -115,3 +115,9 @@ def get_inactives():
 
 
         return (jsonify({"error":" There was an error querying accounts! Likely a database issues within the server"})),500
+
+
+
+
+
+
