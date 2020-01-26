@@ -2,6 +2,6 @@ flask
 mysql
 mysql-connector-python
 mysqlclient
-jwt
+PyJWT
 SQLAlchemy
 flask_cors

@@ -2,7 +2,10 @@ Account_Fields =  {
     "first-name" : "first-name",
     "last-name" : "last-name",
     "password" : "password",
-    "email" : "email"
+    "email" : "email",
+    'secondary-email':'secondary-email',
+    'security-clerance':'security-clerance',
+    'id' : 'id'
 
 }
 
@@ -28,4 +31,16 @@ Announcement_Fields = {
     'created-by' : 'created-by'
 }
 
+
+Group_Fields = { 
+    "group-name" : "group-name",
+    "group-description" : "group-description"
+}
+
+
+Roster_Field = { 
+    'group-id' : 'group-id',
+    'group-name' : 'group-name',
+    'account-id' : 'account-id'
+}
 

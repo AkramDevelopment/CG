@@ -1,10 +1,12 @@
-from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response,session
-from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts,Add_Admin
-from backend.users.auth import adminRequired,login_required,Developer_Required
-from backend.config.fields import Account_Fields
-from werkzeug.security import check_password_hash
 from functools import wraps
-from jwt import encode,decode
+
+from flask import (Blueprint, Flask, jsonify, make_response, render_template,
+                   request, session)
+from jwt import decode, encode
+from werkzeug.security import check_password_hash
+
+from backend.config.fields import Account_Fields
+from backend.db.Accounts import Query_Account_By_Email
 
 auth_blueprint = Blueprint(
     'auth',
@@ -13,15 +15,6 @@ auth_blueprint = Blueprint(
 )
 
 
-@auth_blueprint.route('/register', methods = ["POST"])
-def createAccount():
-    try:
-        new_user = request.get_json(force=True)
-    
-        Add_User(new_user[Account_Fields['first-name']],new_user[Account_Fields['last-name']],new_user[Account_Fields['email']],new_user[Account_Fields['password']])
-        return (jsonify({'success':"Account Created"}))
-    except:
-        return(jsonify({"error":"There Was An Error Creating Account!"})),500
 
 
 @auth_blueprint.route("/login", methods = ["POST"])
@@ -48,6 +41,7 @@ def login():
             return (jsonify({"success":"Login Successful!"}))
     except:
         return (jsonify({"error":"Not Found- User not found"}))
+
 
 
 @auth_blueprint.route("/logout", methods = ["GET"])
