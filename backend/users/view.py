@@ -1,4 +1,4 @@
-from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts,Add_Admin,Query_Roster,Is_Admin,Query_Account_By_ID
+from backend.db.Accounts import Query_Account_By_Email,Add_User,Query_All_Accounts,Add_Admin,Query_Roster,Is_Admin,Query_Account_By_ID,Get_Inactives
 from flask import Blueprint,Flask,render_template,session,request,jsonify,make_response,session
 from backend.users.auth import adminRequired,login_required,Developer_Required,check_admin
 from backend.db.Banned_Accounts import ban_account,unban_account
@@ -66,7 +66,7 @@ def Ban_Account():
     except Exception as e :
 
         print(e)
-        return (jsonify({"Error":"There was an error deactivating account!"})),500
+        return (jsonify({"Error":"There waes an error deactivating account!"})),500
 
    
 @user_blueprint.route("/unban",methods=["POST"])
@@ -82,7 +82,11 @@ def unban():
         account = Query_Account_By_Email(email)
         unban_account(account.id)
         log_unban(unbanned_by.Email,email)
+
+
         return ( jsonify("Account has been unbanned!"))
+
+
     except Exception as e:
         print(e)
         return(jsonify("There was an issue unbanning account"))
@@ -98,14 +102,22 @@ def Public_Roster():
 
 
 
+@user_blueprint.route("/inactive/get")
+@adminRequired
+
+def get_inactives():
+
+
+    try:
+        return (jsonify(Get_Inactives()))
+
+    except:
+
+
+        return (jsonify({"error":" There was an error querying accounts! Likely a database issues within the server"})),500
 
 
 
 
 
 
-
-
-
-
- 

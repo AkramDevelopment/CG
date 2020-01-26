@@ -16,7 +16,7 @@ groups_blueprint = Blueprint(
 def create():
     try:
         data = request.get_json(force=True)
-        create_group(data[Group_Fields["group-name"]],data[Group_Fields['group-description']])
+        create_group(data[Group_Fields["group-name"]],data[Group_Fields['group-description']],data[Group_Fields['created-by']])
         return (jsonify({"success":"Event Successfully Created!"}))
     except Exception as e:
 
@@ -36,7 +36,11 @@ def delete():
 @groups_blueprint.route("/view",methods = ["GET"])
 @adminRequired
 def query_all():
+
+    
     try:
         return(query_groups())
     except Exception as e:
         return (jsonify({"error":e}))
+
+

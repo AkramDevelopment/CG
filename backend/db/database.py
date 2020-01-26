@@ -23,7 +23,7 @@ class Account(Base):
     Last_name = Column("Last_Name",String(32))
     Password = Column("Password",String(10000))
     Email = Column("Email",String(32))
-    Group = Column("Group",String(32),default="Unconfirmed")
+    Secondary_Email = Column("Secondary_Email", String(32))
     Security_Clerance = Column("Security_Clerance",String(32),default="unregistered") 
     Create_Date = Column("Create_Date", String(32),default = datetime.datetime.now())
 
@@ -121,13 +121,13 @@ class Roster(Base):
     __tablename__= "Cyber_Rosters"
 
     id = Column("ID",Integer,primary_key=True)
-    Account_ID= Column("Account_Id",Integer)
-    Group_ID = Column("Group_Id",Integer)
+    Account_ID= Column("Account_Id",Integer,primary_key=False)
+    Group_ID = Column("Group_Id",Integer,primary_key = False)
     Is_Admin = Column("Is_Admin",Boolean, default =False)
 
     def __init__(self,account_id,group_id,Is_Admin):
-        self.account_id = account_id
-        self.group_id = group_id
+        self.Account_ID = account_id
+        self.Group_ID = group_id
         self.Is_Admin = Is_Admin
 
 
