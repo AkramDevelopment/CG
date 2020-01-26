@@ -23,8 +23,12 @@ def add_member(account_id, group_id,is_admin):
     query = query_group_by_id(group_id)
 
     if query == False:
+
+
         return ("There is no group by that ID!")
     else:
+
+        
         new_member = Roster(account_id,group_id,is_admin)
         session.add(new_member)
         session.commit()
@@ -45,7 +49,6 @@ def remove_member(account_id,group_id):
     session.commit()
     return ("Member removed from group successfully!")
     
-
 
 
 
