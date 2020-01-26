@@ -3,7 +3,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash, check_password_hash
 from backend.config.database import mysqlcred
-from backend.db.database import Account
+from backend.db.database import Account,Roster
+from backend.db.Groups import query_group_by_id
 import datetime
 import json
 import datetime
@@ -43,7 +44,7 @@ def Activate_User(secondary_email,id):
 
     account = Query_Account_By_ID(id)
     if account:
-        
+
         account.Secondary_Email = secondary_email
         account.Security_Clerance = "member"
         session.commit()
@@ -115,7 +116,24 @@ def Get_Inactives():
     result = []
     for account in query:
         result.append({"ID":account.id,'First_Name': account.First_Name, "Last_Name": account.Last_name, "Email": account.Email,"Security_Clerance": account.Security_Clerance})
-    return ({"accounts":result})
+    return ({result})
+
+
+
+
+
+def get_groups(account_id):
+    query = session.query(Roster).filter(Roster.Account_ID == account_id)
+    if query:
+
+        result = []
+        for group in result:
+            group_name = query_group_by_id(group['Group_ID'])
+            result.append({'group_name': group_name["Group_Name"], 'is_admin': query.Is_Admin})
+        return (result)
+    else:
+        return False
+
 
 
 
