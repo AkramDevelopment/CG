@@ -33,7 +33,7 @@ def Add_Admin(id):
 
 
     query = session.query(Account).filter(Account.id == id).first()
-    query.Position = "Admin"
+    query.Security_Clerance = "Admin"
     session.commit()
     return("Admin Privilege have been added!")
 
@@ -42,7 +42,7 @@ def Is_Admin(id):
 
 
     user = session.query(Account).filter(Account.id == id).first()
-    if user.Position == "Admin":
+    if user.Security_Clerance == "Admin":
         return True
     else:
         return False
@@ -51,7 +51,7 @@ def Is_Developer(id):
 
 
     user = session.query(Account).filter(Account.id == id).first()
-    if user.Position == "Developer":
+    if user.Security_Clerance == "Developer":
         return True
     else:
         return False       
@@ -77,7 +77,7 @@ def Query_All_Accounts():
     query = session.query(Account)
     result = []
     for account in query:
-        result.append({"ID":account.id,'First_Name': account.First_Name, "Last_Name": account.Last_name, "Email": account.Email,"Position": account.Position})
+        result.append({"ID":account.id,'First_Name': account.First_Name, "Last_Name": account.Last_name, "Email": account.Email,"Security_Clerance": account.Security_Clerance})
     return (result)
 
 
@@ -92,4 +92,10 @@ def Query_Roster():
     return(result)
 
 
+def Get_Inactives():
 
+    query = session.query(Account).filter(Account.Security_Clerance == "unregistered")
+    result = []
+    for account in query:
+        result.append({"ID":account.id,'First_Name': account.First_Name, "Last_Name": account.Last_name, "Email": account.Email,"Security_Clerance": account.Security_Clerance})
+    return ({"accounts":result})
