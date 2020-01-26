@@ -38,6 +38,19 @@ def Add_Admin(id):
     return("Admin Privilege have been added!")
 
 
+def Activate_User(secondary_email,id):
+
+
+    account = Query_Account_By_ID(id)
+    if account:
+        
+        account.Secondary_Email = secondary_email
+        account.Security_Clerance = "member"
+        session.commit()
+    else:
+
+        return False
+
 def Is_Admin(id):
 
 
@@ -68,7 +81,11 @@ def Query_Account_By_Email(Email):
         
 def Query_Account_By_ID(id):
     query = session.query(Account).filter(Account.id == id).first()
-    return (query)
+    if query:
+
+        return (query)
+    else:
+        return False
     
 
 def Query_All_Accounts():
@@ -99,3 +116,6 @@ def Get_Inactives():
     for account in query:
         result.append({"ID":account.id,'First_Name': account.First_Name, "Last_Name": account.Last_name, "Email": account.Email,"Security_Clerance": account.Security_Clerance})
     return ({"accounts":result})
+
+
+
