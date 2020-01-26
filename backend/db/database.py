@@ -24,7 +24,6 @@ class Account(Base):
     Password = Column("Password",String(10000))
     Email = Column("Email",String(32))
     Secondary_Email = Column("Secondary_Email", String(32))
-    Group = Column("Group",String(32),default="Unconfirmed")
     Security_Clerance = Column("Security_Clerance",String(32),default="unregistered") 
     Create_Date = Column("Create_Date", String(32),default = datetime.datetime.now())
 
