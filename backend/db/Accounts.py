@@ -136,4 +136,3 @@ def get_groups(account_id):
 
 
 
-

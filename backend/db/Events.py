@@ -51,3 +51,5 @@ def query_by_id(id):
 
     query = session.query(Event).filter(Event.id == id).first()
     return (query)
+
+
