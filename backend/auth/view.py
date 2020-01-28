@@ -43,6 +43,7 @@ def login():
         return (jsonify({"error":"Not Found- User not found"}))
 
 
+
 @auth_blueprint.route("/logout", methods = ["GET"])
 def logout():
 
