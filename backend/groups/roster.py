@@ -34,6 +34,7 @@ def get_group(id):
 
 
 @roster_blueprint.route("/add/admin/<account_id>/<group_id>", methods = ["PATCH"])
+@adminRequired
 def Add_Admin(account_id,group_id):
     try:
 
@@ -52,6 +53,9 @@ def Add_Admin(account_id,group_id):
 
 
 @roster_blueprint.route("/remove/admin/<account_id>/<group_id>",methods = ["PATCH"])
+@adminRequired
+
+
 def Remove_Admin(account_id,group_id):
 
     try:
