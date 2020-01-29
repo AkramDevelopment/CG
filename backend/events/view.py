@@ -21,12 +21,12 @@ def add_event():
 
     try:
         data = request.get_json(force=True)
-        create_event(data[Event_Fields['title']],data[Event_Fields["date-start"]],data[Event_Fields['date-end']],data[Event_Fields['time-start']],
+        create_event(data[Event_Fields['event-title']],data[Event_Fields["date-start"]],data[Event_Fields['date-end']],data[Event_Fields['time-start']],
         data[Event_Fields['time-end']],data[Event_Fields['location']])
         return(jsonify({"success":"Event Successfully Created!"}))
     except Exception as e:
         print(e)
-        return ("There was an error creating event!")
+        return (str(e))
 
     
 

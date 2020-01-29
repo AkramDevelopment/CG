@@ -5,6 +5,7 @@ from backend.db.database import Roster
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from backend.config.database import mysqlcred
+from backend.users.auth import adminRequired
 import datetime
 import json
 
@@ -53,3 +54,32 @@ def remove_member(account_id,group_id):
 
 
 
+def add_admin(account_id,group_id):
+
+    query = session.query(Roster).filter(Roster.Account_ID == account_id).filter(Roster.Group_ID == group_id).first()
+    if query:
+
+        query.Is_Admin == True
+        session.commit()
+        return ("Account has been updated to admin!")
+    else:
+        return False
+
+
+
+
+def remove_admin(account_id,group_id):
+
+
+    query = session.query(Roster).filter(Roster.Account_ID == account_id).filter(Roster.Group_ID == group_id).first()
+    if query:
+
+
+        query.Is_Admin == False
+        session.commit()
+        return ("Admin rights revoked for account!")
+    else:
+        return False
+
+
+        
