@@ -36,3 +36,22 @@
 
 
 /auth/logout (GET) 
+
+---------------------
+
+
+### /events
+
+
+/events/add(POST) Data("event-title","date-start","date-end","time-start","time-end","location")
+
+
+/events/all (GET)
+
+
+/events/view/$id (GET) Data("event id in url") 
+
+
+/events/delete/$id (DELETE) 
+
+
