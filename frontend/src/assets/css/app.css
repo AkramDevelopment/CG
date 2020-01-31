@@ -1,3 +1,24 @@
+/* 
+
+    *** App Fonts ***
+
+    Header:
+    font-family: Caesar, sans-serif;
+
+    Para:
+    font-family: 'Roboto Mono', monospace;
+
+*/
+
+@font-face {
+    font-family: 'Caesar';
+    src: url('../fonts/caeser.ttf');
+}
+
+p {
+    font-family: 'Roboto Mono', monospace;
+}
+
 div.app-screen {
     width: 100%;
     display: flex;
@@ -94,26 +115,39 @@ div.app-screen > h4 {
     text-align: center;
     color: #fff;
 }
-
 h4 {
     color: #f0f0f0;
     font-size: 35px;
 }
 
+.cg-card input {
+    font-family: 'Roboto Mono', monospace;
+}
 .cg-card label {
     color: #fafafa !important;
+    font-family: 'Roboto Mono', monospace;
 }
 .cg-card small {
     color: #e0e0e0 !important;
+    font-family: 'Roboto Mono', monospace;
 }
 .cg-submit-button {
     width: 100%;
     margin-top: 15px;
+    font-family: 'Roboto Mono', monospace;
 }
 .cg-center-horiz {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+.router-link {
+    margin-top: 12px;
+    color: #fff;
+    font-family: 'Roboto Mono', monospace;
+}
+.router-link:hover {
+    color: #fff;
 }
 
 

@@ -1,31 +1,34 @@
-import { error } from './globals'
+import { error } from "./globals";
 
-export const jsonWithStatus = (r) => new Promise((resolve, reject) => {
+export const jsonWithStatus = r =>
+  new Promise((resolve, reject) => {
     r.json()
-        .then(data => {
-            resolve({ ...data, status: r.status, ok: r.ok })
-        })
-        .catch(err => reject(err))
-})
+      .then(data => {
+        resolve({ ...data, status: r.status, ok: r.ok });
+      })
+      .catch(err => reject(err));
+  });
 
-export const GET = (url) => fetch(url, {
-    method: 'GET',
+export const GET = url =>
+  fetch(url, {
+    method: "GET",
     headers: {
-        'Accept': 'application/json'
+      Accept: "application/json"
     },
-    credentials: 'include'
-})
+    credentials: "include"
+  })
     .then(res => jsonWithStatus(res))
-    .catch(err => error(err))
+    .catch(err => error(err));
 
-export const POST = (url, body) => fetch(url, {
-    method: 'POST',
+export const POST = (url, body) =>
+  fetch(url, {
+    method: "POST",
     headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+      Accept: "application/json",
+      "Content-Type": "application/json"
     },
-    credentials: 'include',
+    credentials: "include",
     body: JSON.stringify(body)
-})
+  })
     .then(res => jsonWithStatus(res))
-    .catch(err => error(err))
+    .catch(err => error(err));
