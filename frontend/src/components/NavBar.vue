@@ -1,5 +1,5 @@
-<template> 
-<div class = "navbar-wrapper">
+<template>
+  <div class="navbar-wrapper">
     <div class="sidenav">
   <a href="#">Home</a>
   <b-dropdown  class="navbar_dropdown"  text = " Admin " v-if="isAdmin" href="#">
@@ -15,13 +15,14 @@
   <a href="#">Contact</a>
 </div>
 
-<!-- Page content -->
-<div class="main">
-  ...
-</div>
-    </div>  
+    <!-- Page content -->
+    <div class="main">
+      ...
+    </div>
+  </div>
+</template>
 
-</template> 
+
 
 
 

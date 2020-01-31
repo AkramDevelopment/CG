@@ -19,9 +19,14 @@
     "@vue/cli-plugin-babel": "^4.1.2",
     "@vue/cli-plugin-eslint": "^4.1.2",
     "@vue/cli-service": "^4.1.2",
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    "@vue/eslint-config-prettier": "^5.0.0",
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.0.0",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
@@ -31,7 +36,9 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended"
+      "eslint:recommended",
+      "@vue/airbnb",
+      "@vue/prettier"
     ],
     "rules": {},
     "parserOptions": {
@@ -41,5 +48,14 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  }
 }
