@@ -7,14 +7,24 @@
 
       <button class="logout" v-on:click="logout">Logout</button>
       <div v-for="p in posts" v-bind:key="`${p.type}${p.id}`" class="post-wrapper">
-        <b-card class="post announcement" v-if="p.type === postTypes.announcement" v-bind:title="p.title">
+        <b-card
+          class="post announcement"
+          v-if="p.type === postTypes.announcement"
+          v-bind:title="p.title"
+        >
           <b-card-text>
             {{ p.body }}
           </b-card-text>
         </b-card>
         <b-card class="post event" v-if="p.type === postTypes.event" v-bind:title="p.event_title">
           <div class="event-row">
-            <p>{{ p.date_start !== p.date_end ? `From ${p.date_start} to ${p.date_end}` : `On ${p.date_start}` }}</p>
+            <p>
+              {{
+                p.date_start !== p.date_end
+                  ? `From ${p.date_start} to ${p.date_end}`
+                  : `On ${p.date_start}`
+              }}
+            </p>
             <p>{{ `Starts at ${p.time_start}, Ends at ${p.time_end}` }}</p>
           </div>
           <p>{{ `Location: ${p.location}` }}</p>
@@ -29,87 +39,9 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-import { log, URL, postTypes } from '../globals'
-import NavBar from './NavBar.vue';
-import { GET, checkAdmin } from '../helpers'
-
-export default {
-    name: 'HomeScreen',
-    components: {NavBar},
-    data: () => ({
-        postTypes,
-        announcements: [],
-        events: [],
-        posts: [],
-        isAdmin: false
-    }),
-    created() {
-        this.getAnnouncements()
-        this.getEvents()
-        checkAdmin((bool)=> {
-            this.isAdmin = bool
-        })
-    },
-    methods: {
-     
-        sortPosts() {
-            const allPosts = []
-            this.announcements.forEach(a => {
-                allPosts.push({ ...a, type: postTypes.announcement })
-                log(a)
-            })
-            this.events.forEach(e => {
-                allPosts.push({ ...e, type: postTypes.event })
-                log(e)
-            })
-            // Sort by: announcements -> Create_Date; events -> date_start
-            allPosts.sort((a, b) => {
-                const date1 = a.type === postTypes.announcement ? a['Create_Date'] : a['date_start']
-                const date2 = b.type === postTypes.announcement ? b['Create_Date'] : b['date_start']
-                return date1 - date2 // double check that the two different date types are comparable
-            })
-            this.posts = allPosts
-        },
-        getAnnouncements() {
-            GET(`${URL}/announcements/view/all`)
-                .then(res => {
-                    if (res.ok) {
-                        this.announcements = res.announcements
-                        this.sortPosts()
-                    } else if (res.status == 401) {
-                        this.$router.push('/')
-                    } else {
-                        log(res)
-                    }
-                })
-        },
-        getEvents() {
-            GET(`${URL}/events/all`)
-                .then(res => {
-                    if (res.ok) {
-                        this.events = res.events
-                        this.sortPosts()
-                    } else if (res.status == 401) {
-                        this.$router.push('/')
-                    } else {
-                        log(res)
-                    }
-                })
-        },
-        logout() {
-            GET(`${URL}/auth/logout`)
-                .then(res => {
-                    if (res.ok) {
-                        this.$router.push('/')
-                    } else {
-                        log(res)
-                    }
-                })
-=======
 import { log, URL, postTypes } from "../globals";
 import NavBar from "./NavBar.vue";
-import { GET } from "../helpers";
+import { GET, checkAdmin } from "../helpers";
 
 export default {
   name: "HomeScreen",
@@ -124,20 +56,11 @@ export default {
   created() {
     this.getAnnouncements();
     this.getEvents();
-    this.checkAdmin();
+    checkAdmin(bool => {
+      this.isAdmin = bool;
+    });
   },
   methods: {
-    checkAdmin() {
-      GET(`${URL}/user/isadmin`).then(res => {
-        if (res.ok) {
-          this.isAdmin = true;
-        } else if (res.status == 401) {
-          this.isAdmin = false;
-        } else {
-          log(res);
-        }
-      });
-    },
     sortPosts() {
       const allPosts = [];
       this.announcements.forEach(a => {
@@ -150,8 +73,8 @@ export default {
       });
       // Sort by: announcements -> Create_Date; events -> date_start
       allPosts.sort((a, b) => {
-        const date1 = a.type === postTypes.announcement ? a.Create_Date : a.date_start;
-        const date2 = b.type === postTypes.announcement ? b.Create_Date : b.date_start;
+        const date1 = a.type === postTypes.announcement ? a["Create_Date"] : a["date_start"];
+        const date2 = b.type === postTypes.announcement ? b["Create_Date"] : b["date_start"];
         return date1 - date2; // double check that the two different date types are comparable
       });
       this.posts = allPosts;
@@ -186,7 +109,6 @@ export default {
           this.$router.push("/");
         } else {
           log(res);
->>>>>>> Staging
         }
       });
     }
@@ -209,8 +131,8 @@ div.post-wrapper {
   }
 }
 div.post {
-  background-color: rgba(2,37,53,0.7);
-  box-shadow: 0 2px 4px 2px rgba(0,0,0,0.5);
+  background-color: rgba(2, 37, 53, 0.7);
+  box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.5);
   color: #fff;
   margin: 20px 0;
 }

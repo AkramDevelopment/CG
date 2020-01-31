@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { error,log, URL } from './globals'
-=======
-import { error } from "./globals";
->>>>>>> Staging
+import { error, log, URL } from "./globals";
 
 export const jsonWithStatus = r =>
   new Promise((resolve, reject) => {
@@ -35,27 +31,16 @@ export const POST = (url, body) =>
     body: JSON.stringify(body)
   })
     .then(res => jsonWithStatus(res))
-<<<<<<< HEAD
-    .catch(err => error(err))
-
-
-
-
-
-
-export const checkAdmin = (isadmin) => {
-   
-    GET(`${URL}/user/isadmin`)
-        .then(res => {
-            if (res.ok) {
-                isadmin(true)
-            } else if (res.status == 401) {
-                isadmin(false)
-            } else {
-                log(res)
-            }
-        })
-}
-=======
     .catch(err => error(err));
->>>>>>> Staging
+
+export const checkAdmin = isadmin => {
+  GET(`${URL}/user/isadmin`).then(res => {
+    if (res.ok) {
+      isadmin(true);
+    } else if (res.status == 401) {
+      isadmin(false);
+    } else {
+      log(res);
+    }
+  });
+};
