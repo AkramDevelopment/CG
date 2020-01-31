@@ -26,7 +26,7 @@
 <script>
 import { log, URL, postTypes } from '../globals'
 import NavBar from './NavBar.vue';
-import { GET } from '../helpers'
+import { GET, checkAdmin } from '../helpers'
 
 export default {
     name: 'HomeScreen',
@@ -41,21 +41,12 @@ export default {
     created() {
         this.getAnnouncements()
         this.getEvents()
-        this.checkAdmin()
+        checkAdmin((bool)=> {
+            this.isAdmin = bool
+        })
     },
     methods: {
-        checkAdmin() {
-            GET(`${URL}/user/isadmin`)
-                .then(res => {
-                    if (res.ok) {
-                        this.isAdmin = true;
-                    } else if (res.status == 401) {
-                        this.isAdmin = false;
-                    } else {
-                        log(res)
-                    }
-                })
-        },
+     
         sortPosts() {
             const allPosts = []
             this.announcements.forEach(a => {

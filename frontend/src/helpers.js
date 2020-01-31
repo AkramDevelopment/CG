@@ -1,4 +1,4 @@
-import { error } from './globals'
+import { error,log, URL } from './globals'
 
 export const jsonWithStatus = (r) => new Promise((resolve, reject) => {
     r.json()
@@ -29,3 +29,22 @@ export const POST = (url, body) => fetch(url, {
 })
     .then(res => jsonWithStatus(res))
     .catch(err => error(err))
+
+
+
+
+
+
+export const checkAdmin = (isadmin) => {
+   
+    GET(`${URL}/user/isadmin`)
+        .then(res => {
+            if (res.ok) {
+                isadmin(true)
+            } else if (res.status == 401) {
+                isadmin(false)
+            } else {
+                log(res)
+            }
+        })
+}

@@ -17,6 +17,37 @@ div.app-screen > h4 {
 }
 
 /* New CSS */
+
+
+.navbar_dropdown
+{
+width: 100% !important;
+display: flex !important;
+flex-direction: column !important;
+justify-content: flex-start !important;
+}
+.navbar_dropdown > button{
+    background:none;
+    border:none;
+} 
+.navbar_dropdown > ul{ 
+    width: 100% !important;
+    position: relative !important;
+    transform: none !important;
+}
+
+.navbar_dropdown > ul > li
+{
+    width: 100% !important;
+}
+
+.navbar_dropdown > ul > li > a
+{
+    font-size: 12px;
+    text-align: center !important;
+    padding-left: 0px;
+    padding-right:  0px;
+}
 .home-wrapper
 {
     background-image: url("../img/dark_spots_texture_background_50355_1920x1080\ \(1\).jpg");
