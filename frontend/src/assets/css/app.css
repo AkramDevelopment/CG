@@ -50,11 +50,25 @@ justify-content: flex-start !important;
 .navbar_dropdown > button{
     background:none;
     border:none;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 20px !important;
+
 } 
+
+.navbar_dropdown > button::after{
+  margin:0px !important;
+  margin-left: 20px !important;
+  margin-right:-32px !important;
+
+} 
+
+
 .navbar_dropdown > ul{ 
     width: 100% !important;
     position: relative !important;
     transform: none !important;
+    background:none !important;
+    border-bottom: 1px solid white;
 }
 
 .navbar_dropdown > ul > li
@@ -199,16 +213,23 @@ h4 {
   
   /* The navigation menu links */
   .sidenav a {
-    padding: 6px 8px 6px 16px;
+    
+    padding: 6px 8px;
+
     text-decoration: none;
-    font-size: 25px;
-    color: #818181;
     display: block;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    border-radius: 4px;
+    font-family: 'Roboto Mono', monospace;
   }
   
   /* When you mouse over the navigation links, change their color */
   .sidenav a:hover {
     color: #f1f1f1;
+    background-color:rgb(90, 98, 104) !important;
+    text-decoration: none;
   }
   
   /* Style page content */
