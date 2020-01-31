@@ -1,10 +1,6 @@
 <template>
   <div id="app">
     <Header />
-<<<<<<< HEAD
-
-=======
->>>>>>> Staging
     <router-view></router-view>
   </div>
 </template>
@@ -12,22 +8,14 @@
 <script>
 import Header from "./Header.vue";
 
-<<<<<<< HEAD
 
 import '../assets/css/app.css'
-=======
-import "../assets/css/app.css";
->>>>>>> Staging
 
 export default {
   name: "app",
   components: {
-<<<<<<< HEAD
     Header,
   
-=======
-    Header
->>>>>>> Staging
   }
 };
 </script>
