@@ -7,6 +7,9 @@ import App from "./components/App.vue";
 import LoginScreen from "./components/LoginScreen.vue";
 import SignupScreen from "./components/SignupScreen.vue";
 import HomeScreen from "./components/HomeScreen.vue";
+import 'vue-material/dist/theme/default-dark.css'
+
+
 // import "bootstrap/dist/css/bootstrap.css";
 // import "bootstrap-vue/dist/bootstrap-vue.css";
 
