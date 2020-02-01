@@ -1,41 +1,23 @@
 <template>
+ <div class="centered-container">
   <div class="wrapper">
-    <b-card title="Cyber Gladiators" class="cg-card">
+    <md-card title="Cyber Gladiators" class="cg-card">
+            <md-card-header>
+        <div class="md-title">Cyber Gladiators</div>
+      </md-card-header>
       <h4>Login Form</h4>
-      <b-form class="cg-form" @submit="submit">
-        <!-- Email Address Input -->
-        <b-form-group
-          id="input-group-1"
-          label="Email:"
-          label-for="input-1"
-          description="Must be an official IvyTech email address."
-        >
-          <b-form-input
-            id="input-1"
-            v-model="email"
-            type="email"
-            required
-            placeholder="Enter email"
-          ></b-form-input>
-        </b-form-group>
-        <!-- Password Input -->
-        <b-form-group id="input-group-2" label="Password:" label-for="input-2">
-          <b-form-input
-            id="input-2"
-            v-model="password"
-            type="password"
-            required
-            placeholder="Enter Password"
-          ></b-form-input>
-        </b-form-group>
-        <b-button type="submit" variant="primary" class="cg-submit-button">Submit</b-button><br />
-        <div class="cg-center-horiz">
-          <router-link to="/signup" class="router-link"
-            >New Gladiator? (Create Account)</router-link
-          >
-        </div>
-      </b-form>
-    </b-card>
+      <md-field>
+          <label>E-mail</label>
+          <md-input v-model="email" autofocus></md-input>
+        </md-field>
+
+        <md-field md-has-password>
+          <label>Password</label>
+          <md-input v-model="password" type="password"></md-input>
+        </md-field>
+    
+    </md-card>
+  </div>
   </div>
 </template>
 
@@ -71,4 +53,20 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.md-input{
+  border-bottom: 0.5px solid white ! important;
+  border-top: 0.5px solid white ! important;
+   border-right: 0.5px solid white ! important;
+  
+   border-radius: 3px;
+   align-content: flex;
+  font-family: 'Roboto Mono', monospace;
+
+  color:white
+}
+
+.md-card-header{ 
+  color:white
+}
+</style>
