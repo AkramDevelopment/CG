@@ -1,5 +1,9 @@
 <template>
+     
   <div class="home-wrapper">
+       <md-button class="md-icon-button" @click="toggleMenu" v-if="!menuVisible">
+          <md-icon>menu</md-icon>
+        </md-button>
     <NavBar />
     <div class="app-screen">
       <h1 v-if="isAdmin">Admin Dashboard</h1>
