@@ -15,6 +15,87 @@
     src: url('../fonts/caeser.ttf');
 }
 
+
+
+.background {
+
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 0;
+
+  }
+  
+
+  .centered-container {
+
+
+   display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+  .centered-container > title{
+  margin-bottom: 30px;}
+
+  .actions > md-button {
+
+      margin: 0;
+    }
+  .form {
+
+  
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+  
+  }
+
+  .md-input{
+
+    color:white !important;
+  }
+ .md-field > label{
+
+    color:white !important;
+  }
+
+  .md-field > border{
+    color: white !important;
+  }
+.md-title{ 
+  font-size: 30px !important;
+}
+
+.md-button { 
+  margin-left: 20px !important;
+}
+
+
+.md-content {
+    width:500px !important;
+    height: 100%;
+    background-color: rgba(0, 12, 14, 0.7) !important;
+
+  }
+
+.form{
+    padding: 20px !important;
+    box-sizing: border-box !important;
+
+}
+ 
 p {
     font-family: 'Roboto Mono', monospace;
 }
@@ -108,84 +189,13 @@ justify-content: flex-start !important;
     padding: 0r;
 }
 
-.cg-center-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: calc(100vh - 56px);
-    padding-bottom: calc(56px * 0.5);   
-}
-.cg-card {
-    box-sizing: content-box !important;
-    padding-bottom: 1px;
-    background-color: rgba(0, 12, 14, 0.7) !important;
-    width: 500px !important;
-    margin: 0 !important;
-    border: none !important;
-    margin-bottom: 0 !important;
-    border-radius: 0 !important;
-    padding-bottom: 0 !important;
-    height: 100%;
-    font-family: Caesar ;
-    display: flex;
-    flex-direction: column;
-    align-items: center !important;
-    justify-content: center;
-}
 
-.cg-card .card-body {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 
-.cg-card .card-body .cg-form {
-    width: 100%;
-}
-
-.cg-card .card-body .cg-form small {
-    outline: none;
-}
-    
-.cg-card h4.card-title, .cg-card p.card-text {
-    color: #fff !important;
-}
-.cg-card h4.card-title
-{
-    font-size: 40px;
-    text-align: center;
-    color: #fff;
-}
 h4 {
     color: #f0f0f0;
     font-size: 35px;
 }
 
-.cg-card input {
-    font-family: 'Roboto Mono', monospace;
-}
-.cg-card label {
-    color: #fafafa !important;
-    font-family: 'Roboto Mono', monospace;
-}
-.cg-card small {
-    color: #e0e0e0 !important;
-    font-family: 'Roboto Mono', monospace;
-}
-.cg-submit-button {
-    width: 100%;
-    margin-top: 15px;
-    font-family: 'Roboto Mono', monospace;
-}
-.cg-center-horiz {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
 .router-link {
     margin-top: 12px;
     color: #fff;

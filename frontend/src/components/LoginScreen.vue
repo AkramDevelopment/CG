@@ -23,15 +23,9 @@
         </md-field>
 
           <div class="actions md-layout md-alignment-center-space-between">
-        <a href="/signup"> Register</a>
-        <md-button class="md-raised md-secondary" @click="auth">Log in </md-button>
+        <router-link to="/signup">Register</router-link>
+        <md-button class="md-raised md-secondary" @click="submit">Login </md-button>
       </div>
-      </div>
-
-    
-
-      <div class="loading-overlay" v-if="loading">
-        <md-progress-spinner md-mode="indeterminate" :md-stroke="2"></md-progress-spinner>
       </div>
 
     </md-content>
@@ -75,28 +69,6 @@ export default {
 </script>
 
 <style scoped>
- .md-content {
-    z-index: 1;
-    padding: 40px;
-    width: 100%;
-    max-width: 400px;
-    position: relative;
-    box-sizing: content-box;
-    padding-bottom: 1px;
-    background-color: rgba(0, 12, 14, 0.7) !important;
-    width: 500px;
-    margin: 0 !important;
-    border: none !important;
-    margin-bottom: 0 !important;
-    border-radius: 0 !important;
-    padding-bottom: 0 !important;
-    height: 100%;
-    font-family: Caesar !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
 
   .background {
 
@@ -113,22 +85,7 @@ export default {
     z-index: 0;
 
   }
-  .loading-overlay {
-
-    z-index: 10;
-    top: 0;
-    left: 0;
-    right: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-
-  }
+  
 
   .centered-container {
 
@@ -136,12 +93,6 @@ export default {
    display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: calc(100vh - 56px);
-    padding-bottom: calc(56px * 0.5);
-    
-    
-    
     }
 
   .centered-container > title{
@@ -153,7 +104,7 @@ export default {
     }
   .form {
 
-    
+  
     width: 100%;
     height: 100%;
     display: flex;
@@ -179,5 +130,11 @@ export default {
 .md-title{ 
   font-size: 30px !important;
 }
-  
+
+.md-button { 
+  margin-left: 20px !important;
+}
+
+
+
 </style>
