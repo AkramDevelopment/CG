@@ -4,6 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from backend.config.database import mysqlcred
 import json
 import datetime
+from datetime import date 
 
 config =  json.loads(mysqlcred) 
 
@@ -12,7 +13,7 @@ engine = create_engine(config["Mysql"]['uri'],
 
 connection = engine.connect()
 Base = declarative_base()
-
+today = date.today()
 class Account(Base):
 
 
@@ -45,7 +46,7 @@ class Announcement(Base):
     id = Column("ID",Integer,primary_key=True)
     title = Column('title',String(32))
     body = Column('body',String(1000))
-    Create_Date = Column("Create_Date", String(32),default = datetime.datetime.now())
+    Create_Date = Column("Create_Date", String(32),default = today)
     created_by = Column("Created_By", String(32))
 
 
@@ -64,7 +65,7 @@ class Banned_Accounts(Base):
     id = Column("ID",Integer,primary_key=True)
     Account_ID = Column("Account_ID",Integer)
     Banned_By = Column("Banned_By",String(32))
-    Ban_Date  = Column("Ban_Date",String(100),default = datetime.datetime.now())
+    Ban_Date  = Column("Ban_Date",String(100),default = today)
 
     def __init__(self,Account_ID,Banned_By):
        self.Account_ID = Account_ID
@@ -110,6 +111,8 @@ class Groups(Base):
     Group_Admin = Column("Group_Admin",String(32))
 
     def __init__(self,Group_Name,Group_Description,Group_Admin):
+
+        
         self.Group_Name = Group_Name
         self.Group_Description = Group_Description
         self.Group_Admin = Group_Admin
