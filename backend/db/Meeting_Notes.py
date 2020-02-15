@@ -23,4 +23,15 @@ def query_all():
     result = []
     
     for note in query: 
-        result.append({"title":note.Title,"body":note.Body,"created_by":note.Created_By})
+        result.append({"title":note.Title,"body":note.Body,"created_by":note.Created_By,"created_date": note.Created_Date})
+    return (result)
+
+
+def query_by_id(id):
+    query = session.query(Meeting_Notes).filter(Meeting_Notes.id == id).first()
+
+    return({"title":query.Title,"body":query.Body,"created_by":query.Created_By,"created_date":query.Created_Date})
+
+
+
+
