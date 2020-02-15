@@ -139,7 +139,7 @@ class Roster(Base):
 class Meeting_Notes(Base):
 
 
-    __tablename__= "Cyber_Rosters"
+    __tablename__= "Meeting_Notes"
 
     id = Column("ID",Integer,primary_key=True)
     Title = Column('Title',String(32))
