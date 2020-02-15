@@ -14,7 +14,11 @@ groups_blueprint = Blueprint(
 @groups_blueprint.route("/create",methods=["POST"])
 @adminRequired
 def create():
+
+
     try:
+
+        
         data = request.get_json(force=True)
         create_group(data[Group_Fields["group-name"]],data[Group_Fields['group-description']],data[Group_Fields['created-by']])
         return (jsonify({"success":"Event Successfully Created!"}))
