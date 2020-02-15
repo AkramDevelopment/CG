@@ -19,19 +19,39 @@ Base = declarative_base()
 
 
 def query_all():
+
+
     query = session.query(Meeting_Notes)
     result = []
     
     for note in query: 
-        result.append({"title":note.Title,"body":note.Body,"created_by":note.Created_By,"created_date": note.Created_Date})
+        result.append({"id":note.id,"title":note.Title,"body":note.Body,"created_by":note.Created_By,"created_date": note.Created_Date})
     return (result)
 
 
 def query_by_id(id):
+
+
     query = session.query(Meeting_Notes).filter(Meeting_Notes.id == id).first()
 
-    return({"title":query.Title,"body":query.Body,"created_by":query.Created_By,"created_date":query.Created_Date})
+    return({"id":query.id,"title":query.Title,"body":query.Body,"created_by":query.Created_By,"created_date":query.Created_Date})
+
+
+def create_notes(title,body,created_by):
+
+    new_notes = Meeting_Notes(title,body,created_by)
+    session.add(new_notes)
+    session.commit()
+    return ("Note successfully created!")
 
 
 
+def delete_note(id):
+    query = session.query(Meeting_Notes).filter(Meeting_Notes.id == id).delete()
+    if query:
+        session.commit()
+        return ("Note deleted")
+    else:
+        return ("Note not found!")
+    
 
