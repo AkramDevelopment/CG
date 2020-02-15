@@ -142,7 +142,7 @@ class Meeting_Notes(Base):
     Title = Column('Title',String(32))
     Body = Column("Body",String(100))
     Created_By = Column("Created_By",String(50))
-    
+    Created_at = Column("Created_At",)
 
 
     def __init__(self,account_id,group_id,Is_Admin):
