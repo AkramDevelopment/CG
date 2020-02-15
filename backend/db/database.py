@@ -3,13 +3,14 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from backend.config.database import mysqlcred
 import json
-import datetime
-from datetime import date 
+from datetime import date
+
 
 config =  json.loads(mysqlcred) 
 
 engine = create_engine(config["Mysql"]['uri'],
                        isolation_level="READ UNCOMMITTED")
+
 
 connection = engine.connect()
 Base = declarative_base()
@@ -26,7 +27,7 @@ class Account(Base):
     Email = Column("Email",String(32))
     Secondary_Email = Column("Secondary_Email", String(32))
     Security_Clerance = Column("Security_Clerance",String(32),default="unregistered") 
-    Create_Date = Column("Create_Date", String(32),default = datetime.datetime.now())
+    Create_Date = Column("Create_Date", String(32),default = today)
 
 
     def __init__(self,First_Name,Last_Name,Email,Password):
@@ -139,19 +140,19 @@ class Roster(Base):
 class Meeting_Notes(Base):
 
 
-    __tablename__= "Cyber_Rosters"
+    __tablename__= "Meeting_Notes"
 
     id = Column("ID",Integer,primary_key=True)
     Title = Column('Title',String(32))
     Body = Column("Body",String(100))
     Created_By = Column("Created_By",String(50))
-    Created_at = Column("Created_At",)
+    Created_at = Column("Created_At",String(50),default=today)
 
 
-    def __init__(self,account_id,group_id,Is_Admin):
-        self.Account_ID = account_id
-        self.Group_ID = group_id
-        self.Is_Admin = Is_Admin
+    def __init__(self,Title,Body):
+        self.Title = Title
+        self.Body = Body
+
 
 
 
