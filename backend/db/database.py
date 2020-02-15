@@ -136,5 +136,23 @@ class Roster(Base):
 
 
 
+class Meeting_Notes(Base):
+
+
+    __tablename__= "Cyber_Rosters"
+
+    id = Column("ID",Integer,primary_key=True)
+    Title = Column('Title',String(32))
+    Body = Column("Body",String(100))
+    Created_By = Column("Created_By",String(50))
+    
+
+
+    def __init__(self,account_id,group_id,Is_Admin):
+        self.Account_ID = account_id
+        self.Group_ID = group_id
+        self.Is_Admin = Is_Admin
+
+
 
 Base.metadata.create_all(engine)

@@ -14,6 +14,8 @@ groups_blueprint = Blueprint(
 @groups_blueprint.route("/create",methods=["POST"])
 @adminRequired
 def create():
+
+
     try:
 
         
