@@ -25,14 +25,17 @@ def get_by_id(id):
     
     except:
 
-        return (jsonify({"success":"Return notes by ID"}))
+        return (jsonify({"error":"There was an error deleting note!"})),404
 
 
 @meeting_blueprint.route("/delete/<id>")
 def remove_notes(id):
-
-
-    return ({"success": "Removing notes successful!"})
+    
+    try:
+        remove_notes(id)
+        return (jsonify({"success":"Notes successfuly created!"}))
+    except:
+        return (jsonify({"error":"There was an error removing note"})),404
 
 
 
