@@ -1,6 +1,10 @@
 <template>
 <md-drawer :md-active.sync="showNavigation" md-swipeable>
       <md-toolbar class="md-transparent" md-elevation="0">
+        <md-button class="md-icon-button" @click="toggleMenu" v-if="!menuVisible">
+          <md-icon>menu</md-icon>
+          </md-button>
+ 
         <span class="md-title">Cyber<br> Gladiators</span>
       </md-toolbar>
       <hr> 
