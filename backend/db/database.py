@@ -146,6 +146,7 @@ class Meeting_Notes(Base):
     Title = Column('Title',String(32))
     Body = Column("Body",String(100))
     Created_By = Column("Created_By",String(50))
+<<<<<<< HEAD
     Created_at = Column("Created_At",String(50),default=today)
 
 
@@ -153,6 +154,19 @@ class Meeting_Notes(Base):
         self.Title = Title
         self.Body = Body
 
+=======
+    Created_Date = Column("Created_Date",String(20),default=today)
+    
+
+
+    def __init__(self,Title,Body,Created_By):
+
+        
+        self.Title = Title
+        self.Body = Body
+        self.Created_By = Created_By
+        
+>>>>>>> f06952b2a904960d8907e550d960309a0d7778eb
 
 
 
