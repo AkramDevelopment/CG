@@ -166,13 +166,12 @@ justify-content: flex-start !important;
 }
 .home-wrapper
 {
-    background-image: url("../img/dark_spots_texture_background_50355_1920x1080\ \(1\).jpg");
-    background-position: center;
-    background-size: cover;
-    display: flex;
-    height: 100vh;
-    width: 100%;
-    font-family: Caesar !important;
+  background-image: url("../img/dark_spots_texture_background_50355_1920x1080\ \(1\).jpg");
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  font-family: Caesar !important;
 
 }
 .wrapper{
@@ -253,3 +252,18 @@ h4 {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
+
+
+  .md-tabs.md-theme-default .md-tabs-navigation{
+    background-color: rgb(21, 23, 26) !important;
+  }
+
+ .md-tabs-indicator{
+  background-color: rgb(5, 226, 255) !important;
+ }
+
+
+ .md-tabs.md-theme-default .md-tabs-navigation .md-button.md-active {
+   color: rgb(5, 226, 255) !important;
+ }
+ 

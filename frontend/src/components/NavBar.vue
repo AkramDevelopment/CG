@@ -1,39 +1,22 @@
 <template>
-<md-drawer class="md-permanent">
-      <md-toolbar class="md-transparent" md-elevation="0">
-        
- 
-        <span class="md-title">Cyber<br> Gladiators</span>
-      </md-toolbar>
-      <hr> 
-   <md-list>
-     <md-list-item>
-        <span class="md-list-item-text">Home</span>
-        </md-list-item>
 
-        <md-list-item>
-        <span class="md-list-item-text">Meeting Notes</span>
-        </md-list-item>
+ <md-tabs md-sync-route :md-elevation:md-alignment="fixed"> 
+      <md-tab id="tab-home" md-label="Home" to="/home" exact>
+      </md-tab>
 
-          <md-list-item>
-        <span class="md-list-item-text">Admin</span>
-        </md-list-item>
-
-            <md-list-item>
-        <span class="md-list-item-text">Roster</span>
-        </md-list-item>
+      <md-tab id="meeting-notes" md-label="Meeting Notes" to="/ree" exact>
+      </md-tab>
 
 
+      <md-tab id="suggestions" md-label="Suggestions" to="/ree" exact>
+      </md-tab>
 
-     </md-list> 
+      <md-tab id="admin" md-label="Admin" to="/ree" exact>
+      </md-tab>
 
-     
-
-
-
-
-
-    </md-drawer>
+    
+    </md-tabs>
+    
 </template>
 
 <script>
@@ -52,43 +35,10 @@ export default {
 </script>
 
 
-<style scoped>
-  .page-container {
-    min-height: 300px;
-    overflow: hidden;
-    position: relative;
-    border: 1px solid rgba(#000, .12);
-  }
+<style scoped> 
 
-  .md-drawer {
-    width: 230px;
-    max-width: calc(100vw - 125px);
-    background-color: rgba(1, 57, 87,0.5) !important; 
-  }
-
-  .md-content {
-    padding: 16px;
-  }
-
-  .md-title{ 
-    font-size: 1.5rem !important;
-    padding-top: 30px !important; 
-    
-  }
-  hr{ 
-    margin-top:10px !important;
-    margin-bottom: 8px !important
-  }
-.md-list{
-background: none !important;
+md-button-content{
+  border-right: 1px solid white !important;
 }
 
-.md-list-item{
-border-bottom: 1px solid rgba(255,255,255,0.5) !important;
-}
-
-
-.md-list-item:hover{
-background-color: rgba(255,255,255,0.1)
-}
 </style>

@@ -1,18 +1,43 @@
 <template>
+  <div class='home-wrapper' >
+    <NavBar/>
+
+      <div class="md-display-2"  > 
+        Cyber Gladiators
+        <div class="md-subheading">Welcome To The Arena!</div>
+
+        </div>  
+
+        <md-divider></md-divider>
+    <div class="announcements"> </div>  
+   <md-layout  >
+
      
-  <div class="home-container">
+
+   </md-layout>
+
+  <md-divider></md-divider>
+   <md-layout class ="md-layout" md-flex-xsmall="100" md-flex-small="100" md-flex-medium="100" md-flex-large="100" md-flex-xlarge="100">
+
+   
+   </md-layout>
     
-      
   </div>
+
+     
+ 
+
 </template>
 
 <script>
 import { log, URL, postTypes } from "../globals";
+import NavBar from './NavBar.vue';
 import { GET, checkAdmin } from "../helpers";
+
 
 export default {
   name: "HomeScreen",
-  components: {  },
+  components: { NavBar },
   data: () => ({
     postTypes,
     announcements: [],
@@ -83,50 +108,58 @@ export default {
 };
 </script>
 
-<style scoped>
-h1 {
-  color: #fff;
-  font-family: Caesar, sans-serif;
-}
-div.post-wrapper {
-  width: 50%;
-  min-width: 300px;
-}
-@media screen and (max-width: 900px) {
-  div.post-wrapper {
-    width: 90%;
-  }
-}
-div.post {
-  background-color: rgba(2, 37, 53, 0.7);
-  box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.5);
-  color: #fff;
-  margin: 20px 0;
-}
-div.post h4 {
-  font-family: Caesar, sans-serif;
-}
-div.post.announcement h4 {
-  font-size: 2rem;
-  font-weight: bold;
-}
-div.post.announcement p {
-  color: #c4c4c4;
-  margin-left: 10px;
-  text-indent: 10px;
-}
-div.post.event h4 {
-  font-size: 1.3rem;
-}
-div.post.event p {
-  margin: 0;
+<style  scoped>
+  
+.md-layout-item {
+  height: 40px;}
+
+
+.h1{
+  color:white;
 }
 
-.container {
-  display: flex;
+
+.md-layout-item {
+    height: 40px;
+
+    }
+.md-layout-item::after
+{
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: md-get-palette-color(red, 200) !important;
+  content: "";
 }
-.container > div {
-  flex: 1; /*grow*/
+
+.md-layout{
+  
+}
+.md-title{
+
+  text-align: center;
+  color: black;
+
+ 
+}
+
+.md-card{
+  background-color: white !important;
+}
+
+.home-header{
+  text-align: center !important;
+}
+.md-display-2
+{
+  margin-top: 15px;
+  text-align: center !important;
+}
+
+.announcements{
+
+  margin-top: 20px !important;
+
 }
 
 </style>
