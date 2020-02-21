@@ -9,18 +9,29 @@
         </div>  
 
         <md-divider></md-divider>
-    <div class="announcements"> </div>  
-   <md-layout  >
-
+    <div class="announcements"> 
+      <md-card>
      
 
+      <md-card-header>
+        <div class="md-title">CCDC Competition</div>   
+        
+      </md-card-header>
+  <div class='hdivider'> <divider> </divider></div> 
+      <md-card-content>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.
+      </md-card-content>
+    </md-card>
+      
+      
+      </div>  
+   <md-layout  >
+
+
+
    </md-layout>
 
-  <md-divider></md-divider>
-   <md-layout class ="md-layout" md-flex-xsmall="100" md-flex-small="100" md-flex-medium="100" md-flex-large="100" md-flex-xlarge="100">
-
-   
-   </md-layout>
+ 
     
   </div>
 
@@ -138,14 +149,21 @@ export default {
 .md-title{
 
   text-align: center;
-  color: black;
+  color: black !important;
 
  
 }
 
 .md-card{
+  width: 320px;
+  margin: 4px;
+  display: inline-block;
+  vertical-align: top;
   background-color: white !important;
+  color:white !important;
 }
+
+
 
 .home-header{
   text-align: center !important;
@@ -162,4 +180,10 @@ export default {
 
 }
 
+.md-card-content{
+  color:black;
+}
+.hdivider{
+  color:black !important;
+}
 </style>
