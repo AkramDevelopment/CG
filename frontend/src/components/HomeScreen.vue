@@ -5,33 +5,33 @@
       <div class="md-display-2"  > 
         Cyber Gladiators
         <div class="md-subheading">Welcome To The Arena!</div>
-
         </div>  
-
         <md-divider></md-divider>
-    <div class="announcements"> 
-      <md-card>
-     
+    <div class="current-notes"> 
+      <md-card> 
+        <md-card-header> <div class="md-title">Meeting Notes</div>
+        <div class="md-subhead">2/21/2020</div></md-card-header>
+        <md-card-content> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
 
-      <md-card-header>
-        <div class="md-title">CCDC Competition</div>   
-        
-      </md-card-header>
-  <div class='hdivider'> <divider> </divider></div> 
-      <md-card-content>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.
-      </md-card-content>
-    </md-card>
-      
-      
+The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham. </md-card-content>
+        </md-card> 
       </div>  
    <md-layout  >
-
-
-
    </md-layout>
 
- 
+ <div class="events">
+   <div class="md-display-2"> Events </div> 
+
+  <div v-for="e in events" v-bind:key="e.id">
+    <div class="event-row">
+       {{e.event_title}}
+       
+       </div>
+      <div> <md-icon> calendar_today</md-icon> Start_Date: {{e.date_start}} </div> 
+
+     </div> 
+
+    </div> 
     
   </div>
 
@@ -76,8 +76,8 @@ export default {
       });
       // Sort by: announcements -> Create_Date; events -> date_start
       allPosts.sort((a, b) => {
-        const date1 = a.type === postTypes.announcement ? a["Create_Date"] : a["date_start"];
-        const date2 = b.type === postTypes.announcement ? b["Create_Date"] : b["date_start"];
+        const date1 = a.type === postTypes.announcement ? a["create_date"] : a["date_start"];
+        const date2 = b.type === postTypes.announcement ? b["create_date"] : b["date_start"];
         return date1 - date2; // double check that the two different date types are comparable
       });
       this.posts = allPosts;
@@ -98,6 +98,7 @@ export default {
       GET(`${URL}/events/all`).then(res => {
         if (res.ok) {
           this.events = res.events;
+          log(this.events)
           this.sortPosts();
         } else if (res.status == 401) {
           this.$router.push("/");
@@ -154,24 +155,22 @@ export default {
  
 }
 
-.md-card{
-  width: 320px;
-  margin: 4px;
-  display: inline-block;
-  vertical-align: top;
-  background-color: white !important;
-  color:white !important;
-}
 
+.md-subheade{ 
+  color:black
+}
 
 
 .home-header{
   text-align: center !important;
+  
 }
 .md-display-2
 {
   margin-top: 15px;
   text-align: center !important;
+  color: black !important;
+
 }
 
 .announcements{
@@ -179,11 +178,59 @@ export default {
   margin-top: 20px !important;
 
 }
-
-.md-card-content{
-  color:black;
+.md-divider{ 
+  margin: 20px !important;
+  width : 60%;
+  background-color: black ! important;  
 }
-.hdivider{
+
+
+
+.current-notes{ 
+  width: 50% !important;
+  
+
+}
+
+.md-card .md-subhead{ 
   color:black !important;
+}
+
+.current-notes .md-card{ 
+  background-color:#F7F7F7 !important;
+  box-shadow: 0px 3px 14px 1px rgba(0,0,0,.2)!important;
+  
+
+}
+
+.current-notes .md-card-header{ 
+  text-align: center !important;
+  font-size: 2rem !important;
+  
+}
+
+
+.current-notes .md-card-header .md-title{ 
+  color:black !important;
+  
+}
+
+
+.md-card-content{ 
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+  padding: 10px 50px ! important; 
+  text-indent: 20px !important;
+  color:black !important;
+}
+
+
+.events{ 
+  position: absolute !important;
+  top: 50px;
+  left:0px;
+  width: 300px;
+  height: calc(100vh - 50px);
+  background-color: #D5D3D3;
 }
 </style>

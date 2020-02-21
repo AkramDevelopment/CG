@@ -41,4 +41,8 @@ md-button-content{
   border-right: 1px solid white !important;
 }
 
+.md-tabs
+{
+  width: 100% !important
+}
 </style>
