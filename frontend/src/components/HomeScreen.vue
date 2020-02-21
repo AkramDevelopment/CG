@@ -1,53 +1,18 @@
 <template>
      
-  <div class="home-wrapper">
+  <div class="home-container">
+    
       
-    <NavBar />
-    <div class="app-screen">
-      <h1 v-if="isAdmin">Admin Dashboard</h1>
-      <h1 v-else>Welcome To The Arena</h1>
-
-      <button class="logout" v-on:click="logout">Logout</button>
-      <div v-for="p in posts" v-bind:key="`${p.type}${p.id}`" class="post-wrapper">
-        <b-card
-          class="post announcement"
-          v-if="p.type === postTypes.announcement"
-          v-bind:title="p.title"
-        >
-          <b-card-text>
-            {{ p.body }}
-          </b-card-text>
-        </b-card>
-        <b-card class="post event" v-if="p.type === postTypes.event" v-bind:title="p.event_title">
-          <div class="event-row">
-            <p>
-              {{
-                p.date_start !== p.date_end
-                  ? `From ${p.date_start} to ${p.date_end}`
-                  : `On ${p.date_start}`
-              }}
-            </p>
-            <p>{{ `Starts at ${p.time_start}, Ends at ${p.time_end}` }}</p>
-          </div>
-          <p>{{ `Location: ${p.location}` }}</p>
-        </b-card>
-      </div>
-      <h4 v-if="posts.length <= 0">
-        Looks like we don't have any posts yet.<br />
-        Please check back later!
-      </h4>
-    </div>
   </div>
 </template>
 
 <script>
 import { log, URL, postTypes } from "../globals";
-import NavBar from "./NavBar.vue";
 import { GET, checkAdmin } from "../helpers";
 
 export default {
   name: "HomeScreen",
-  components: { NavBar },
+  components: {  },
   data: () => ({
     postTypes,
     announcements: [],
@@ -156,12 +121,12 @@ div.post.event h4 {
 div.post.event p {
   margin: 0;
 }
-div.event-row {
+
+.container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  /* padding: 0 40px; */
 }
+.container > div {
+  flex: 1; /*grow*/
+}
+
 </style>

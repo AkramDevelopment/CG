@@ -1,13 +1,11 @@
 import Vue from "vue";
 import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.min.css'
 import VueRouter from "vue-router";
 //import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import App from "./components/App.vue";
 import LoginScreen from "./components/LoginScreen.vue";
 import SignupScreen from "./components/SignupScreen.vue";
 import HomeScreen from "./components/HomeScreen.vue";
-import 'vue-material/dist/theme/default-dark.css'
 
 
 // import "bootstrap/dist/css/bootstrap.css";
