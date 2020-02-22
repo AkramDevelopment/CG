@@ -63,8 +63,11 @@ def Remove_Admin(account_id,group_id):
         if remove_admin(account_id,group_id) == True:
             return (jsonify({"success": "Admin for group removed!"}))
         else:
+
             return (jsonify({"error": "Account or group no found!"})),404
     except Exception as e:
+
+        
         print(e)
         return (jsonify({"error":"There was an internal server error"})),500
 
