@@ -169,8 +169,6 @@ justify-content: flex-start !important;
   background-image: url("../img/dark_spots_texture_background_50355_1920x1080\ \(1\).jpg");
   background-position: center;
   background-size: cover;
-  height: 100vh;
-  width: 100%;
   font-family: Caesar !important;
   display: flex !important;
   flex-direction: column !important;

@@ -215,8 +215,9 @@ export default {
 
 .current-notes .md-card{ 
   background: rgba(0, 0, 0, 0.6)!important;
-  box-shadow: 0px 3px 14px 1px rgba(0,0,0,.2)!important;
+  box-shadow: 50px 10px 140px 100px rgba(0,0,0,.30)!important;
   border: 2px solid black;
+  border-radius: 50px 20px;
   
 
 }
@@ -240,8 +241,10 @@ export default {
   padding: 10px 50px ! important; 
   text-indent: 20px !important;
   color:#039693 !important;
-  line-height: 150% !important;
+  line-height: 200% !important;
   letter-spacing: 3px;
+  font-size: 25px;
+  font-family: 'Roboto Mono', monospace;
 }
 
 
