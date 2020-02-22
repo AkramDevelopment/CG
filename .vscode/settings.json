@@ -1,7 +1,7 @@
 {
     "git.ignoreLimitWarning": true,
 
-    "python.pythonPath": "C:\\Users\\Akram\\Anaconda3\\python.exe",
+    "python.pythonPath": "C:\\Users\\Akram\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
     "python.linting.pylintEnabled": true,
     "python.linting.flake8Enabled": false,
     "python.linting.enabled": true

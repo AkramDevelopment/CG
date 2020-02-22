@@ -8,6 +8,7 @@ from backend.auth.view import auth_blueprint
 from backend.events.view import event_blueprint
 from backend.groups.view import groups_blueprint
 from backend.groups.roster import roster_blueprint
+from backend.db.Meeting_Notes import create_notes
 import os
 
 
