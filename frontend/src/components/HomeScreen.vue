@@ -1,37 +1,65 @@
 <template>
-  <div class="home-wrapper">
-    <NavBar />
-    <div class="app-screen">
-      <h1 v-if="isAdmin">Admin Dashboard</h1>
-      <h1 v-else>Welcome To The Arena</h1>
+  <div class='home-wrapper' >
+    <NavBar/>
 
-      <button class="logout" v-on:click="logout">Logout</button>
-      <div v-for="p in posts" v-bind:key="`${p.type}${p.id}`" class="post-wrapper">
-        <b-card class="post announcement" v-if="p.type === postTypes.announcement" v-bind:title="p.title">
-          <b-card-text>
-            {{ p.body }}
-          </b-card-text>
-        </b-card>
-        <b-card class="post event" v-if="p.type === postTypes.event" v-bind:title="p.event_title">
-          <div class="event-row">
-            <p>{{ p.date_start !== p.date_end ? `From ${p.date_start} to ${p.date_end}` : `On ${p.date_start}` }}</p>
-            <p>{{ `Starts at ${p.time_start}, Ends at ${p.time_end}` }}</p>
-          </div>
-          <p>{{ `Location: ${p.location}` }}</p>
-        </b-card>
+      <div class="md-display-2"  > 
+        Cyber Gladiators
+        <div class="md-subheading">Welcome To The Arena!</div>
+        </div>  
+        <md-divider></md-divider>
+    <div class="current-notes"> 
+      <md-card> 
+        <md-card-header> <div class="md-title">Latest Update</div>
+        <div class="md-subhead">2/21/2020</div></md-card-header>
+        <md-card-content> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham. </md-card-content>
+        </md-card> 
+      </div>  
+
+
+      
+   <md-layout  >
+   </md-layout>
+
+ <div class="events">
+   <div class="md-display-2">  Events </div> 
+  
+
+  <div v-for="e in events" v-bind:key="e.id">
+    <div class="event-row">
+
+      <div>  
+      <li> <md-icon> calendar_today</md-icon> Date: {{e.date_start}}</li> </div> 
+
+      <li> <md-icon> calendar_today</md-icon> Location: {{e.location}}</li>
+      
+      
+      
       </div>
-      <h4 v-if="posts.length <= 0">
-        Looks like we don't have any posts yet.<br />
-        Please check back later!
-      </h4>
-    </div>
-  </div>
+      
+      <md-divider> </md-divider>
+
+     </div>
+    
+       
+       
+       </div>
+      
+      
+     
+    </div> 
+  
+     
+ 
+
 </template>
 
 <script>
 import { log, URL, postTypes } from "../globals";
-import NavBar from "./NavBar.vue";
-import { GET } from "../helpers";
+import NavBar from './NavBar.vue';
+import { GET, checkAdmin } from "../helpers";
+
 
 export default {
   name: "HomeScreen",
@@ -46,20 +74,11 @@ export default {
   created() {
     this.getAnnouncements();
     this.getEvents();
-    this.checkAdmin();
+    checkAdmin(bool => {
+      this.isAdmin = bool;
+    });
   },
   methods: {
-    checkAdmin() {
-      GET(`${URL}/user/isadmin`).then(res => {
-        if (res.ok) {
-          this.isAdmin = true;
-        } else if (res.status == 401) {
-          this.isAdmin = false;
-        } else {
-          log(res);
-        }
-      });
-    },
     sortPosts() {
       const allPosts = [];
       this.announcements.forEach(a => {
@@ -72,8 +91,8 @@ export default {
       });
       // Sort by: announcements -> Create_Date; events -> date_start
       allPosts.sort((a, b) => {
-        const date1 = a.type === postTypes.announcement ? a.Create_Date : a.date_start;
-        const date2 = b.type === postTypes.announcement ? b.Create_Date : b.date_start;
+        const date1 = a.type === postTypes.announcement ? a["create_date"] : a["date_start"];
+        const date2 = b.type === postTypes.announcement ? b["create_date"] : b["date_start"];
         return date1 - date2; // double check that the two different date types are comparable
       });
       this.posts = allPosts;
@@ -94,6 +113,7 @@ export default {
       GET(`${URL}/events/all`).then(res => {
         if (res.ok) {
           this.events = res.events;
+          log(this.events)
           this.sortPosts();
         } else if (res.status == 401) {
           this.$router.push("/");
@@ -115,50 +135,139 @@ export default {
 };
 </script>
 
-<style scoped>
-h1 {
-  color: #fff;
-  font-family: Caesar, sans-serif;
+<style  scoped>
+  
+.md-layout-item {
+  height: 40px;}
+
+
+.h1{
+  color:white;
 }
-div.post-wrapper {
-  width: 50%;
-  min-width: 300px;
+
+
+.md-layout-item {
+    height: 40px;
+
+    }
+.md-layout-item::after
+{
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: md-get-palette-color(red, 200) !important;
+  content: "";
 }
-@media screen and (max-width: 900px) {
-  div.post-wrapper {
-    width: 90%;
-  }
+
+.md-layout{
+  
 }
-div.post {
-  background-color: rgba(2,37,53,0.7);
-  box-shadow: 0 2px 4px 2px rgba(0,0,0,0.5);
-  color: #fff;
-  margin: 20px 0;
+.md-title{
+
+  text-align: center;
+  color: white !important;
+
+ 
 }
-div.post h4 {
-  font-family: Caesar, sans-serif;
-}
-div.post.announcement h4 {
-  font-size: 2rem;
-  font-weight: bold;
-}
-div.post.announcement p {
-  color: #c4c4c4;
-  margin-left: 10px;
-  text-indent: 10px;
-}
-div.post.event h4 {
-  font-size: 1.3rem;
-}
-div.post.event p {
-  margin: 0;
-}
-div.event-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+
+.events{ 
   align-items: center;
-  flex-wrap: wrap;
-  /* padding: 0 40px; */
+}
+.md-subheade{ 
+  color:white
+}
+
+
+.home-header{
+  text-align: center !important;
+  
+}
+.md-display-2
+{
+  margin-top: 15px;
+  text-align: center !important;
+  color: white !important;
+
+}
+
+.announcements{
+
+  margin-top: 20px !important;
+
+}
+.md-divider{ 
+  margin: 20px !important;
+  width : 60%;
+  background-color: #039693 ! important;  
+}
+
+
+
+.current-notes{ 
+  width: 50% !important;
+  
+
+}
+
+.md-card .md-subhead{ 
+  color:white !important;
+}
+
+.current-notes .md-card{ 
+  background: rgba(0, 0, 0, 0.6)!important;
+  box-shadow: 50px 10px 140px 100px rgba(0,0,0,.30)!important;
+  border: 2px solid black;
+  border-radius: 50px 20px;
+  
+
+}
+
+.current-notes .md-card-header{ 
+  text-align: center !important;
+  font-size: 2rem !important;
+  
+}
+
+
+.current-notes .md-card-header .md-title{ 
+  color:white !important;
+  
+}
+
+
+.md-card-content{ 
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+  padding: 10px 50px ! important; 
+  text-indent: 20px !important;
+  color:#039693 !important;
+  line-height: 200% !important;
+  letter-spacing: 3px;
+  font-size: 25px;
+  font-family: 'Roboto Mono', monospace;
+}
+
+
+.events{ 
+  align-content: center !important;
+  position: absolute !important;
+  top: 50px;
+  left:0px;
+  width: 300px;
+  height: calc(100vh - 50px);
+  background-color: rgba(0,0,0,.2);
+  color:white !important;
+  list-style-type: none;
+  
+}
+
+.event-row{
+  align-content: center !important;
+  padding-top: 20px;
+}
+
+.events .md-display-2{
+  padding-top: 5px;
+  padding-bottom:5px;
 }
 </style>

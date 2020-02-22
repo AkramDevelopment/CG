@@ -58,6 +58,6 @@ def edit_announcement(id,title,body):
 
 
 
-
+create_announcement("Test","Remember to instlal kali Linux on a virtual machine by sunday for the next cyber gladiator meeting","")
 
 

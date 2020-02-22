@@ -15,6 +15,87 @@
     src: url('../fonts/caeser.ttf');
 }
 
+
+
+.background {
+
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 0;
+
+  }
+  
+
+  .centered-container {
+
+
+   display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+  .centered-container > title{
+  margin-bottom: 30px;}
+
+  .actions > md-button {
+
+      margin: 0;
+    }
+  .form {
+
+  
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+  
+  }
+
+  .md-input{
+
+    color:white !important;
+  }
+ .md-field > label{
+
+    color:white !important;
+  }
+
+  .md-field > border{
+    color: white !important;
+  }
+.md-title{ 
+  font-size: 30px !important;
+}
+
+.md-button { 
+  margin-left: 20px !important;
+}
+
+
+.md-content {
+    width:500px !important;
+    height: 100%;
+    background-color: rgba(0, 12, 14, 0.7) !important;
+
+  }
+
+.form{
+    padding: 20px !important;
+    box-sizing: border-box !important;
+
+}
+ 
 p {
     font-family: 'Roboto Mono', monospace;
 }
@@ -38,19 +119,64 @@ div.app-screen > h4 {
 }
 
 /* New CSS */
+
+
+.navbar_dropdown
+{
+width: 100% !important;
+display: flex !important;
+flex-direction: column !important;
+justify-content: flex-start !important;
+}
+.navbar_dropdown > button{
+    background:none;
+    border:none;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 20px !important;
+
+} 
+
+.navbar_dropdown > button::after{
+  margin:0px !important;
+  margin-left: 20px !important;
+  margin-right:-32px !important;
+
+} 
+
+
+.navbar_dropdown > ul{ 
+    width: 100% !important;
+    position: relative !important;
+    transform: none !important;
+    background:none !important;
+    border-bottom: 1px solid white;
+}
+
+.navbar_dropdown > ul > li
+{
+    width: 100% !important;
+}
+
+.navbar_dropdown > ul > li > a
+{
+    font-size: 12px;
+    text-align: center !important;
+    padding-left: 0px;
+    padding-right:  0px;
+}
 .home-wrapper
 {
-    background-image: url("../img/dark_spots_texture_background_50355_1920x1080\ \(1\).jpg");
-    background-position: center;
-    background-size: cover;
-    display: flex;
-    height: 100vh;
-    width: 100%;
-    font-family: Caesar !important;
+  background-image: url("../img/dark_spots_texture_background_50355_1920x1080\ \(1\).jpg");
+  background-position: center;
+  background-size: cover;
+  font-family: Caesar !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center;
 
 }
 .wrapper{
-    background-image: url("../img/CGBackground.jpg");
+    background-image: url("../img/CGBackground.jpg") !important;
     background-repeat: none;
     background-size: cover;
     background-position: center;
@@ -63,84 +189,13 @@ div.app-screen > h4 {
     padding: 0r;
 }
 
-.cg-center-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: calc(100vh - 56px);
-    padding-bottom: calc(56px * 0.5);   
-}
-.cg-card {
-    box-sizing: content-box;
-    padding-bottom: 1px;
-    background-color: rgba(0, 12, 14, 0.7) !important;
-    width: 500px;
-    margin: 0 !important;
-    border: none !important;
-    margin-bottom: 0 !important;
-    border-radius: 0 !important;
-    padding-bottom: 0 !important;
-    height: 100%;
-    font-family: Caesar !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 
-.cg-card .card-body {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 
-.cg-card .card-body .cg-form {
-    width: 100%;
-}
-
-.cg-card .card-body .cg-form small {
-    outline: none;
-}
-    
-.cg-card h4.card-title, .cg-card p.card-text {
-    color: #fff !important;
-}
-.cg-card h4.card-title
-{
-    font-size: 40px;
-    text-align: center;
-    color: #fff;
-}
 h4 {
     color: #f0f0f0;
     font-size: 35px;
 }
 
-.cg-card input {
-    font-family: 'Roboto Mono', monospace;
-}
-.cg-card label {
-    color: #fafafa !important;
-    font-family: 'Roboto Mono', monospace;
-}
-.cg-card small {
-    color: #e0e0e0 !important;
-    font-family: 'Roboto Mono', monospace;
-}
-.cg-submit-button {
-    width: 100%;
-    margin-top: 15px;
-    font-family: 'Roboto Mono', monospace;
-}
-.cg-center-horiz {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
 .router-link {
     margin-top: 12px;
     color: #fff;
@@ -168,16 +223,23 @@ h4 {
   
   /* The navigation menu links */
   .sidenav a {
-    padding: 6px 8px 6px 16px;
+    
+    padding: 6px 8px;
+
     text-decoration: none;
-    font-size: 25px;
-    color: #818181;
     display: block;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    border-radius: 4px;
+    font-family: 'Roboto Mono', monospace;
   }
   
   /* When you mouse over the navigation links, change their color */
   .sidenav a:hover {
     color: #f1f1f1;
+    background-color:rgb(90, 98, 104) !important;
+    text-decoration: none;
   }
   
   /* Style page content */
@@ -191,3 +253,18 @@ h4 {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
+
+
+  .md-tabs.md-theme-default .md-tabs-navigation{
+    background-color: rgb(21, 23, 26) !important;
+  }
+
+ .md-tabs-indicator{
+  background-color: rgb(5, 226, 255) !important;
+ }
+
+
+ .md-tabs.md-theme-default .md-tabs-navigation .md-button.md-active {
+   color: rgb(5, 226, 255) !important;
+ }
+ 

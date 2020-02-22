@@ -10,6 +10,8 @@ import Header from "./Header.vue";
 
 import "../assets/css/app.css";
 
+
+
 export default {
   name: "app",
   components: {
@@ -32,6 +34,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
   min-height: 100vh;
-  background-color: #494b48;
+  background-color: #e0e0e0;
 }
 </style>

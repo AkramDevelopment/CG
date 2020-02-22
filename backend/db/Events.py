@@ -45,7 +45,7 @@ def query_events():
 
         result.append({"id":row.id,"event_title":row.Event_Title,'date_start':row.Date_Start,"date_end":row.Date_End,'time_start':row.Time_Start,
         "time_end":row.Time_End,'location':row.Location})
-        #result.sort(key = lambda row:datetime.strptime(row['date_start']," %d  %b %Y"))
+
     return (result)
 
 
