@@ -166,7 +166,7 @@ justify-content: flex-start !important;
 }
 .home-wrapper
 {
-  
+  background-image: url("../img/dark_spots_texture_background_50355_1920x1080\ \(1\).jpg");
   background-position: center;
   background-size: cover;
   height: 100vh;
@@ -174,7 +174,7 @@ justify-content: flex-start !important;
   font-family: Caesar !important;
   display: flex !important;
   flex-direction: column !important;
-  align-items: center !important;
+  align-items: center;
 
 }
 .wrapper{
@@ -258,15 +258,15 @@ h4 {
 
 
   .md-tabs.md-theme-default .md-tabs-navigation{
-    background-color: #003366 !important;
+    background-color: rgb(21, 23, 26) !important;
   }
 
  .md-tabs-indicator{
-  background-color: #70C6F5 !important;
+  background-color: rgb(5, 226, 255) !important;
  }
 
 
  .md-tabs.md-theme-default .md-tabs-navigation .md-button.md-active {
-   color: #70C6F5 !important;
+   color: rgb(5, 226, 255) !important;
  }
  
